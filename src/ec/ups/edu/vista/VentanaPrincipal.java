@@ -5,17 +5,69 @@
  */
 package ec.ups.edu.vista;
 
+import ec.ups.edu.controlador.ControladorCliente;
+import ec.ups.edu.controlador.ControladorTicket;
+import ec.ups.edu.controlador.ControladorVehiculo;
+import ec.ups.edu.dao.ClienteDAO;
+import ec.ups.edu.dao.TicketDAO;
+import ec.ups.edu.dao.VehiculoDAO;
+import java.util.Locale;
+import java.util.ResourceBundle;
+
 /**
  *
  * @author Adolfo
  */
 public class VentanaPrincipal extends javax.swing.JFrame {
+    
+    private ClienteDAO clienteDAO;
+    private VehiculoDAO vehiculoDAO;
+    private TicketDAO ticketDAO;
 
+    private ControladorCliente controladorCliente;
+    private ControladorVehiculo controladorVehiculo;
+    private ControladorTicket controladorTicket;
+    
+    private VentanaRegistarCliente ventanaRegistrarCliente;
+    private VentanaRegistrarVehiculo ventanaRegistrarVehiculo;
+    private VentanaRegistrarTicket ventanaRegistrarTicket;
+    private VentanaSalidaTicket ventanaSalidaTicket;
+    
+    
     /**
      * Creates new form VentanaPrincipal
      */
     public VentanaPrincipal() {
         initComponents();
+        
+        clienteDAO = new ClienteDAO();
+        vehiculoDAO = new VehiculoDAO();
+        ticketDAO = new TicketDAO();
+        
+        controladorCliente = new ControladorCliente(clienteDAO, vehiculoDAO);
+        
+        ventanaRegistrarCliente = new VentanaRegistarCliente(controladorCliente);
+        ventanaRegistrarVehiculo = new VentanaRegistrarVehiculo();
+        ventanaRegistrarTicket = new VentanaRegistrarTicket();
+        ventanaSalidaTicket = new VentanaSalidaTicket();
+        
+        desktopPane.add(ventanaRegistrarCliente);
+        desktopPane.add(ventanaRegistrarTicket);
+        desktopPane.add(ventanaRegistrarVehiculo);
+        desktopPane.add(ventanaSalidaTicket);
+        
+      /*  localizacion = new Locale("es","EC");
+        mensajes = ResourceBundle.getBundle("ec.ups.edu.idiomas.mensajes", localizacion);
+        cambiarIdiomas();*/
+        
+    }
+    
+    public void cerrarVentanas(){
+        ventanaRegistrarCliente.setVisible(false);
+        ventanaRegistrarTicket.setVisible(false);
+        ventanaRegistrarVehiculo.setVisible(false);
+        ventanaSalidaTicket.setVisible(false);
+        
     }
 
     /**
@@ -54,6 +106,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         menuItemRegistrarCliente.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.CTRL_MASK));
         menuItemRegistrarCliente.setMnemonic('o');
         menuItemRegistrarCliente.setText("Registrar cliente");
+        menuItemRegistrarCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItemRegistrarClienteActionPerformed(evt);
+            }
+        });
         menuInicio.add(menuItemRegistrarCliente);
 
         menuItemRegistrarVehiculo.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_V, java.awt.event.InputEvent.CTRL_MASK));
@@ -131,6 +188,12 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private void menuItemExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemExitActionPerformed
         System.exit(0);
     }//GEN-LAST:event_menuItemExitActionPerformed
+
+    private void menuItemRegistrarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemRegistrarClienteActionPerformed
+        // TODO add your handling code here:
+        cerrarVentanas();
+        ventanaRegistrarCliente.setVisible(true);
+    }//GEN-LAST:event_menuItemRegistrarClienteActionPerformed
 
     /**
      * @param args the command line arguments

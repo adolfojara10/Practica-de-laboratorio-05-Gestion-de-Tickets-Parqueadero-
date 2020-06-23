@@ -24,16 +24,20 @@ public class ControladorCliente {
     private Vehiculo vehiculo;
 
     private IClienteDAO clienteDAO;
-    private IVehiculoDAO vehiculaDAO;
+    private IVehiculoDAO vehiculoDAO;
 
-    public ControladorCliente(ClienteDAO clienteDAO, VehiculoDAO vehiculaDAO) {
+    public ControladorCliente(ClienteDAO clienteDAO, VehiculoDAO vehiculoDAO) {
         this.clienteDAO = clienteDAO;
-        this.vehiculaDAO = vehiculaDAO;
+        this.vehiculoDAO = vehiculoDAO;
     }
 
-    public boolean crearCliente(String cedula, String nombre, Telefono telefono, Direccion direccion) {
-
-        cliente = new Cliente(cedula, nombre, telefono, direccion);
+    public boolean crearCliente(String cedula, String nombre,String tipo, String numeroT, String operadora, 
+            String calleP, String calleS, String numeroC) {
+        
+        Telefono tele = new Telefono(numeroT, tipo, operadora);
+        Direccion dir = new Direccion(calleP, calleS, numeroC);
+        
+        cliente = new Cliente(cedula, nombre, tele, dir);
         if (clienteDAO.create(cliente)) {
             return true;
         } else {
@@ -45,7 +49,7 @@ public class ControladorCliente {
     
     public boolean agregarVehiculo(String placa, String marca, String modelo){
         vehiculo = new Vehiculo(placa, marca, modelo);
-        if(vehiculaDAO.create(vehiculo)){
+        if(vehiculoDAO.create(vehiculo)){
             cliente.agregarVehiculo(vehiculo);
             clienteDAO.update(cliente);
             return true;
