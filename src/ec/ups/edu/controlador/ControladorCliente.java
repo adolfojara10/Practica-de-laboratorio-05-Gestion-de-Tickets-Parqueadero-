@@ -63,7 +63,7 @@ public class ControladorCliente {
     
     
     
-    public Cliente burcarCliente(String cedula) {
+    public Cliente buscarCliente(String cedula) {
         cliente = clienteDAO.read(cedula);
         return cliente;
     }
