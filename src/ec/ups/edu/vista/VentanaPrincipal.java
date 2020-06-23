@@ -13,6 +13,7 @@ import ec.ups.edu.dao.TicketDAO;
 import ec.ups.edu.dao.VehiculoDAO;
 import java.util.Locale;
 import java.util.ResourceBundle;
+import sun.security.tools.keytool.Resources;
 
 /**
  *
@@ -20,9 +21,13 @@ import java.util.ResourceBundle;
  */
 public class VentanaPrincipal extends javax.swing.JFrame {
     
+    private Locale localizacion;
+    private ResourceBundle  recurso;
+    
     private ClienteDAO clienteDAO;
     private VehiculoDAO vehiculoDAO;
     private TicketDAO ticketDAO;
+    
 
     private ControladorCliente controladorCliente;
     private ControladorVehiculo controladorVehiculo;
@@ -71,6 +76,35 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         ventanaSalidaTicket.setVisible(false);
         
     }
+    public void  cambiarIdioma(String idioma, String localidad){
+    localizacion = new Locale(localidad, idioma);
+    recurso = ResourceBundle.getBundle("ec.ups.edu.idioma.mensaje",localizacion);
+    
+    //JmenuInicio
+    menuInicio.setText(recurso.getString("menuInicio"));
+    //JmenuItems de el JmenuInicio
+    menuItemRegistrarCliente.setText(recurso.getString("registrarCliente"));
+    menuItemRegistrarVehiculo.setText(recurso.getString("registrarVehiculo"));
+    menuItemEmitirTicket.setText(recurso.getString("emitirTicket"));
+    menuItemSalidaTicket.setText(recurso.getString("salidaTicket"));
+    menuItemExit.setText(recurso.getString("salida"));
+    
+    //JmenuListar
+    menuListar.setText(recurso.getString("menuListar"));
+    //JmenuItems de el JmenuListar
+    menuItemListarClientes.setText(recurso.getString("listarClientes"));
+    menuItemListarVehiculos.setText(recurso.getString("listarVehiculos"));
+    menuItemListarTickets.setText(recurso.getString("listarTickets"));
+    
+    //JmenuIdiomas
+    menuIdiomas.setText(recurso.getString("menuIdiomas"));
+    //JmenusItem de el JmenuIdiomas
+    menuItemIdiomasEspañol.setText(recurso.getString("español"));
+    menuItemIdiomasIngles.setText(recurso.getString("ingles"));
+    
+    
+    
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -94,8 +128,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         menuItemListarVehiculos = new javax.swing.JMenuItem();
         menuItemListarTickets = new javax.swing.JMenuItem();
         menuIdiomas = new javax.swing.JMenu();
-        contentMenuItem = new javax.swing.JMenuItem();
-        aboutMenuItem = new javax.swing.JMenuItem();
+        menuItemIdiomasEspañol = new javax.swing.JMenuItem();
+        menuItemIdiomasIngles = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Sistema Parqueadero");
@@ -161,13 +195,23 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         menuIdiomas.setMnemonic('h');
         menuIdiomas.setText("Idiomas");
 
-        contentMenuItem.setMnemonic('c');
-        contentMenuItem.setText("Español");
-        menuIdiomas.add(contentMenuItem);
+        menuItemIdiomasEspañol.setMnemonic('c');
+        menuItemIdiomasEspañol.setText("Español");
+        menuItemIdiomasEspañol.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItemIdiomasEspañolActionPerformed(evt);
+            }
+        });
+        menuIdiomas.add(menuItemIdiomasEspañol);
 
-        aboutMenuItem.setMnemonic('a');
-        aboutMenuItem.setText("Inglés");
-        menuIdiomas.add(aboutMenuItem);
+        menuItemIdiomasIngles.setMnemonic('a');
+        menuItemIdiomasIngles.setText("Inglés");
+        menuItemIdiomasIngles.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItemIdiomasInglesActionPerformed(evt);
+            }
+        });
+        menuIdiomas.add(menuItemIdiomasIngles);
 
         menuBar.add(menuIdiomas);
 
@@ -196,6 +240,16 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         cerrarVentanas();
         ventanaRegistrarCliente.setVisible(true);
     }//GEN-LAST:event_menuItemRegistrarClienteActionPerformed
+
+    private void menuItemIdiomasEspañolActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemIdiomasEspañolActionPerformed
+        // TODO add your handling code here:
+        this.cambiarIdioma("es","EC");
+    }//GEN-LAST:event_menuItemIdiomasEspañolActionPerformed
+
+    private void menuItemIdiomasInglesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemIdiomasInglesActionPerformed
+        // TODO add your handling code here:
+        this.cambiarIdioma("en","UK");  
+    }//GEN-LAST:event_menuItemIdiomasInglesActionPerformed
 
     /**
      * @param args the command line arguments
@@ -233,14 +287,14 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenuItem aboutMenuItem;
-    private javax.swing.JMenuItem contentMenuItem;
     private javax.swing.JDesktopPane desktopPane;
     private javax.swing.JMenuBar menuBar;
     private javax.swing.JMenu menuIdiomas;
     private javax.swing.JMenu menuInicio;
     private javax.swing.JMenuItem menuItemEmitirTicket;
     private javax.swing.JMenuItem menuItemExit;
+    private javax.swing.JMenuItem menuItemIdiomasEspañol;
+    private javax.swing.JMenuItem menuItemIdiomasIngles;
     private javax.swing.JMenuItem menuItemListarClientes;
     private javax.swing.JMenuItem menuItemListarTickets;
     private javax.swing.JMenuItem menuItemListarVehiculos;
