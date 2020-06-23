@@ -14,7 +14,7 @@ import java.util.Set;
  */
 public interface ITicketDAO {
     
-     public void create(Ticket ticket);
+     public boolean create(Ticket ticket);
     
     public Ticket read(int numero);
     

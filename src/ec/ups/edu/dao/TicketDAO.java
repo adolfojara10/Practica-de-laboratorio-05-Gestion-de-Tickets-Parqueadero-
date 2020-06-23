@@ -5,45 +5,70 @@
  */
 package ec.ups.edu.dao;
 
-import ec.ups.edu.idao.IClienteDAO;
-import ec.ups.edu.modelo.Cliente;
-import java.util.Set;
+import ec.ups.edu.idao.ITicketDAO;
+
+import ec.ups.edu.modelo.Ticket;
+
+import java.util.*;
 
 /**
  *
  * @author JHON FAREZ
  */
+public class TicketDAO implements ITicketDAO {
 
-public class TicketDAO implements IClienteDAO{
+    private Set<Ticket> tickets;
 
-    private Set<Cliente> Clientes;
-    
-    public TicketDAO(){
-
-    }
-    @Override
-    public void create(Cliente cliente) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public TicketDAO() {
+        tickets = new HashSet<>();
     }
 
     @Override
-    public Cliente read(String cedula) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean create(Ticket ticket) {
+        if (tickets.contains(ticket) != true) {
+            tickets.add(ticket);
+            return true;
+        }
+        return false;
     }
 
     @Override
-    public void update(Cliente cliente) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Ticket read(int numero) {
+        Iterator<Ticket> it = tickets.iterator();
+        while (it.hasNext()) {
+            Ticket t = it.next();
+            if (t.getNumero() == numero) {
+                return t;
+            }
+            break;
+        }
+        return null;
     }
 
     @Override
-    public void delete(Cliente cliente) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void update(Ticket ticket) {
+        Iterator<Ticket> it = tickets.iterator();
+        while (it.hasNext()) {
+            Ticket t = it.next();
+            if (t.getNumero() == ticket.getNumero()) {
+                tickets.remove(t);
+                tickets.add(ticket);
+            }
+            break;
+        }
+
     }
 
     @Override
-    public Set<Cliente> findAll() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void delete(Ticket ticket) {
+        if (tickets.contains(ticket)) {
+            tickets.remove(ticket);
+        }
     }
-    
+
+    @Override
+    public Set<Ticket> findAll() {
+        return tickets;
+    }
+
 }
