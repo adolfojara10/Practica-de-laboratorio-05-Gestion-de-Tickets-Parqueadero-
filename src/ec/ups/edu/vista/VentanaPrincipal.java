@@ -29,83 +29,88 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         desktopPane = new javax.swing.JDesktopPane();
         menuBar = new javax.swing.JMenuBar();
-        fileMenu = new javax.swing.JMenu();
-        openMenuItem = new javax.swing.JMenuItem();
-        saveMenuItem = new javax.swing.JMenuItem();
-        saveAsMenuItem = new javax.swing.JMenuItem();
-        exitMenuItem = new javax.swing.JMenuItem();
-        editMenu = new javax.swing.JMenu();
-        cutMenuItem = new javax.swing.JMenuItem();
-        copyMenuItem = new javax.swing.JMenuItem();
-        pasteMenuItem = new javax.swing.JMenuItem();
-        deleteMenuItem = new javax.swing.JMenuItem();
-        helpMenu = new javax.swing.JMenu();
+        menuInicio = new javax.swing.JMenu();
+        menuItemRegistrarCliente = new javax.swing.JMenuItem();
+        menuItemRegistrarVehiculo = new javax.swing.JMenuItem();
+        menuItemEmitirTicket = new javax.swing.JMenuItem();
+        menuItemSalidaTicket = new javax.swing.JMenuItem();
+        menuItemExit = new javax.swing.JMenuItem();
+        menuListar = new javax.swing.JMenu();
+        menuItemListarClientes = new javax.swing.JMenuItem();
+        menuItemListarVehiculos = new javax.swing.JMenuItem();
+        menuItemListarTickets = new javax.swing.JMenuItem();
+        menuIdiomas = new javax.swing.JMenu();
         contentMenuItem = new javax.swing.JMenuItem();
         aboutMenuItem = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Sistema Parqueadero");
+        setLocation(new java.awt.Point(500, 100));
+        setMinimumSize(new java.awt.Dimension(400, 500));
 
-        fileMenu.setMnemonic('f');
-        fileMenu.setText("File");
+        menuInicio.setMnemonic('f');
+        menuInicio.setText("Inicio");
 
-        openMenuItem.setMnemonic('o');
-        openMenuItem.setText("Open");
-        fileMenu.add(openMenuItem);
+        menuItemRegistrarCliente.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.CTRL_MASK));
+        menuItemRegistrarCliente.setMnemonic('o');
+        menuItemRegistrarCliente.setText("Registrar cliente");
+        menuInicio.add(menuItemRegistrarCliente);
 
-        saveMenuItem.setMnemonic('s');
-        saveMenuItem.setText("Save");
-        fileMenu.add(saveMenuItem);
+        menuItemRegistrarVehiculo.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_V, java.awt.event.InputEvent.CTRL_MASK));
+        menuItemRegistrarVehiculo.setMnemonic('s');
+        menuItemRegistrarVehiculo.setText("Registrar vehículo");
+        menuInicio.add(menuItemRegistrarVehiculo);
 
-        saveAsMenuItem.setMnemonic('a');
-        saveAsMenuItem.setText("Save As ...");
-        saveAsMenuItem.setDisplayedMnemonicIndex(5);
-        fileMenu.add(saveAsMenuItem);
+        menuItemEmitirTicket.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_T, java.awt.event.InputEvent.CTRL_MASK));
+        menuItemEmitirTicket.setMnemonic('a');
+        menuItemEmitirTicket.setText("Emitir ticket");
+        menuInicio.add(menuItemEmitirTicket);
 
-        exitMenuItem.setMnemonic('x');
-        exitMenuItem.setText("Exit");
-        exitMenuItem.addActionListener(new java.awt.event.ActionListener() {
+        menuItemSalidaTicket.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_MASK));
+        menuItemSalidaTicket.setText("Salida ticket");
+        menuInicio.add(menuItemSalidaTicket);
+
+        menuItemExit.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_ESCAPE, 0));
+        menuItemExit.setMnemonic('x');
+        menuItemExit.setText("Exit");
+        menuItemExit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                exitMenuItemActionPerformed(evt);
+                menuItemExitActionPerformed(evt);
             }
         });
-        fileMenu.add(exitMenuItem);
+        menuInicio.add(menuItemExit);
 
-        menuBar.add(fileMenu);
+        menuBar.add(menuInicio);
 
-        editMenu.setMnemonic('e');
-        editMenu.setText("Edit");
+        menuListar.setMnemonic('e');
+        menuListar.setText("Listar");
 
-        cutMenuItem.setMnemonic('t');
-        cutMenuItem.setText("Cut");
-        editMenu.add(cutMenuItem);
+        menuItemListarClientes.setMnemonic('t');
+        menuItemListarClientes.setText("Clientes");
+        menuListar.add(menuItemListarClientes);
 
-        copyMenuItem.setMnemonic('y');
-        copyMenuItem.setText("Copy");
-        editMenu.add(copyMenuItem);
+        menuItemListarVehiculos.setMnemonic('y');
+        menuItemListarVehiculos.setText("Vehiculos");
+        menuListar.add(menuItemListarVehiculos);
 
-        pasteMenuItem.setMnemonic('p');
-        pasteMenuItem.setText("Paste");
-        editMenu.add(pasteMenuItem);
+        menuItemListarTickets.setMnemonic('p');
+        menuItemListarTickets.setText("Tickets");
+        menuListar.add(menuItemListarTickets);
 
-        deleteMenuItem.setMnemonic('d');
-        deleteMenuItem.setText("Delete");
-        editMenu.add(deleteMenuItem);
+        menuBar.add(menuListar);
 
-        menuBar.add(editMenu);
-
-        helpMenu.setMnemonic('h');
-        helpMenu.setText("Help");
+        menuIdiomas.setMnemonic('h');
+        menuIdiomas.setText("Idiomas");
 
         contentMenuItem.setMnemonic('c');
-        contentMenuItem.setText("Contents");
-        helpMenu.add(contentMenuItem);
+        contentMenuItem.setText("Español");
+        menuIdiomas.add(contentMenuItem);
 
         aboutMenuItem.setMnemonic('a');
-        aboutMenuItem.setText("About");
-        helpMenu.add(aboutMenuItem);
+        aboutMenuItem.setText("Inglés");
+        menuIdiomas.add(aboutMenuItem);
 
-        menuBar.add(helpMenu);
+        menuBar.add(menuIdiomas);
 
         setJMenuBar(menuBar);
 
@@ -123,9 +128,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void exitMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitMenuItemActionPerformed
+    private void menuItemExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemExitActionPerformed
         System.exit(0);
-    }//GEN-LAST:event_exitMenuItemActionPerformed
+    }//GEN-LAST:event_menuItemExitActionPerformed
 
     /**
      * @param args the command line arguments
@@ -165,19 +170,19 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem aboutMenuItem;
     private javax.swing.JMenuItem contentMenuItem;
-    private javax.swing.JMenuItem copyMenuItem;
-    private javax.swing.JMenuItem cutMenuItem;
-    private javax.swing.JMenuItem deleteMenuItem;
     private javax.swing.JDesktopPane desktopPane;
-    private javax.swing.JMenu editMenu;
-    private javax.swing.JMenuItem exitMenuItem;
-    private javax.swing.JMenu fileMenu;
-    private javax.swing.JMenu helpMenu;
     private javax.swing.JMenuBar menuBar;
-    private javax.swing.JMenuItem openMenuItem;
-    private javax.swing.JMenuItem pasteMenuItem;
-    private javax.swing.JMenuItem saveAsMenuItem;
-    private javax.swing.JMenuItem saveMenuItem;
+    private javax.swing.JMenu menuIdiomas;
+    private javax.swing.JMenu menuInicio;
+    private javax.swing.JMenuItem menuItemEmitirTicket;
+    private javax.swing.JMenuItem menuItemExit;
+    private javax.swing.JMenuItem menuItemListarClientes;
+    private javax.swing.JMenuItem menuItemListarTickets;
+    private javax.swing.JMenuItem menuItemListarVehiculos;
+    private javax.swing.JMenuItem menuItemRegistrarCliente;
+    private javax.swing.JMenuItem menuItemRegistrarVehiculo;
+    private javax.swing.JMenuItem menuItemSalidaTicket;
+    private javax.swing.JMenu menuListar;
     // End of variables declaration//GEN-END:variables
 
 }
