@@ -13,7 +13,7 @@ import java.util.Objects;
  * @author Adolfo
  */
 public class Cliente {
-    
+
     private String cedula;
     private String nombre;
     private Telefono telefono;
@@ -27,13 +27,14 @@ public class Cliente {
         this.direccion = direccion;
     }
 
+    /*
     public Cliente(String cedula, String nombre, Telefono telefono, Direccion direccion, List<Vehiculo> listaVehiculos) {
         this.cedula = cedula;
         this.nombre = nombre;
         this.telefono = telefono;
         this.direccion = direccion;
         this.listaVehiculos = listaVehiculos;
-    }
+    }*/
 
     public String getCedula() {
         return cedula;
@@ -71,23 +72,24 @@ public class Cliente {
         return listaVehiculos;
     }
 
-    public void agregarVehiculo(Vehiculo vehiculo){
-        listaVehiculos.add(vehiculo);
+    public void agregarVehiculo(String placa, String marca, String modelo) {
+        Vehiculo v = new Vehiculo(placa, marca, modelo);
+        listaVehiculos.add(v);
     }
-    
-    public void actualizarVehiculo(Vehiculo vehiculo){
-        if(listaVehiculos.contains(vehiculo)){
+/*
+    public void actualizarVehiculo(Vehiculo vehiculo) {
+        if (listaVehiculos.contains(vehiculo)) {
             int index = listaVehiculos.indexOf(vehiculo);
             listaVehiculos.set(index, vehiculo);
         }
     }
-    
-    public void eliminarVehiculo(Vehiculo vehiculo){
-        if(listaVehiculos.contains(vehiculo)){
+
+    public void eliminarVehiculo(Vehiculo vehiculo) {
+        if (listaVehiculos.contains(vehiculo)) {
             listaVehiculos.remove(vehiculo);
         }
     }
-
+*/
     @Override
     public int hashCode() {
         int hash = 7;
@@ -115,10 +117,9 @@ public class Cliente {
 
     @Override
     public String toString() {
-        return "Cliente:\n" + "cedula=" + cedula + ", nombre=" + nombre 
-                + "\ntelefono=" + telefono + "\ndireccion=" + direccion 
+        return "Cliente:\n" + "cedula=" + cedula + ", nombre=" + nombre
+                + "\ntelefono=" + telefono + "\ndireccion=" + direccion
                 + "\nlistaVehiculos=" + listaVehiculos + '}';
     }
-    
-    
+
 }
