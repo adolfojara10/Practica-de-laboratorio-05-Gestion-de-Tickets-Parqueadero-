@@ -14,7 +14,7 @@ import java.util.Set;
  */
 public interface IClienteDAO {
     
-    public void create(Cliente cliente);
+    public boolean create(Cliente cliente);
     
     public Cliente read(String cedula);
     
