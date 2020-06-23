@@ -35,7 +35,6 @@ public class Cliente {
         this.direccion = direccion;
         this.listaVehiculos = listaVehiculos;
     }*/
-
     public String getCedula() {
         return cedula;
     }
@@ -72,11 +71,11 @@ public class Cliente {
         return listaVehiculos;
     }
 
-    public void agregarVehiculo(String placa, String marca, String modelo) {
-        Vehiculo v = new Vehiculo(placa, marca, modelo);
-        listaVehiculos.add(v);
+    public void agregarVehiculo(Vehiculo vehiculo) {
+        listaVehiculos.add(vehiculo);
     }
-/*
+
+    /*
     public void actualizarVehiculo(Vehiculo vehiculo) {
         if (listaVehiculos.contains(vehiculo)) {
             int index = listaVehiculos.indexOf(vehiculo);
@@ -89,7 +88,7 @@ public class Cliente {
             listaVehiculos.remove(vehiculo);
         }
     }
-*/
+     */
     @Override
     public int hashCode() {
         int hash = 7;

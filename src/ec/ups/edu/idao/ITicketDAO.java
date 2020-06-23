@@ -13,14 +13,16 @@ import java.util.Set;
  * @author Adolfo
  */
 public interface ITicketDAO {
-    
-     public boolean create(Ticket ticket);
-    
+
+    public boolean create(Ticket ticket);
+
     public Ticket read(int numero);
-    
+
     public void update(Ticket ticket);
-    
+
     public void delete(Ticket ticket);
-    
+
     public Set<Ticket> findAll();
+
+    public int devolverNumero();
 }

@@ -75,6 +75,7 @@ public class TicketDAO implements ITicketDAO {
         return tickets;
     }
     
+    @Override
     public int devolverNumero(){
         return numero;
     }

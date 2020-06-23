@@ -23,4 +23,6 @@ public interface IVehiculoDAO {
     public void delete(Vehiculo vehiculo);
 
     public Set<Vehiculo> findAll();
+    
+   
 }
