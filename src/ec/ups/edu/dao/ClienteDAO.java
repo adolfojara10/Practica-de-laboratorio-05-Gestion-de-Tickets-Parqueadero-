@@ -30,8 +30,10 @@ public class ClienteDAO implements IClienteDAO {
         if (!clientes.contains(cliente)) {
             clientes.add(cliente);
             return true;
+        } else {
+            return false;
         }
-        return false;
+
     }
 
     @Override

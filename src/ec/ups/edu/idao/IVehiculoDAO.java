@@ -14,7 +14,7 @@ import java.util.Set;
  */
 public interface IVehiculoDAO {
 
-    public void create(Vehiculo vehiculo);
+    public boolean create(Vehiculo vehiculo);
 
     public Vehiculo read(String placa);
 

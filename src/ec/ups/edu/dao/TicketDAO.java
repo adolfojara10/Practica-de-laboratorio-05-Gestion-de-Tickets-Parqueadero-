@@ -18,9 +18,11 @@ import java.util.*;
 public class TicketDAO implements ITicketDAO {
 
     private Set<Ticket> tickets;
+    private int numero;
 
     public TicketDAO() {
         tickets = new HashSet<>();
+        numero = 0;
     }
 
     @Override
@@ -28,8 +30,10 @@ public class TicketDAO implements ITicketDAO {
         if (tickets.contains(ticket) != true) {
             tickets.add(ticket);
             return true;
+        } else {
+            return false;
         }
-        return false;
+
     }
 
     @Override
@@ -69,6 +73,10 @@ public class TicketDAO implements ITicketDAO {
     @Override
     public Set<Ticket> findAll() {
         return tickets;
+    }
+    
+    public int devolverNumero(){
+        return numero;
     }
 
 }
