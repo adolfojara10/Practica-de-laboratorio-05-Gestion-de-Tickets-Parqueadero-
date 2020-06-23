@@ -66,6 +66,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
       /*  localizacion = new Locale("es","EC");
         mensajes = ResourceBundle.getBundle("ec.ups.edu.idiomas.mensajes", localizacion);
         cambiarIdiomas();*/
+      
         
     }
     
@@ -77,6 +78,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         
     }
     public void  cambiarIdioma(String idioma, String localidad){
+        System.out.println("Metodo cambiar idioma en la ventana principal y en  las ventana descritas en la misma ventana");
     localizacion = new Locale(localidad, idioma);
     recurso = ResourceBundle.getBundle("ec.ups.edu.idioma.mensaje",localizacion);
     
