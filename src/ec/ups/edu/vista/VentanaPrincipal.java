@@ -61,9 +61,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         desktopPane.add(ventanaRegistrarVehiculo);
         desktopPane.add(ventanaSalidaTicket);
 
-        localizacion = new Locale("es", "EC");
-        recurso = ResourceBundle.getBundle("ec.ups.edu.idioma.mensaje", localizacion);
-        cambiarIdioma();
+      /*  localizacion = new Locale("es", "EC");
+        recurso = ResourceBundle.getBundle("ec.ups.edu.idioma.mensaje", localizacion);*/
+        cambiarIdioma("es", "EC");
 
     }
 
@@ -75,10 +75,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     }
 
-    public void cambiarIdioma() {
-        /*  System.out.println("Metodo cambiar idioma en la ventana principal y en  las ventana descritas en la misma ventana principal ");
-        localizacion = new Locale(localidad, idioma);
-        recurso = ResourceBundle.getBundle("ec.ups.edu.idioma.mensaje", localizacion);*/
+    public void cambiarIdioma(String idioma, String localidad) {
+         //System.out.println("Metodo cambiar idioma en la ventana principal y en  las ventana descritas en la misma ventana principal ");
+        localizacion = new Locale(idioma, localidad);
+        
+        recurso = ResourceBundle.getBundle("ec.ups.edu.idioma.mensaje", localizacion);
 
         //JmenuInicio
         menuInicio.setText(recurso.getString("menuInicio"));
@@ -101,15 +102,16 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         //JmenusItem de el JmenuIdiomas
         menuItemIdiomasEspañol.setText(recurso.getString("español"));
         menuItemIdiomasIngles.setText(recurso.getString("ingles"));
-
+        
+        ventanaRegistrarVehiculo.setTitle(recurso.getString("tituloCliente"));
         
         //Ventana Registrar Vehiculo
         /*
         if (ventanaRegistrarVehiculo != null) {
             ventanaRegistrarVehiculo.setRecurso(recurso);
             ventanaRegistrarVehiculo.cambiarIdioma(idioma, localidad);
-        }
-         */
+        }*/
+         
     }
 
     /**
@@ -264,17 +266,17 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     private void menuItemIdiomasEspañolActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemIdiomasEspañolActionPerformed
         // TODO add your handling code here:
-        localizacion = new Locale("es", "EC");
-        recurso = ResourceBundle.getBundle("ec.ups.edu.idioma.mensaje", localizacion);
-        cambiarIdioma();
+      /*  localizacion = new Locale("es", "EC");
+        recurso = ResourceBundle.getBundle("ec.ups.edu.idioma.mensaje", localizacion);*/
+        cambiarIdioma("es", "EC");
     }//GEN-LAST:event_menuItemIdiomasEspañolActionPerformed
 
     private void menuItemIdiomasInglesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemIdiomasInglesActionPerformed
         // TODO add your handling code here:
         //this.cambiarIdioma("en", "UK");
-        localizacion = new Locale("en", "UK");
-        recurso = ResourceBundle.getBundle("ec.ups.edu.idioma.mensaje", localizacion);
-        cambiarIdioma();
+      /* localizacion = new Locale("en", "UK");
+        recurso = ResourceBundle.getBundle("ec.ups.edu.idioma.mensaje", localizacion);*/
+        cambiarIdioma("en", "UK");
 
     }//GEN-LAST:event_menuItemIdiomasInglesActionPerformed
 
