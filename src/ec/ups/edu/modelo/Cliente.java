@@ -91,8 +91,8 @@ public class Cliente {
      */
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 67 * hash + Objects.hashCode(this.cedula);
+        int hash = 5;
+        hash = 97 * hash + Objects.hashCode(this.cedula);
         return hash;
     }
 

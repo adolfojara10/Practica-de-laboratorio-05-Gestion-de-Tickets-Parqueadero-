@@ -8,10 +8,12 @@ package ec.ups.edu.vista;
 import ec.ups.edu.controlador.ControladorCliente;
 import ec.ups.edu.controlador.ControladorVehiculo;
 import ec.ups.edu.modelo.Cliente;
+import ec.ups.edu.modelo.Vehiculo;
 import java.util.Locale;
 import java.util.ResourceBundle;
+import java.util.*;
 import javax.swing.JOptionPane;
-
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -22,11 +24,10 @@ public class VentanaRegistrarVehiculo extends javax.swing.JInternalFrame {
     private ControladorCliente controladorCliente;
     private ControladorVehiculo controladorVehiculo;
     private VentanaRegistarCliente ventanaRegistarCliente;
-    
+
     private Locale localizacion;
     private ResourceBundle recurso;
-    
-    
+
     /**
      * Creates new form VentanaRegistrarVehiculo
      */
@@ -36,7 +37,7 @@ public class VentanaRegistrarVehiculo extends javax.swing.JInternalFrame {
 
         this.controladorCliente = controladorCliente;
         this.controladorVehiculo = controladorVehiculo;
-        
+
         this.ventanaRegistarCliente = ventanaRegistarCliente;
     }
 
@@ -55,19 +56,34 @@ public class VentanaRegistrarVehiculo extends javax.swing.JInternalFrame {
     public void setRecurso(ResourceBundle recurso) {
         this.recurso = recurso;
     }
-    
-    public void cambiarIdioma(String idioma, String localizacion){
-    placa.setText(recurso.getString("placa"));
-    marca.setText(recurso.getString("marca"));
-    modelo.setText(recurso.getString("modelo"));
-    cedula.setText(recurso.getString("cedula"));
-    nombre.setText(recurso.getString("nombre"));
-    telefono.setText(recurso.getString("telefono"));
-    direccion.setText(recurso.getString("direccion"));
-    btnBuscar.setText(recurso.getString("btnBuscar"));
-    btnAgregar.setText(recurso.getString("btnAgregar"));
-    btnAtras.setText(recurso.getString("tbnAtras"));
-        
+
+    public void llenarTBLClientes() {
+        DefaultTableModel modelo = (DefaultTableModel) tblClientes.getModel();
+        modelo.setRowCount(0);
+
+        Set<Cliente> clientes = controladorCliente.findAll();
+        Iterator<Cliente> it = clientes.iterator();
+        while (it.hasNext()) {
+            Cliente c = it.next();
+            Object[] objeto = {c.getNombre(), c.getCedula(), c.getTelefono().getNumero(),
+                c.getDireccion().toString()};
+            modelo.addRow(objeto);
+        }
+        tblClientes.setModel(modelo);
+    }
+
+    public void cambiarIdioma(String idioma, String localizacion) {
+        placa.setText(recurso.getString("placa"));
+        marca.setText(recurso.getString("marca"));
+        modelo.setText(recurso.getString("modelo"));
+        cedula.setText(recurso.getString("cedula"));
+        nombre.setText(recurso.getString("nombre"));
+        telefono.setText(recurso.getString("telefono"));
+        direccion.setText(recurso.getString("direccion"));
+        btnBuscar.setText(recurso.getString("btnBuscar"));
+        btnAgregar.setText(recurso.getString("btnAgregar"));
+        btnAtras.setText(recurso.getString("tbnAtras"));
+
     }
 
     /**
@@ -103,10 +119,25 @@ public class VentanaRegistrarVehiculo extends javax.swing.JInternalFrame {
 
         setClosable(true);
         setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
-        setIconifiable(true);
-        setMaximizable(true);
         setResizable(true);
         setTitle("Registrar Vehículo");
+        addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+                formInternalFrameActivated(evt);
+            }
+            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+            }
+        });
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Datos del vehículo", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Dialog", 0, 12))); // NOI18N
 
@@ -254,6 +285,11 @@ public class VentanaRegistrarVehiculo extends javax.swing.JInternalFrame {
 
         btnAgregar.setBackground(new java.awt.Color(102, 102, 255));
         btnAgregar.setText("Agregar");
+        btnAgregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarActionPerformed(evt);
+            }
+        });
 
         btnAtras.setBackground(new java.awt.Color(255, 0, 0));
         btnAtras.setText("Atrás");
@@ -300,31 +336,76 @@ public class VentanaRegistrarVehiculo extends javax.swing.JInternalFrame {
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         // TODO add your handling code here:
+
+        String cedula = txtCedula.getText();
+
+        if (cedula.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "LLene el campo de cédula para buscar un cliente");
+        } else {
+            Cliente c = controladorCliente.buscarCliente(cedula);
+            if (c == null) {
+                int opcion = JOptionPane.showConfirmDialog(this, "Cliente no encontrado, "
+                        + "¿Desea crear un nuevo cliente?");
+                if (opcion == JOptionPane.YES_OPTION) {
+                    ventanaRegistarCliente.setVisible(true);
+                    llenarTBLClientes();
+                }
+            } else {
+                txtNombre.setText(c.getNombre());
+                txtTelefono.setText(c.getTelefono().getNumero());
+                txtDireccion.setText(c.getDireccion().toString());
+
+            }
+        }
+    }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
+        // TODO add your handling code here:
+
         String placa = txtFormatedPlaca.getText();
         String marca = txtMarca.getText();
         String modelo = txtModelo.getText();
         String cedula = txtCedula.getText();
 
         if (placa.isEmpty() || marca.isEmpty() || modelo.isEmpty() || cedula.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "LLene todos los campos para crear y agregar el vehiculo a un cliente");
+            JOptionPane.showMessageDialog(this, "LLene todos los campos para crear "
+                    + "y agregar el vehiculo a un cliente");
         } else {
+            /* Vehiculo ve = controladorVehiculo.crearVehiculo(placa, marca, modelo);
+            System.out.println(ve);*/
+            Vehiculo ve = new Vehiculo(placa, marca, modelo);
+
             Cliente c = controladorCliente.buscarCliente(cedula);
-            if (c == null) {
-                int opcion = JOptionPane.showConfirmDialog(this, "Cliente no encontrado, ¿Desea crear un nuevo cliente?");
-                if (opcion == JOptionPane.YES_OPTION) {
-                    ventanaRegistarCliente.setVisible(true);
-                }
+            /* if (ve == null) {
+                JOptionPane.showMessageDialog(this, "El vehículo ya existe");
             } else {
-                txtNombre.setText(c.getNombre());
-                txtTelefono.setText(c.getTelefono().getNumero());
-                txtDireccion.setText(c.getDireccion().toString());
-                
-            }
+               
+            }*/
+
+            controladorCliente.agregarVehiculo(ve, c);
+            JOptionPane.showMessageDialog(this, "Vehículo creado con exito");
+            this.hide();
+            limpiar();
         }
 
+    }//GEN-LAST:event_btnAgregarActionPerformed
 
-    }//GEN-LAST:event_btnBuscarActionPerformed
+    private void formInternalFrameActivated(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameActivated
+        // TODO add your handling code here:
+        llenarTBLClientes();
+    }//GEN-LAST:event_formInternalFrameActivated
 
+    public void limpiar() {
+
+        txtFormatedPlaca.setValue("");
+        txtMarca.setText("");
+        txtModelo.setText("");
+
+        txtCedula.setText("");
+        txtNombre.setText("");
+        txtTelefono.setText("");
+        txtDireccion.setText("");
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregar;

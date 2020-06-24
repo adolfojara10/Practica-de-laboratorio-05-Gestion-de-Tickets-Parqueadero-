@@ -41,7 +41,7 @@ public class ClienteDAO implements IClienteDAO {
         Iterator<Cliente> it = clientes.iterator();
         while (it.hasNext()) {
             Cliente c = it.next();
-            if (c.equals(cedula)) {
+            if (c.getCedula().equals(cedula)) {
                 return c;
             }
             break;
@@ -55,7 +55,7 @@ public class ClienteDAO implements IClienteDAO {
 
         while (it.hasNext()) {
             Cliente c = it.next();
-            if (c.equals(cliente.getCedula())) {
+            if (c.getCedula().equals(cliente.getCedula())) {
                 clientes.remove(c);
                 clientes.add(cliente);
             }

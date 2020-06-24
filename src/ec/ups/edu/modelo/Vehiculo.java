@@ -5,18 +5,18 @@
  */
 package ec.ups.edu.modelo;
 
-import java.util.Objects;
+import java.util.*;
 
 /**
  *
  * @author Adolfo
  */
 public class Vehiculo {
-    
+
     private String placa;
     private String marca;
     private String modelo;
-    private Ticket ticket;
+    private List<Ticket> listaTickets;
 
     public Vehiculo(String placa, String marca, String modelo) {
         this.placa = placa;
@@ -48,12 +48,12 @@ public class Vehiculo {
         this.modelo = modelo;
     }
 
-    public Ticket getTicket() {
-        return ticket;
+    public List<Ticket> getListaTickets() {
+        return listaTickets;
     }
 
-    public void setTicket(Ticket ticket) {
-        this.ticket = ticket;
+    public void agregarTicket(Ticket ticket) {
+        listaTickets.add(ticket);
     }
 
     @Override
@@ -83,10 +83,8 @@ public class Vehiculo {
 
     @Override
     public String toString() {
-        return "Vehiculo\n" + "placa=" + placa + ", marca=" + marca + ", modelo=" 
-                + modelo + ", ticket=" + ticket;
+        return "Vehiculo\n" + "placa=" + placa + ", marca=" + marca + ", modelo="
+                + modelo + ", ticket=" + listaTickets;
     }
-    
-    
-    
+
 }

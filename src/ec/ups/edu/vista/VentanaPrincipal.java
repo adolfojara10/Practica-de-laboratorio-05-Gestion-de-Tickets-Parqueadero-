@@ -20,97 +20,95 @@ import sun.security.tools.keytool.Resources;
  * @author Adolfo
  */
 public class VentanaPrincipal extends javax.swing.JFrame {
-    
+
     private Locale localizacion;
-    private ResourceBundle  recurso;
-    
+    private ResourceBundle recurso;
+
     private ClienteDAO clienteDAO;
     private VehiculoDAO vehiculoDAO;
     private TicketDAO ticketDAO;
-    
 
     private ControladorCliente controladorCliente;
     private ControladorVehiculo controladorVehiculo;
     private ControladorTicket controladorTicket;
-    
+
     private VentanaRegistarCliente ventanaRegistrarCliente;
     private VentanaRegistrarVehiculo ventanaRegistrarVehiculo;
     private VentanaRegistrarTicket ventanaRegistrarTicket;
     private VentanaSalidaTicket ventanaSalidaTicket;
-    
-    
+
     /**
      * Creates new form VentanaPrincipal
      */
     public VentanaPrincipal() {
         initComponents();
-        
+
         clienteDAO = new ClienteDAO();
         vehiculoDAO = new VehiculoDAO();
         ticketDAO = new TicketDAO();
-        
-        controladorCliente = new ControladorCliente(clienteDAO, vehiculoDAO);
+
+        controladorCliente = new ControladorCliente(clienteDAO, vehiculoDAO, ticketDAO);
         controladorVehiculo = new ControladorVehiculo(vehiculoDAO);
-        
+
         ventanaRegistrarCliente = new VentanaRegistarCliente(controladorCliente);
-        ventanaRegistrarVehiculo = new VentanaRegistrarVehiculo(controladorCliente, controladorVehiculo
-                , ventanaRegistrarCliente);
+        ventanaRegistrarVehiculo = new VentanaRegistrarVehiculo(controladorCliente, controladorVehiculo,
+                ventanaRegistrarCliente);
         ventanaRegistrarTicket = new VentanaRegistrarTicket();
         ventanaSalidaTicket = new VentanaSalidaTicket();
-        
+
         desktopPane.add(ventanaRegistrarCliente);
         desktopPane.add(ventanaRegistrarTicket);
         desktopPane.add(ventanaRegistrarVehiculo);
         desktopPane.add(ventanaSalidaTicket);
-        
-      /*  localizacion = new Locale("es","EC");
-        mensajes = ResourceBundle.getBundle("ec.ups.edu.idiomas.mensajes", localizacion);
-        cambiarIdiomas();*/
-      
-        
+
+        localizacion = new Locale("es", "EC");
+        recurso = ResourceBundle.getBundle("ec.ups.edu.idioma.mensaje", localizacion);
+        cambiarIdioma();
+
     }
-    
-    public void cerrarVentanas(){
+
+    public void cerrarVentanas() {
         ventanaRegistrarCliente.setVisible(false);
         ventanaRegistrarTicket.setVisible(false);
         ventanaRegistrarVehiculo.setVisible(false);
         ventanaSalidaTicket.setVisible(false);
-        
+
     }
-    public void  cambiarIdioma(String idioma, String localidad){
-      System.out.println("Metodo cambiar idioma en la ventana principal y en  las ventana descritas en la misma ventana principal ");
-    localizacion = new Locale(localidad, idioma);
-    recurso = ResourceBundle.getBundle("ec.ups.edu.idioma.mensaje",localizacion);
-    
-    //JmenuInicio
-    menuInicio.setText(recurso.getString("menuInicio"));
-    //JmenuItems de el JmenuInicio
-    menuItemRegistrarCliente.setText(recurso.getString("registrarCliente"));
-    menuItemRegistrarVehiculo.setText(recurso.getString("registrarVehiculo"));
-    menuItemEmitirTicket.setText(recurso.getString("emitirTicket"));
-    menuItemSalidaTicket.setText(recurso.getString("salidaTicket"));
-    menuItemExit.setText(recurso.getString("salida"));
-    
-    //JmenuListar
-    menuListar.setText(recurso.getString("menuListar"));
-    //JmenuItems de el JmenuListar
-    menuItemListarClientes.setText(recurso.getString("listarClientes"));
-    menuItemListarVehiculos.setText(recurso.getString("listarVehiculos"));
-    menuItemListarTickets.setText(recurso.getString("listarTickets"));
-    
-    //JmenuIdiomas
-    menuIdiomas.setText(recurso.getString("menuIdiomas"));
-    //JmenusItem de el JmenuIdiomas
-    menuItemIdiomasEspañol.setText(recurso.getString("español"));
-    menuItemIdiomasIngles.setText(recurso.getString("ingles"));
-    //Ventana Registrar Vehiculo
-    if(ventanaRegistrarVehiculo != null){
-    ventanaRegistrarVehiculo.setRecurso(recurso);
-    ventanaRegistrarVehiculo.cambiarIdioma(idioma, localidad);
-    }
-    
-    
-    
+
+    public void cambiarIdioma() {
+        /*  System.out.println("Metodo cambiar idioma en la ventana principal y en  las ventana descritas en la misma ventana principal ");
+        localizacion = new Locale(localidad, idioma);
+        recurso = ResourceBundle.getBundle("ec.ups.edu.idioma.mensaje", localizacion);*/
+
+        //JmenuInicio
+        menuInicio.setText(recurso.getString("menuInicio"));
+        //JmenuItems de el JmenuInicio
+        menuItemRegistrarCliente.setText(recurso.getString("registrarCliente"));
+        menuItemRegistrarVehiculo.setText(recurso.getString("registrarVehiculo"));
+        menuItemEmitirTicket.setText(recurso.getString("emitirTicket"));
+        menuItemSalidaTicket.setText(recurso.getString("salidaTicket"));
+        menuItemExit.setText(recurso.getString("salida"));
+
+        //JmenuListar
+        menuListar.setText(recurso.getString("menuListar"));
+        //JmenuItems de el JmenuListar
+        menuItemListarClientes.setText(recurso.getString("listarClientes"));
+        menuItemListarVehiculos.setText(recurso.getString("listarVehiculos"));
+        menuItemListarTickets.setText(recurso.getString("listarTickets"));
+
+        //JmenuIdiomas
+        menuIdiomas.setText(recurso.getString("menuIdiomas"));
+        //JmenusItem de el JmenuIdiomas
+        menuItemIdiomasEspañol.setText(recurso.getString("español"));
+        menuItemIdiomasIngles.setText(recurso.getString("ingles"));
+
+        //Ventana Registrar Vehiculo
+        /*
+        if (ventanaRegistrarVehiculo != null) {
+            ventanaRegistrarVehiculo.setRecurso(recurso);
+            ventanaRegistrarVehiculo.cambiarIdioma(idioma, localidad);
+        }
+         */
     }
 
     /**
@@ -159,15 +157,30 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         menuItemRegistrarVehiculo.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_V, java.awt.event.InputEvent.CTRL_MASK));
         menuItemRegistrarVehiculo.setMnemonic('s');
         menuItemRegistrarVehiculo.setText("Registrar vehículo");
+        menuItemRegistrarVehiculo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItemRegistrarVehiculoActionPerformed(evt);
+            }
+        });
         menuInicio.add(menuItemRegistrarVehiculo);
 
         menuItemEmitirTicket.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_T, java.awt.event.InputEvent.CTRL_MASK));
         menuItemEmitirTicket.setMnemonic('a');
         menuItemEmitirTicket.setText("Emitir ticket");
+        menuItemEmitirTicket.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItemEmitirTicketActionPerformed(evt);
+            }
+        });
         menuInicio.add(menuItemEmitirTicket);
 
         menuItemSalidaTicket.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_MASK));
         menuItemSalidaTicket.setText("Salida ticket");
+        menuItemSalidaTicket.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItemSalidaTicketActionPerformed(evt);
+            }
+        });
         menuInicio.add(menuItemSalidaTicket);
 
         menuItemExit.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_ESCAPE, 0));
@@ -250,14 +263,39 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     private void menuItemIdiomasEspañolActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemIdiomasEspañolActionPerformed
         // TODO add your handling code here:
-        this.cambiarIdioma("es","EC");
+        localizacion = new Locale("es", "EC");
+        recurso = ResourceBundle.getBundle("ec.ups.edu.idioma.mensaje", localizacion);
+        cambiarIdioma();
     }//GEN-LAST:event_menuItemIdiomasEspañolActionPerformed
 
     private void menuItemIdiomasInglesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemIdiomasInglesActionPerformed
         // TODO add your handling code here:
-        this.cambiarIdioma("en","UK");  
+        //this.cambiarIdioma("en", "UK");
+        localizacion = new Locale("en", "UK");
+        recurso = ResourceBundle.getBundle("ec.ups.edu.idioma.mensaje", localizacion);
+        cambiarIdioma();
+
     }//GEN-LAST:event_menuItemIdiomasInglesActionPerformed
 
+    private void menuItemRegistrarVehiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemRegistrarVehiculoActionPerformed
+        // TODO add your handling code here:
+        cerrarVentanas();
+        ventanaRegistrarVehiculo.setVisible(true);
+    }//GEN-LAST:event_menuItemRegistrarVehiculoActionPerformed
+
+    private void menuItemEmitirTicketActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemEmitirTicketActionPerformed
+        // TODO add your handling code here:
+        cerrarVentanas();
+        ventanaRegistrarTicket.setVisible(true);
+    }//GEN-LAST:event_menuItemEmitirTicketActionPerformed
+
+    private void menuItemSalidaTicketActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemSalidaTicketActionPerformed
+        // TODO add your handling code here:
+        cerrarVentanas();
+        ventanaSalidaTicket.setVisible(true);
+    }//GEN-LAST:event_menuItemSalidaTicketActionPerformed
+
+    
     /**
      * @param args the command line arguments
      */

@@ -84,7 +84,7 @@ public class VentanaRegistarCliente extends javax.swing.JInternalFrame {
         txtNombre = new javax.swing.JTextField();
         txtApellido = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        txtFormattedCedula = new javax.swing.JFormattedTextField();
+        txtCedula = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         cbxTipo = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
@@ -119,12 +119,8 @@ public class VentanaRegistarCliente extends javax.swing.JInternalFrame {
 
         jLabel4.setText("Cédula:");
 
-        try {
-            txtFormattedCedula.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("0#########")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-        txtFormattedCedula.setToolTipText("Escribir la cédula");
+        txtCedula.setColumns(10);
+        txtCedula.setToolTipText("Escribir la cédula del cliente");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -140,7 +136,7 @@ public class VentanaRegistarCliente extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(txtApellido)
                     .addComponent(txtNombre)
-                    .addComponent(txtFormattedCedula, javax.swing.GroupLayout.DEFAULT_SIZE, 143, Short.MAX_VALUE))
+                    .addComponent(txtCedula, javax.swing.GroupLayout.DEFAULT_SIZE, 143, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -157,8 +153,8 @@ public class VentanaRegistarCliente extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(txtFormattedCedula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(16, Short.MAX_VALUE))
+                    .addComponent(txtCedula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Teléfono", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 12))); // NOI18N
@@ -315,7 +311,7 @@ public class VentanaRegistarCliente extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCrear)
                     .addComponent(btnAtras))
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addContainerGap(10, Short.MAX_VALUE))
         );
 
         pack();
@@ -357,7 +353,7 @@ public class VentanaRegistarCliente extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         String nombre = txtNombre.getText();
         String apellido = txtApellido.getText();
-        String cedula = txtFormattedCedula.getText();
+        String cedula = txtCedula.getText();
         String tipo = cbxTipo.getSelectedItem().toString();
         String numeroT = txtFormattedNumero.getText();
         String operadora = cbxOperadora.getSelectedItem().toString();
@@ -374,6 +370,7 @@ public class VentanaRegistarCliente extends javax.swing.JInternalFrame {
                     tipo, numeroT, operadora, calleP, calleS, numeroC);
             if (verdad) {
                 JOptionPane.showMessageDialog(this, "Cliente creado con exito");
+                this.hide();
                 limpiar();
             } else {
                 JOptionPane.showMessageDialog(this, "El cliente ya existe");
@@ -392,7 +389,7 @@ public class VentanaRegistarCliente extends javax.swing.JInternalFrame {
     public void limpiar(){
         txtNombre.setText("");
         txtApellido.setText("");
-        txtFormattedCedula.setText("");
+        txtCedula.setText("");
         cbxTipo.setSelectedIndex(0);
         cbxOperadora.setSelectedIndex(0);
         txtFormattedNumero.setValue("");
@@ -421,7 +418,7 @@ public class VentanaRegistarCliente extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtApellido;
     private javax.swing.JTextField txtCallePrincipal;
     private javax.swing.JTextField txtCalleSecundaria;
-    private javax.swing.JFormattedTextField txtFormattedCedula;
+    private javax.swing.JTextField txtCedula;
     private javax.swing.JFormattedTextField txtFormattedNumero;
     private javax.swing.JFormattedTextField txtFormattedNumeroCasa;
     private javax.swing.JTextField txtNombre;

@@ -10,7 +10,7 @@ package ec.ups.edu.modelo;
  * @author Adolfo
  */
 public class Direccion {
-    
+
     private String callePrincipal;
     private String calleSecundaria;
     private String numero;
@@ -47,9 +47,7 @@ public class Direccion {
 
     @Override
     public String toString() {
-        return "Direccion\n" + "callePrincipal=" + callePrincipal + ", calleSecundaria=" 
-                + calleSecundaria + ", numero=" + numero + '}';
+        return callePrincipal + " " + calleSecundaria + " " + numero;
     }
-    
-    
+
 }

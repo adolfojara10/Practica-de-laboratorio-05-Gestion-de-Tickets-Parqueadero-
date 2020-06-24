@@ -39,7 +39,7 @@ public class VehiculoDAO implements IVehiculoDAO {
         Iterator<Vehiculo> it = vehiculos.iterator();
         while (it.hasNext()) {
             Vehiculo v = it.next();
-            if (v.equals(placa)) {
+            if (v.getPlaca().equals(placa)) {
                 return v;
             }
             break;
@@ -52,7 +52,7 @@ public class VehiculoDAO implements IVehiculoDAO {
         Iterator<Vehiculo> it = vehiculos.iterator();
         while (it.hasNext()) {
             Vehiculo v = it.next();
-            if (v.equals(vehiculo.getPlaca())) {
+            if (v.getPlaca().equals(vehiculo.getPlaca())) {
                 vehiculos.remove(v);
                 vehiculos.add(vehiculo);
             }

@@ -57,7 +57,7 @@
                   <Component id="btnCrear" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnAtras" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="16" max="32767" attributes="0"/>
+              <EmptySpace pref="10" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -88,7 +88,7 @@
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Component id="txtApellido" max="32767" attributes="0"/>
                       <Component id="txtNombre" alignment="0" max="32767" attributes="0"/>
-                      <Component id="txtFormattedCedula" alignment="0" pref="143" max="32767" attributes="0"/>
+                      <Component id="txtCedula" pref="143" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
@@ -110,9 +110,9 @@
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="txtFormattedCedula" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtCedula" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="16" max="32767" attributes="0"/>
+                  <EmptySpace pref="18" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -143,12 +143,10 @@
             <Property name="text" type="java.lang.String" value="C&#xe9;dula:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JFormattedTextField" name="txtFormattedCedula">
+        <Component class="javax.swing.JTextField" name="txtCedula">
           <Properties>
-            <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
-              <Format format="0#########" subtype="-1" type="5"/>
-            </Property>
-            <Property name="toolTipText" type="java.lang.String" value="Escribir la c&#xe9;dula"/>
+            <Property name="columns" type="int" value="10"/>
+            <Property name="toolTipText" type="java.lang.String" value="Escribir la c&#xe9;dula del cliente"/>
           </Properties>
         </Component>
       </SubComponents>
