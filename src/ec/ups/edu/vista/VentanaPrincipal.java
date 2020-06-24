@@ -37,6 +37,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private VentanaRegistrarTicket ventanaRegistrarTicket;
     private VentanaSalidaTicket ventanaSalidaTicket;
 
+    private VentanaListarTickets ventanaListarTickets;
+
     /**
      * Creates new form VentanaPrincipal
      */
@@ -49,19 +51,24 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         controladorCliente = new ControladorCliente(clienteDAO, vehiculoDAO, ticketDAO);
         controladorVehiculo = new ControladorVehiculo(vehiculoDAO);
+        controladorTicket = new ControladorTicket(clienteDAO, vehiculoDAO, ticketDAO);
 
         ventanaRegistrarCliente = new VentanaRegistarCliente(controladorCliente);
         ventanaRegistrarVehiculo = new VentanaRegistrarVehiculo(controladorCliente, controladorVehiculo,
                 ventanaRegistrarCliente);
-        ventanaRegistrarTicket = new VentanaRegistrarTicket();
+        ventanaRegistrarTicket = new VentanaRegistrarTicket(controladorTicket, controladorCliente,
+                 controladorVehiculo, ventanaRegistrarVehiculo, ventanaRegistrarCliente);
         ventanaSalidaTicket = new VentanaSalidaTicket();
+
+        ventanaListarTickets = new VentanaListarTickets(controladorCliente);
 
         desktopPane.add(ventanaRegistrarCliente);
         desktopPane.add(ventanaRegistrarTicket);
         desktopPane.add(ventanaRegistrarVehiculo);
         desktopPane.add(ventanaSalidaTicket);
+        desktopPane.add(ventanaListarTickets);
 
-      /*  localizacion = new Locale("es", "EC");
+        /*  localizacion = new Locale("es", "EC");
         recurso = ResourceBundle.getBundle("ec.ups.edu.idioma.mensaje", localizacion);*/
         cambiarIdioma("es", "EC");
 
@@ -76,9 +83,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }
 
     public void cambiarIdioma(String idioma, String localidad) {
-         //System.out.println("Metodo cambiar idioma en la ventana principal y en  las ventana descritas en la misma ventana principal ");
+        //System.out.println("Metodo cambiar idioma en la ventana principal y en  las ventana descritas en la misma ventana principal ");
         localizacion = new Locale(idioma, localidad);
-        
+
         recurso = ResourceBundle.getBundle("ec.ups.edu.idioma.mensaje", localizacion);
 
         //JmenuInicio
@@ -102,16 +109,15 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         //JmenusItem de el JmenuIdiomas
         menuItemIdiomasEspañol.setText(recurso.getString("español"));
         menuItemIdiomasIngles.setText(recurso.getString("ingles"));
-        
+
         ventanaRegistrarVehiculo.setTitle(recurso.getString("tituloCliente"));
-        
+
         //Ventana Registrar Vehiculo
         /*
         if (ventanaRegistrarVehiculo != null) {
             ventanaRegistrarVehiculo.setRecurso(recurso);
             ventanaRegistrarVehiculo.cambiarIdioma(idioma, localidad);
         }*/
-         
     }
 
     /**
@@ -211,6 +217,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         menuItemListarTickets.setMnemonic('p');
         menuItemListarTickets.setText("Tickets");
+        menuItemListarTickets.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItemListarTicketsActionPerformed(evt);
+            }
+        });
         menuListar.add(menuItemListarTickets);
 
         menuBar.add(menuListar);
@@ -266,7 +277,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     private void menuItemIdiomasEspañolActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemIdiomasEspañolActionPerformed
         // TODO add your handling code here:
-      /*  localizacion = new Locale("es", "EC");
+        /*  localizacion = new Locale("es", "EC");
         recurso = ResourceBundle.getBundle("ec.ups.edu.idioma.mensaje", localizacion);*/
         cambiarIdioma("es", "EC");
     }//GEN-LAST:event_menuItemIdiomasEspañolActionPerformed
@@ -274,7 +285,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private void menuItemIdiomasInglesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemIdiomasInglesActionPerformed
         // TODO add your handling code here:
         //this.cambiarIdioma("en", "UK");
-      /* localizacion = new Locale("en", "UK");
+        /* localizacion = new Locale("en", "UK");
         recurso = ResourceBundle.getBundle("ec.ups.edu.idioma.mensaje", localizacion);*/
         cambiarIdioma("en", "UK");
 
@@ -298,7 +309,12 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         ventanaSalidaTicket.setVisible(true);
     }//GEN-LAST:event_menuItemSalidaTicketActionPerformed
 
-    
+    private void menuItemListarTicketsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemListarTicketsActionPerformed
+        // TODO add your handling code here:
+        cerrarVentanas();
+        ventanaListarTickets.setVisible(true);
+    }//GEN-LAST:event_menuItemListarTicketsActionPerformed
+
     /**
      * @param args the command line arguments
      */

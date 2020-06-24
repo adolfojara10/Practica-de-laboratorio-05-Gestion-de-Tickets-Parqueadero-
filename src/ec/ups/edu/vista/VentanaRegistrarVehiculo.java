@@ -295,6 +295,12 @@ public class VentanaRegistrarVehiculo extends javax.swing.JInternalFrame {
 
         btnAtras.setBackground(new java.awt.Color(255, 0, 0));
         btnAtras.setText("Atrás");
+        btnAtras.setToolTipText("Cerrar esta ventana y volver al menú principal");
+        btnAtras.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAtrasActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -373,21 +379,22 @@ public class VentanaRegistrarVehiculo extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "LLene todos los campos para crear "
                     + "y agregar el vehiculo a un cliente");
         } else {
-            /* Vehiculo ve = controladorVehiculo.crearVehiculo(placa, marca, modelo);
-            System.out.println(ve);*/
-            Vehiculo ve = new Vehiculo(placas, marcas, modelos);
-
-           // Cliente c = controladorCliente.buscarCliente(cedula);
-            /* if (ve == null) {
+            Vehiculo ve = controladorVehiculo.crearVehiculo(placas, marcas, modelos);
+            System.out.println(ve);
+            
+            if (ve == null) {
                 JOptionPane.showMessageDialog(this, "El vehículo ya existe");
             } else {
-               
-            }*/
-
+               controladorCliente.agregarVehiculo(ve, cedulas);
+               JOptionPane.showMessageDialog(this, "¡Vehiculo agregado con exito!");
+               limpiar();
+               this.hide();
+            }
+/*
             controladorCliente.agregarVehiculo(ve, cedulas);
             JOptionPane.showMessageDialog(this, "Vehículo creado con exito");
             this.hide();
-            limpiar();
+            limpiar();*/
         }
 
     }//GEN-LAST:event_btnAgregarActionPerformed
@@ -396,6 +403,14 @@ public class VentanaRegistrarVehiculo extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         llenarTBLClientes();
     }//GEN-LAST:event_formInternalFrameActivated
+
+    private void btnAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasActionPerformed
+        // TODO add your handling code here:
+        
+        limpiar();
+        this.hide();
+        
+    }//GEN-LAST:event_btnAtrasActionPerformed
 
     public void limpiar() {
 

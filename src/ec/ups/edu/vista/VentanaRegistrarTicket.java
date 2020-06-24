@@ -5,17 +5,78 @@
  */
 package ec.ups.edu.vista;
 
+import ec.ups.edu.controlador.ControladorCliente;
+import ec.ups.edu.controlador.ControladorTicket;
+import ec.ups.edu.controlador.ControladorVehiculo;
+import ec.ups.edu.modelo.Cliente;
+import ec.ups.edu.modelo.Ticket;
+import ec.ups.edu.modelo.Vehiculo;
+import java.util.Calendar;
+import java.util.Date;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Adolfo
  */
 public class VentanaRegistrarTicket extends javax.swing.JInternalFrame {
 
+    private Calendar fechaActual;
+
+    private ControladorTicket controladorTicket;
+    private ControladorCliente controladorCliente;
+    private ControladorVehiculo controladorVehiculo;
+
+    private VentanaRegistrarVehiculo ventanaRegistrarVehiculo;
+    private VentanaRegistarCliente ventanaRegistarCliente;
+
     /**
      * Creates new form VentanaRegistrarTicket
      */
-    public VentanaRegistrarTicket() {
+    public VentanaRegistrarTicket(ControladorTicket controladorTicket, ControladorCliente controladorCliente,
+            ControladorVehiculo controladorVehiculo, VentanaRegistrarVehiculo ventanaRegistrarVehiculo,
+            VentanaRegistarCliente ventanaRegistarCliente) {
         initComponents();
+
+        this.ventanaRegistrarVehiculo = ventanaRegistrarVehiculo;
+        this.ventanaRegistarCliente = ventanaRegistarCliente;
+
+        this.controladorTicket = controladorTicket;
+        this.controladorCliente = controladorCliente;
+        this.controladorVehiculo = controladorVehiculo;
+    }
+
+    public void ponerFecha() {
+        fechaActual = Calendar.getInstance();
+        txtFechaEntrada.setText(fechaActual.getTime().toString());
+    }
+
+    public void cargarNumero() {
+        int num = controladorTicket.numeroTicket();
+        String num2 = String.valueOf(num);
+        txtNumero.setText(num2);
+    }
+
+    public void llenartblInformacion(Cliente c) {
+        DefaultTableModel modelo = (DefaultTableModel) tblInformacion.getModel();
+        modelo.setRowCount(0);
+
+        for (Vehiculo ve : c.getListaVehiculos()) {
+            Object[] rowData = {c.getNombre(), ve.getPlaca(), ve.getMarca(), ve.getModelo()};
+            modelo.addRow(rowData);
+        }
+        tblInformacion.setModel(modelo);
+    }
+
+    public void llenartblInformacionPorPlaca(Cliente c, Vehiculo ve) {
+        DefaultTableModel modelo = (DefaultTableModel) tblInformacion.getModel();
+        modelo.setRowCount(0);
+
+        Object[] rowData = {c.getNombre(), ve.getPlaca(), ve.getMarca(), ve.getModelo()};
+        modelo.addRow(rowData);
+
+        tblInformacion.setModel(modelo);
     }
 
     /**
@@ -27,28 +88,403 @@ public class VentanaRegistrarTicket extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        btnGroupBuscar = new javax.swing.ButtonGroup();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        txtNumero = new javax.swing.JTextField();
+        txtFechaEntrada = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        radiobtnCedula = new javax.swing.JRadioButton();
+        radiobtnPlaca = new javax.swing.JRadioButton();
+        labelBuscar = new javax.swing.JLabel();
+        txtBuscar = new javax.swing.JTextField();
+        btnBuscar = new javax.swing.JButton();
+        btnAtras = new javax.swing.JButton();
+        btnLimpiar = new javax.swing.JButton();
+        btnEmitir = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblInformacion = new javax.swing.JTable();
+        labelMensaje = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+
         setClosable(true);
         setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
-        setIconifiable(true);
-        setMaximizable(true);
         setResizable(true);
         setTitle("Emitir Ticket");
+        addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+                formInternalFrameActivated(evt);
+            }
+            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+            }
+        });
+
+        jLabel1.setText("Número:");
+
+        jLabel2.setText("Fecha entrada:");
+
+        txtNumero.setEditable(false);
+        txtNumero.setBackground(new java.awt.Color(102, 102, 102));
+
+        txtFechaEntrada.setEditable(false);
+        txtFechaEntrada.setBackground(new java.awt.Color(102, 102, 102));
+
+        jLabel3.setText("Parámetro de busqueda: ");
+
+        btnGroupBuscar.add(radiobtnCedula);
+        radiobtnCedula.setText("Cédula");
+        radiobtnCedula.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        radiobtnCedula.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                radiobtnCedulaActionPerformed(evt);
+            }
+        });
+
+        btnGroupBuscar.add(radiobtnPlaca);
+        radiobtnPlaca.setText("Placa");
+        radiobtnPlaca.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        radiobtnPlaca.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                radiobtnPlacaActionPerformed(evt);
+            }
+        });
+
+        labelBuscar.setText("Seleccione parámetro:");
+
+        txtBuscar.setEditable(false);
+
+        btnBuscar.setBackground(new java.awt.Color(102, 102, 255));
+        btnBuscar.setText("Buscar");
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
+
+        btnAtras.setBackground(new java.awt.Color(255, 0, 0));
+        btnAtras.setText("Atrás");
+        btnAtras.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAtrasActionPerformed(evt);
+            }
+        });
+
+        btnLimpiar.setBackground(new java.awt.Color(255, 51, 51));
+        btnLimpiar.setText("Limpiar");
+        btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimpiarActionPerformed(evt);
+            }
+        });
+
+        btnEmitir.setBackground(new java.awt.Color(102, 102, 255));
+        btnEmitir.setText("Emitir");
+        btnEmitir.setEnabled(false);
+        btnEmitir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEmitirActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(42, 42, 42)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addGap(121, 121, 121)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(radiobtnPlaca, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(radiobtnCedula)))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addComponent(btnBuscar)
+                            .addGap(34, 34, 34)
+                            .addComponent(btnEmitir)
+                            .addGap(38, 38, 38)
+                            .addComponent(btnLimpiar)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnAtras))
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel1)
+                                .addComponent(jLabel2)
+                                .addComponent(labelBuscar))
+                            .addGap(73, 73, 73)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtFechaEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(37, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(txtNumero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(txtFechaEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(14, 14, 14)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel3)
+                    .addComponent(radiobtnCedula))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(radiobtnPlaca)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labelBuscar)
+                    .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnBuscar)
+                    .addComponent(btnAtras)
+                    .addComponent(btnLimpiar)
+                    .addComponent(btnEmitir))
+                .addContainerGap(19, Short.MAX_VALUE))
+        );
+
+        tblInformacion.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Cliente", "Placa", "Marca", "Modelo"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(tblInformacion);
+
+        labelMensaje.setText("Seleccione el vehiculo a asignar el ticket");
+        labelMensaje.setEnabled(false);
+
+        jLabel4.setText("Placa:");
+
+        jLabel5.setText("jLabel5");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(52, 52, 52)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel4))
+                .addContainerGap(221, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(29, 29, 29)
+                .addComponent(jLabel4)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel5)
+                .addContainerGap(165, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 394, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(217, 217, 217)
+                        .addComponent(labelMensaje))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(25, 25, 25)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 522, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(86, 86, 86)
+                                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(117, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 274, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(12, 12, 12)
+                .addComponent(labelMensaje)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(25, 25, 25))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void formInternalFrameActivated(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameActivated
+        // TODO add your handling code here:
+        ponerFecha();
+        cargarNumero();
+    }//GEN-LAST:event_formInternalFrameActivated
+
+    private void radiobtnCedulaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radiobtnCedulaActionPerformed
+        // TODO add your handling code here:
+
+        radiobtnPlaca.setSelected(false);
+        labelBuscar.setText("Cédula:");
+        txtBuscar.setEditable(true);
+
+    }//GEN-LAST:event_radiobtnCedulaActionPerformed
+
+    private void radiobtnPlacaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radiobtnPlacaActionPerformed
+        // TODO add your handling code here:
+
+        radiobtnCedula.setSelected(false);
+        labelBuscar.setText("Placa:");
+        txtBuscar.setEditable(true);
+    }//GEN-LAST:event_radiobtnPlacaActionPerformed
+
+    private void btnAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasActionPerformed
+        // TODO add your handling code here:
+        limpiar();
+        this.hide();
+
+    }//GEN-LAST:event_btnAtrasActionPerformed
+
+    private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
+        // TODO add your handling code here:
+        limpiar();
+        ponerFecha();
+
+
+    }//GEN-LAST:event_btnLimpiarActionPerformed
+
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        // TODO add your handling code here:
+
+        String buscars = txtBuscar.getText();
+
+        String numero = txtNumero.getText();
+        String fecha = txtFechaEntrada.getText();
+
+        if (buscars == null) {
+            JOptionPane.showMessageDialog(this, "Llene el campo requerido para buscar un vehiculo o cliente");
+
+        } else {
+            if (radiobtnCedula.isSelected()) {
+                Cliente c = controladorCliente.buscarCliente(buscars);
+                if (c == null) {
+                    int op = JOptionPane.showConfirmDialog(this, "Cliente no encontrado, "
+                            + "¿desea crear un nuevo cliente?");
+                    if (op == JOptionPane.YES_OPTION) {
+                        ventanaRegistarCliente.setVisible(true);
+                    }
+                } else {
+                    labelMensaje.setEnabled(true);
+                    llenartblInformacion(c);
+                    btnEmitir.setEnabled(true);
+                }
+            } else if (radiobtnPlaca.isSelected()) {
+                Vehiculo v = controladorVehiculo.buscarVehiculo(buscars);
+                if (v == null) {
+                    int op = JOptionPane.showConfirmDialog(this, "Vehiculo no encontrado, "
+                            + "¿desea crear un nuevo vehiculo?");
+                    if (op == JOptionPane.YES_OPTION) {
+                        ventanaRegistrarVehiculo.setVisible(true);
+                    }
+                } else {
+                    Cliente c = controladorCliente.buscarPorVehiculo(v.getPlaca());
+                    labelMensaje.setEnabled(true);
+                    llenartblInformacionPorPlaca(c, v);
+                    btnEmitir.setEnabled(true);
+                }
+            }
+        }
+
+    }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private void btnEmitirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEmitirActionPerformed
+        // TODO add your handling code here:
+        String num = txtNumero.getText();
+        int num2 = Integer.parseInt(num);
+        Date entrada = fechaActual.getTime();
+        
+        Ticket t = controladorTicket.crear(num2, entrada);
+        
+        int row = tblInformacion.getSelectedRow();
+        
+        String placa = tblInformacion.getValueAt(row,1).toString();
+        Vehiculo ve = controladorVehiculo.buscarVehiculo(placa);
+        
+        
+        
+    }//GEN-LAST:event_btnEmitirActionPerformed
+
+    public void limpiar() {
+        labelBuscar.setText("Seleccione parámetro:");
+        radiobtnCedula.setSelected(false);
+        radiobtnPlaca.setSelected(false);
+        txtBuscar.setText("");
+        txtBuscar.setEditable(false);
+        DefaultTableModel modelo = (DefaultTableModel) tblInformacion.getModel();
+        modelo.setRowCount(0);
+        tblInformacion.setModel(modelo);
+        btnEmitir.setEnabled(false);
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAtras;
+    private javax.swing.JButton btnBuscar;
+    private javax.swing.JButton btnEmitir;
+    private javax.swing.ButtonGroup btnGroupBuscar;
+    private javax.swing.JButton btnLimpiar;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel labelBuscar;
+    private javax.swing.JLabel labelMensaje;
+    private javax.swing.JRadioButton radiobtnCedula;
+    private javax.swing.JRadioButton radiobtnPlaca;
+    private javax.swing.JTable tblInformacion;
+    private javax.swing.JTextField txtBuscar;
+    private javax.swing.JTextField txtFechaEntrada;
+    private javax.swing.JTextField txtNumero;
     // End of variables declaration//GEN-END:variables
 }

@@ -15,24 +15,32 @@ import ec.ups.edu.modelo.Vehiculo;
  * @author Adolfo
  */
 public class ControladorVehiculo {
-    
+
     private Vehiculo vehiculo;
     private Ticket ticket;
-    
+
     private IVehiculoDAO vehiculoDAO;
 
     public ControladorVehiculo(VehiculoDAO vehiculoDAO) {
         this.vehiculoDAO = vehiculoDAO;
     }
-    
-    
-    public Vehiculo crearVehiculo(String placa, String marca, String modelo){
+
+    public Vehiculo crearVehiculo(String placa, String marca, String modelo) {
         vehiculo = new Vehiculo(placa, marca, modelo);
-        if(vehiculoDAO.create(vehiculo)){
+        if (vehiculoDAO.create(vehiculo)) {
             return vehiculo;
         }
         return null;
     }
-    
-    
+
+    public Vehiculo buscarVehiculo(String placa) {
+
+        vehiculo = vehiculoDAO.read(placa);
+        if (vehiculo == null) {
+            return null;
+        } else {
+            return vehiculo;
+        }
+    }
+
 }

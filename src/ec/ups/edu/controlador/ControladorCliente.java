@@ -54,14 +54,14 @@ public class ControladorCliente {
         // vehiculo = new Vehiculo(placa, marca, modelo);
         System.out.println("\n" + vehiculo);
         this.cliente = clienteDAO.read(cedulas);
-        vehiculoDAO.create(vehiculo);
+        // vehiculoDAO.create(vehiculo);
         if (cliente == null || vehiculo == null) {
             System.out.println(cliente);
         } else {
             cliente.agregarVehiculo(vehiculo);
             clienteDAO.update(cliente);
             System.out.println(cliente);
-            System.out.println(cliente);
+            // System.out.println(cliente);
         }
 
     }
@@ -69,6 +69,15 @@ public class ControladorCliente {
     public Cliente buscarCliente(String cedula) {
         cliente = clienteDAO.read(cedula);
         return cliente;
+    }
+
+    public Cliente buscarPorVehiculo(String placa) {
+        cliente = clienteDAO.buscarPorVehiculo(placa);
+        if(cliente == null){
+            return null;
+        } else {
+            return cliente;
+        }
     }
 
     public Set<Cliente> findAll() {
