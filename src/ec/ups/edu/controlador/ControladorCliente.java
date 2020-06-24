@@ -50,17 +50,18 @@ public class ControladorCliente {
         }
     }
 
-    public void agregarVehiculo(Vehiculo vehiculo, Cliente c) {
+    public void agregarVehiculo(Vehiculo vehiculo, String cedulas) {
         // vehiculo = new Vehiculo(placa, marca, modelo);
         System.out.println("\n" + vehiculo);
-        // this.cliente = clienteDAO.read(cedula);
+        this.cliente = clienteDAO.read(cedulas);
         vehiculoDAO.create(vehiculo);
-        if (c == null || vehiculo == null) {
-            System.out.println(c);
+        if (cliente == null || vehiculo == null) {
+            System.out.println(cliente);
         } else {
-            c.agregarVehiculo(vehiculo);
-            clienteDAO.update(c);
-            System.out.println(c);
+            cliente.agregarVehiculo(vehiculo);
+            clienteDAO.update(cliente);
+            System.out.println(cliente);
+            System.out.println(cliente);
         }
 
     }

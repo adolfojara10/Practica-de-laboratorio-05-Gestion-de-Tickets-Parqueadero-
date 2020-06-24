@@ -102,6 +102,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         menuItemIdiomasEspañol.setText(recurso.getString("español"));
         menuItemIdiomasIngles.setText(recurso.getString("ingles"));
 
+        
         //Ventana Registrar Vehiculo
         /*
         if (ventanaRegistrarVehiculo != null) {

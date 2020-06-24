@@ -5,7 +5,8 @@
  */
 package ec.ups.edu.modelo;
 
-import java.util.List;
+import java.util.ArrayList;
+import java.util.*;
 import java.util.Objects;
 
 /**
@@ -25,6 +26,7 @@ public class Cliente {
         this.nombre = nombre;
         this.telefono = telefono;
         this.direccion = direccion;
+        listaVehiculos = new ArrayList<>();
     }
 
     /*

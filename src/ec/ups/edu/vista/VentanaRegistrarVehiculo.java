@@ -41,6 +41,8 @@ public class VentanaRegistrarVehiculo extends javax.swing.JInternalFrame {
         this.ventanaRegistarCliente = ventanaRegistarCliente;
     }
 
+    
+    
     public Locale getLocalizacion() {
         return localizacion;
     }
@@ -362,27 +364,27 @@ public class VentanaRegistrarVehiculo extends javax.swing.JInternalFrame {
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         // TODO add your handling code here:
 
-        String placa = txtFormatedPlaca.getText();
-        String marca = txtMarca.getText();
-        String modelo = txtModelo.getText();
-        String cedula = txtCedula.getText();
+        String placas = txtFormatedPlaca.getText();
+        String marcas = txtMarca.getText();
+        String modelos = txtModelo.getText();
+        String cedulas = txtCedula.getText();
 
-        if (placa.isEmpty() || marca.isEmpty() || modelo.isEmpty() || cedula.isEmpty()) {
+        if (placas.isEmpty() || marcas.isEmpty() || modelos.isEmpty() || cedulas.isEmpty()) {
             JOptionPane.showMessageDialog(this, "LLene todos los campos para crear "
                     + "y agregar el vehiculo a un cliente");
         } else {
             /* Vehiculo ve = controladorVehiculo.crearVehiculo(placa, marca, modelo);
             System.out.println(ve);*/
-            Vehiculo ve = new Vehiculo(placa, marca, modelo);
+            Vehiculo ve = new Vehiculo(placas, marcas, modelos);
 
-            Cliente c = controladorCliente.buscarCliente(cedula);
+           // Cliente c = controladorCliente.buscarCliente(cedula);
             /* if (ve == null) {
                 JOptionPane.showMessageDialog(this, "El vehículo ya existe");
             } else {
                
             }*/
 
-            controladorCliente.agregarVehiculo(ve, c);
+            controladorCliente.agregarVehiculo(ve, cedulas);
             JOptionPane.showMessageDialog(this, "Vehículo creado con exito");
             this.hide();
             limpiar();
