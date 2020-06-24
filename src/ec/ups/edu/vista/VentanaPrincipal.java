@@ -78,7 +78,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         
     }
     public void  cambiarIdioma(String idioma, String localidad){
-        System.out.println("Metodo cambiar idioma en la ventana principal y en  las ventana descritas en la misma ventana");
+      System.out.println("Metodo cambiar idioma en la ventana principal y en  las ventana descritas en la misma ventana principal ");
     localizacion = new Locale(localidad, idioma);
     recurso = ResourceBundle.getBundle("ec.ups.edu.idioma.mensaje",localizacion);
     
@@ -103,6 +103,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     //JmenusItem de el JmenuIdiomas
     menuItemIdiomasEspañol.setText(recurso.getString("español"));
     menuItemIdiomasIngles.setText(recurso.getString("ingles"));
+    //Ventana Registrar Vehiculo
+    if(ventanaRegistrarVehiculo != null){
+    ventanaRegistrarVehiculo.setRecurso(recurso);
+    ventanaRegistrarVehiculo.cambiarIdioma(idioma, localidad);
+    }
     
     
     

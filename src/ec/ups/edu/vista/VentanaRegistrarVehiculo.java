@@ -8,7 +8,10 @@ package ec.ups.edu.vista;
 import ec.ups.edu.controlador.ControladorCliente;
 import ec.ups.edu.controlador.ControladorVehiculo;
 import ec.ups.edu.modelo.Cliente;
+import java.util.Locale;
+import java.util.ResourceBundle;
 import javax.swing.JOptionPane;
+
 
 /**
  *
@@ -19,6 +22,10 @@ public class VentanaRegistrarVehiculo extends javax.swing.JInternalFrame {
     private ControladorCliente controladorCliente;
     private ControladorVehiculo controladorVehiculo;
     private VentanaRegistarCliente ventanaRegistarCliente;
+    
+    private Locale localizacion;
+    private ResourceBundle recurso;
+    
     
     /**
      * Creates new form VentanaRegistrarVehiculo
@@ -33,6 +40,36 @@ public class VentanaRegistrarVehiculo extends javax.swing.JInternalFrame {
         this.ventanaRegistarCliente = ventanaRegistarCliente;
     }
 
+    public Locale getLocalizacion() {
+        return localizacion;
+    }
+
+    public void setLocalizacion(Locale localizacion) {
+        this.localizacion = localizacion;
+    }
+
+    public ResourceBundle getRecurso() {
+        return recurso;
+    }
+
+    public void setRecurso(ResourceBundle recurso) {
+        this.recurso = recurso;
+    }
+    
+    public void cambiarIdioma(String idioma, String localizacion){
+    placa.setText(recurso.getString("placa"));
+    marca.setText(recurso.getString("marca"));
+    modelo.setText(recurso.getString("modelo"));
+    cedula.setText(recurso.getString("cedula"));
+    nombre.setText(recurso.getString("nombre"));
+    telefono.setText(recurso.getString("telefono"));
+    direccion.setText(recurso.getString("direccion"));
+    btnBuscar.setText(recurso.getString("btnBuscar"));
+    btnAgregar.setText(recurso.getString("btnAgregar"));
+    btnAtras.setText(recurso.getString("tbnAtras"));
+        
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -43,26 +80,26 @@ public class VentanaRegistrarVehiculo extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        placa = new javax.swing.JLabel();
         txtFormatedPlaca = new javax.swing.JFormattedTextField();
-        jLabel2 = new javax.swing.JLabel();
+        marca = new javax.swing.JLabel();
         txtMarca = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
+        modelo = new javax.swing.JLabel();
         txtModelo = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblClientes = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
-        jLabel4 = new javax.swing.JLabel();
+        cedula = new javax.swing.JLabel();
         txtCedula = new javax.swing.JTextField();
         btnBuscar = new javax.swing.JButton();
-        jLabel5 = new javax.swing.JLabel();
+        nombre = new javax.swing.JLabel();
         txtNombre = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
+        telefono = new javax.swing.JLabel();
         txtTelefono = new javax.swing.JTextField();
-        jLabel7 = new javax.swing.JLabel();
+        direccion = new javax.swing.JLabel();
         txtDireccion = new javax.swing.JTextField();
         btnAgregar = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        btnAtras = new javax.swing.JButton();
 
         setClosable(true);
         setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
@@ -73,11 +110,11 @@ public class VentanaRegistrarVehiculo extends javax.swing.JInternalFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Datos del vehículo", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Dialog", 0, 12))); // NOI18N
 
-        jLabel1.setText("Placa:");
+        placa.setText("Placa:");
 
-        jLabel2.setText("Marca:");
+        marca.setText("Marca:");
 
-        jLabel3.setText("Modelo:");
+        modelo.setText("Modelo:");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -86,9 +123,9 @@ public class VentanaRegistrarVehiculo extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(79, 79, 79)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3))
+                    .addComponent(placa)
+                    .addComponent(marca)
+                    .addComponent(modelo))
                 .addGap(72, 72, 72)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(txtFormatedPlaca)
@@ -101,15 +138,15 @@ public class VentanaRegistrarVehiculo extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
+                    .addComponent(placa)
                     .addComponent(txtFormatedPlaca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtMarca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
+                    .addComponent(marca))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
+                    .addComponent(modelo)
                     .addComponent(txtModelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -141,7 +178,7 @@ public class VentanaRegistrarVehiculo extends javax.swing.JInternalFrame {
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Añadir a cliente", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Dialog", 0, 12))); // NOI18N
 
-        jLabel4.setText("Cédula:");
+        cedula.setText("Cédula:");
 
         btnBuscar.setBackground(new java.awt.Color(102, 102, 255));
         btnBuscar.setText("Buscar");
@@ -151,17 +188,17 @@ public class VentanaRegistrarVehiculo extends javax.swing.JInternalFrame {
             }
         });
 
-        jLabel5.setText("Nombre:");
+        nombre.setText("Nombre:");
 
         txtNombre.setEditable(false);
         txtNombre.setBackground(new java.awt.Color(102, 102, 102));
 
-        jLabel6.setText("Teléfono:");
+        telefono.setText("Teléfono:");
 
         txtTelefono.setEditable(false);
         txtTelefono.setBackground(new java.awt.Color(102, 102, 102));
 
-        jLabel7.setText("Dirección:");
+        direccion.setText("Dirección:");
 
         txtDireccion.setEditable(false);
         txtDireccion.setBackground(new java.awt.Color(102, 102, 102));
@@ -179,10 +216,10 @@ public class VentanaRegistrarVehiculo extends javax.swing.JInternalFrame {
                         .addGap(38, 38, 38)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jLabel4)
-                                .addComponent(jLabel5))
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel7))
+                                .addComponent(cedula)
+                                .addComponent(nombre))
+                            .addComponent(telefono)
+                            .addComponent(direccion))
                         .addGap(86, 86, 86)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txtNombre)
@@ -196,19 +233,19 @@ public class VentanaRegistrarVehiculo extends javax.swing.JInternalFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(12, 12, 12)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
+                    .addComponent(cedula)
                     .addComponent(txtCedula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
+                    .addComponent(nombre)
                     .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel6)
+                    .addComponent(telefono)
                     .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
+                    .addComponent(direccion)
                     .addComponent(txtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnBuscar)
@@ -218,8 +255,8 @@ public class VentanaRegistrarVehiculo extends javax.swing.JInternalFrame {
         btnAgregar.setBackground(new java.awt.Color(102, 102, 255));
         btnAgregar.setText("Agregar");
 
-        jButton1.setBackground(new java.awt.Color(255, 0, 0));
-        jButton1.setText("Atrás");
+        btnAtras.setBackground(new java.awt.Color(255, 0, 0));
+        btnAtras.setText("Atrás");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -239,7 +276,7 @@ public class VentanaRegistrarVehiculo extends javax.swing.JInternalFrame {
                         .addGap(136, 136, 136)
                         .addComponent(btnAgregar)
                         .addGap(129, 129, 129)
-                        .addComponent(jButton1)))
+                        .addComponent(btnAtras)))
                 .addContainerGap(59, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -251,7 +288,7 @@ public class VentanaRegistrarVehiculo extends javax.swing.JInternalFrame {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
+                    .addComponent(btnAtras)
                     .addComponent(btnAgregar))
                 .addGap(18, 18, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -291,19 +328,19 @@ public class VentanaRegistrarVehiculo extends javax.swing.JInternalFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregar;
+    private javax.swing.JButton btnAtras;
     private javax.swing.JButton btnBuscar;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel cedula;
+    private javax.swing.JLabel direccion;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel marca;
+    private javax.swing.JLabel modelo;
+    private javax.swing.JLabel nombre;
+    private javax.swing.JLabel placa;
     private javax.swing.JTable tblClientes;
+    private javax.swing.JLabel telefono;
     private javax.swing.JTextField txtCedula;
     private javax.swing.JTextField txtDireccion;
     private javax.swing.JFormattedTextField txtFormatedPlaca;
