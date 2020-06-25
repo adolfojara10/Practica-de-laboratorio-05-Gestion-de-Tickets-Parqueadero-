@@ -282,7 +282,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
         /*  localizacion = new Locale("es", "EC");
         recurso = ResourceBundle.getBundle("ec.ups.edu.idioma.mensaje", localizacion);*/
-        cambiarIdioma("es", "EC");
+       this.cambiarIdioma("es", "EC");
     }//GEN-LAST:event_menuItemIdiomasEspañolActionPerformed
 
     private void menuItemIdiomasInglesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemIdiomasInglesActionPerformed
@@ -290,7 +290,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         //this.cambiarIdioma("en", "UK");
         /* localizacion = new Locale("en", "UK");
         recurso = ResourceBundle.getBundle("ec.ups.edu.idioma.mensaje", localizacion);*/
-        cambiarIdioma("en", "UK");
+        this.cambiarIdioma("en", "UK");
 
     }//GEN-LAST:event_menuItemIdiomasInglesActionPerformed
 
