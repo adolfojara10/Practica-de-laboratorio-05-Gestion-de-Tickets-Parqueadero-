@@ -12,13 +12,11 @@ import java.util.Date;
  * @author Adolfo
  */
 public class Ticket {
-    
+
     private int numero;
     private Date fechaEntrada;
     private Date fechaSalida;
     private double total;
-    
-    
 
     public Ticket(int numero, Date fechaEntrada) {
         this.numero = numero;
@@ -57,14 +55,25 @@ public class Ticket {
         this.total = total;
     }
 
-    public double calcularPago(Date fechaE, Date fechaS){
-        
-        fechaE.
-        
-        
+    public double calcularPago(Date fechaE, Date fechaS) {
+
+        int hora = (fechaE.getHours() * 3600);
+        int minutos = (fechaE.getMinutes() * 60);
+        int segundos = (fechaE.getSeconds());
+
+        int tiempo1 = hora + minutos + segundos;
+
+        int hora2 = (fechaS.getHours() * 3600);
+        int minutos2 = (fechaS.getMinutes() * 60);
+        int segundos2 = (fechaS.getSeconds());
+
+        int tiempo2 = hora2 + minutos2 + segundos2;
+
+        double tiempoTotal = (tiempo2 - tiempo1) / 60;
+
+        return tiempoTotal;
     }
-    
-    
+
     @Override
     public int hashCode() {
         int hash = 7;
@@ -92,9 +101,8 @@ public class Ticket {
 
     @Override
     public String toString() {
-        return "Ticket\n" + "numero=" + numero + ", fechaEntrada=" + fechaEntrada 
+        return "Ticket\n" + "numero=" + numero + ", fechaEntrada=" + fechaEntrada
                 + ", fechaSalida=" + fechaSalida + ", total=" + total;
     }
-    
-    
+
 }

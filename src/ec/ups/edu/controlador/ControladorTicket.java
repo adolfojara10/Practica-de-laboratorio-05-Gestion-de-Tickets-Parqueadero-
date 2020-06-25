@@ -21,8 +21,7 @@ import java.util.Date;
  * @author Adolfo
  */
 public class ControladorTicket {
-    
-    
+
     private Cliente cliente;
     private Vehiculo vehiculo;
     private Ticket ticket;
@@ -37,26 +36,46 @@ public class ControladorTicket {
         this.ticketDAO = ticketDAO;
     }
 
-   
-    public Ticket crear(int numero, Date entrada){
-        
+    public Ticket crear(int numero, Date entrada) {
+
         ticket = new Ticket(numero, entrada);
         ticketDAO.create(ticket);
-        
+
         return ticket;
     }
-    
-    public Ticket encontrarTicket(int numero){
+
+    public Ticket encontrarTicket(int numero) {
         ticket = ticketDAO.read(numero);
-        
-        return ticket;     
+
+        return ticket;
     }
-    
-    public double calcularPago(Date fechaEntrada, Date fechaSalida){
-        
+
+    public double calcularTiempo(Date fechaEntrada, Date fechaSalida) {
+
+        double tiempo = ticket.calcularPago(fechaEntrada, fechaSalida);
+
+        return tiempo;
     }
-    
-    
+
+    public double calcularPago(double tiempo) {
+        int tt = (int) Math.round(tiempo);
+        tt = tt / 10;
+        double pago = (tt * 25) / 100;
+        return pago;
+    }
+
+    public String calcularHorasMinutos(double time) {
+
+        int tiempoMinutos = (int) Math.round(time);
+        int horas = tiempoMinutos / 60;
+        int minutos = (((tiempoMinutos / 60) - horas)) * 60;
+
+        String hour = horas + "" + "h;";
+        String minute = minutos + "" + "min";
+        String total = hour.concat(minute);
+        return total;
+    }
+
     public int numeroTicket() {
         int conta = ticketDAO.devolverNumero();
         return (++conta);

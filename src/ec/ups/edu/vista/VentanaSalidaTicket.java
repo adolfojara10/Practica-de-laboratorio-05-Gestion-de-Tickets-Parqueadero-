@@ -11,6 +11,7 @@ import ec.ups.edu.controlador.ControladorVehiculo;
 import ec.ups.edu.modelo.Ticket;
 import ec.ups.edu.modelo.Vehiculo;
 import java.util.Calendar;
+import java.util.Date;
 import javax.swing.JOptionPane;
 
 /**
@@ -41,8 +42,6 @@ public class VentanaSalidaTicket extends javax.swing.JInternalFrame {
         fechaSalida = Calendar.getInstance();
         txtFechaEntrada.setText(fechaSalida.getTime().toString());
     }
-    
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -243,9 +242,15 @@ public class VentanaSalidaTicket extends javax.swing.JInternalFrame {
             } else {
                 txtFechaEntrada.setText(t.getFechaEntrada().toString());
                 ponerFecha();
+
+                Date fechaS = Calendar.getInstance().getTime();
+                double tiempo = controladorTicket.calcularTiempo(t.getFechaEntrada(), fechaS);
                 
+                String totalTiempo = controladorTicket.calcularHorasMinutos(tiempo);
+                txtTiempo.setText(totalTiempo);
                 
-                
+                double pago = controladorTicket.calcularPago(tiempo);
+
                 Vehiculo ve = controladorVehiculo.buscarPorTicket(t);
             }
 
