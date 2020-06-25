@@ -46,6 +46,15 @@ public class ControladorTicket {
         return ticket;
     }
     
+    public Ticket encontrarTicket(int numero){
+        ticket = ticketDAO.read(numero);
+        
+        return ticket;     
+    }
+    
+    public double calcularPago(Date fechaEntrada, Date fechaSalida){
+        
+    }
     
     
     public int numeroTicket() {

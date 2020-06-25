@@ -58,7 +58,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 ventanaRegistrarCliente);
         ventanaRegistrarTicket = new VentanaRegistrarTicket(controladorTicket, controladorCliente,
                  controladorVehiculo, ventanaRegistrarVehiculo, ventanaRegistrarCliente);
-        ventanaSalidaTicket = new VentanaSalidaTicket();
+        ventanaSalidaTicket = new VentanaSalidaTicket(controladorTicket, controladorVehiculo, 
+                controladorCliente);
 
         ventanaListarTickets = new VentanaListarTickets(controladorCliente);
 
@@ -70,7 +71,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         /*  localizacion = new Locale("es", "EC");
         recurso = ResourceBundle.getBundle("ec.ups.edu.idioma.mensaje", localizacion);*/
-        cambiarIdioma("es", "EC");
+//        cambiarIdioma("es", "EC");
 
     }
 
@@ -81,7 +82,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         ventanaSalidaTicket.setVisible(false);
 
     }
-
+/*
     public void cambiarIdioma(String idioma, String localidad) {
         //System.out.println("Metodo cambiar idioma en la ventana principal y en  las ventana descritas en la misma ventana principal ");
         localizacion = new Locale(idioma, localidad);
@@ -122,7 +123,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         ventanaListarTickets.cambiarIdioma(idioma,localidad);
         }
     }
-
+*/
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -280,17 +281,17 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     private void menuItemIdiomasEspañolActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemIdiomasEspañolActionPerformed
         // TODO add your handling code here:
-        /*  localizacion = new Locale("es", "EC");
-        recurso = ResourceBundle.getBundle("ec.ups.edu.idioma.mensaje", localizacion);*/
-       this.cambiarIdioma("es", "EC");
+      /*    localizacion = new Locale("es", "EC");
+        recurso = ResourceBundle.getBundle("ec.ups.edu.idioma.mensaje", localizacion);
+       this.cambiarIdioma("es", "EC");*/
     }//GEN-LAST:event_menuItemIdiomasEspañolActionPerformed
 
     private void menuItemIdiomasInglesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemIdiomasInglesActionPerformed
         // TODO add your handling code here:
         //this.cambiarIdioma("en", "UK");
-        /* localizacion = new Locale("en", "UK");
-        recurso = ResourceBundle.getBundle("ec.ups.edu.idioma.mensaje", localizacion);*/
-        this.cambiarIdioma("en", "UK");
+       /*  localizacion = new Locale("en", "UK");
+        recurso = ResourceBundle.getBundle("ec.ups.edu.idioma.mensaje", localizacion);
+        this.cambiarIdioma("en", "UK");*/
 
     }//GEN-LAST:event_menuItemIdiomasInglesActionPerformed
 

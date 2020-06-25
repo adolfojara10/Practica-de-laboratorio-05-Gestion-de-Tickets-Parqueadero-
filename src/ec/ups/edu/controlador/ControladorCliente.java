@@ -66,6 +66,14 @@ public class ControladorCliente {
 
     }
 
+    public void actualizarVehiculo(Cliente cliente, Vehiculo vehiculo) {
+        
+        vehiculoDAO.update(vehiculo);
+        cliente.actualizarVehiculo(vehiculo);
+        clienteDAO.update(cliente);
+        System.out.println("\nactualizado:\n" + cliente);
+    }
+
     public Cliente buscarCliente(String cedula) {
         cliente = clienteDAO.read(cedula);
         return cliente;
@@ -73,7 +81,7 @@ public class ControladorCliente {
 
     public Cliente buscarPorVehiculo(String placa) {
         cliente = clienteDAO.buscarPorVehiculo(placa);
-        if(cliente == null){
+        if (cliente == null) {
             return null;
         } else {
             return cliente;

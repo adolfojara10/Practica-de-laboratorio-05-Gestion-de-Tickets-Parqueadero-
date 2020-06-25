@@ -22,6 +22,8 @@ public class Vehiculo {
         this.placa = placa;
         this.marca = marca;
         this.modelo = modelo;
+        
+        listaTickets = new ArrayList<>();
     }
 
     public String getPlaca() {
@@ -55,6 +57,8 @@ public class Vehiculo {
     public void agregarTicket(Ticket ticket) {
         listaTickets.add(ticket);
     }
+    
+    
 
     @Override
     public int hashCode() {

@@ -9,6 +9,7 @@ import ec.ups.edu.dao.VehiculoDAO;
 import ec.ups.edu.idao.IVehiculoDAO;
 import ec.ups.edu.modelo.Ticket;
 import ec.ups.edu.modelo.Vehiculo;
+import java.util.*;
 
 /**
  *
@@ -41,6 +42,22 @@ public class ControladorVehiculo {
         } else {
             return vehiculo;
         }
+    }
+
+    public Vehiculo buscarPorTicket(Ticket ticket) {
+        Set<Vehiculo> vehiculos = vehiculoDAO.findAll();
+        Iterator<Vehiculo> it = vehiculos.iterator();
+        while (it.hasNext()) {
+            vehiculo = it.next();
+            for (Ticket t : vehiculo.getListaTickets()) {
+                if (t.getNumero() == ticket.getNumero()) {
+                    return vehiculo;
+                }
+                break;
+            }
+        }
+        return null;
+
     }
 
 }

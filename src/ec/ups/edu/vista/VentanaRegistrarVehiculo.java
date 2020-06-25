@@ -73,9 +73,9 @@ public class VentanaRegistrarVehiculo extends javax.swing.JInternalFrame {
         }
         tblClientes.setModel(modelo);
     }
-
+/*
     public void cambiarIdioma(String idioma, String localizacion) {
-        placa.setText(recurso.getString("placa"));
+       // placa.setText(recurso.getString("placa"));
         marca.setText(recurso.getString("marca"));
         modelo.setText(recurso.getString("modelo"));
         cedula.setText(recurso.getString("cedula"));
@@ -86,7 +86,7 @@ public class VentanaRegistrarVehiculo extends javax.swing.JInternalFrame {
         btnAgregar.setText(recurso.getString("btnAgregar"));
         btnAtras.setText(recurso.getString("tbnAtras"));
 
-    }
+    }*/
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -345,12 +345,12 @@ public class VentanaRegistrarVehiculo extends javax.swing.JInternalFrame {
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         // TODO add your handling code here:
 
-        String cedula = txtCedula.getText();
+        String cedulas = txtCedula.getText();
 
-        if (cedula.isEmpty()) {
+        if (cedulas.isEmpty()) {
             JOptionPane.showMessageDialog(this, "LLene el campo de cédula para buscar un cliente");
         } else {
-            Cliente c = controladorCliente.buscarCliente(cedula);
+            Cliente c = controladorCliente.buscarCliente(cedulas);
             if (c == null) {
                 int opcion = JOptionPane.showConfirmDialog(this, "Cliente no encontrado, "
                         + "¿Desea crear un nuevo cliente?");

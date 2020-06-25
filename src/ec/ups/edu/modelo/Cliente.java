@@ -77,7 +77,6 @@ public class Cliente {
         listaVehiculos.add(vehiculo);
     }
 
-    /*
     public void actualizarVehiculo(Vehiculo vehiculo) {
         if (listaVehiculos.contains(vehiculo)) {
             int index = listaVehiculos.indexOf(vehiculo);
@@ -90,7 +89,7 @@ public class Cliente {
             listaVehiculos.remove(vehiculo);
         }
     }
-     */
+
     @Override
     public int hashCode() {
         int hash = 5;

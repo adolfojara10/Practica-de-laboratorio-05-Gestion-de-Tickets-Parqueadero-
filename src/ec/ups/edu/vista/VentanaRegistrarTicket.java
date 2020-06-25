@@ -63,7 +63,8 @@ public class VentanaRegistrarTicket extends javax.swing.JInternalFrame {
         modelo.setRowCount(0);
 
         for (Vehiculo ve : c.getListaVehiculos()) {
-            Object[] rowData = {c.getNombre(), ve.getPlaca(), ve.getMarca(), ve.getModelo()};
+            Object[] rowData = {c.getNombre(), c.getCedula(), ve.getPlaca(), ve.getMarca(),
+                 ve.getModelo()};
             modelo.addRow(rowData);
         }
         tblInformacion.setModel(modelo);
@@ -73,7 +74,8 @@ public class VentanaRegistrarTicket extends javax.swing.JInternalFrame {
         DefaultTableModel modelo = (DefaultTableModel) tblInformacion.getModel();
         modelo.setRowCount(0);
 
-        Object[] rowData = {c.getNombre(), ve.getPlaca(), ve.getMarca(), ve.getModelo()};
+        Object[] rowData = {c.getNombre(), c.getCedula(), ve.getPlaca(), ve.getMarca()
+                , ve.getModelo()};
         modelo.addRow(rowData);
 
         tblInformacion.setModel(modelo);
@@ -106,9 +108,6 @@ public class VentanaRegistrarTicket extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblInformacion = new javax.swing.JTable();
         labelMensaje = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
 
         setClosable(true);
         setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
@@ -268,14 +267,14 @@ public class VentanaRegistrarTicket extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "Cliente", "Placa", "Marca", "Modelo"
+                "Cliente", "Cédula", "Placa", "Marca", "Modelo"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -291,31 +290,6 @@ public class VentanaRegistrarTicket extends javax.swing.JInternalFrame {
         labelMensaje.setText("Seleccione el vehiculo a asignar el ticket");
         labelMensaje.setEnabled(false);
 
-        jLabel4.setText("Placa:");
-
-        jLabel5.setText("jLabel5");
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(52, 52, 52)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel4))
-                .addContainerGap(221, Short.MAX_VALUE))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addComponent(jLabel4)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel5)
-                .addContainerGap(165, Short.MAX_VALUE))
-        );
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -329,19 +303,14 @@ public class VentanaRegistrarTicket extends javax.swing.JInternalFrame {
                         .addGap(25, 25, 25)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 522, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(86, 86, 86)
-                                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(117, Short.MAX_VALUE))
+                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(12, 12, 12)
                 .addComponent(labelMensaje)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
@@ -440,15 +409,24 @@ public class VentanaRegistrarTicket extends javax.swing.JInternalFrame {
         int num2 = Integer.parseInt(num);
         Date entrada = fechaActual.getTime();
         
+
         Ticket t = controladorTicket.crear(num2, entrada);
-        
+
         int row = tblInformacion.getSelectedRow();
-        
-        String placa = tblInformacion.getValueAt(row,1).toString();
+
+        String placa = tblInformacion.getValueAt(row, 2).toString();
+        String cedulas = tblInformacion.getValueAt(row,1).toString();
+                
+                
         Vehiculo ve = controladorVehiculo.buscarVehiculo(placa);
+        ve.agregarTicket(t);
+        Cliente c = controladorCliente.buscarCliente(cedulas);
         
+        controladorCliente.actualizarVehiculo(c, ve);
+        JOptionPane.showMessageDialog(this, "¡Ticket emitido con exito!");
         
-        
+        limpiar();
+        this.hide();
     }//GEN-LAST:event_btnEmitirActionPerformed
 
     public void limpiar() {
@@ -473,10 +451,7 @@ public class VentanaRegistrarTicket extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel labelBuscar;
     private javax.swing.JLabel labelMensaje;

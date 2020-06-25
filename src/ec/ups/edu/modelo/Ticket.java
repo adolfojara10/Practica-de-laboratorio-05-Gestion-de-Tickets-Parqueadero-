@@ -17,6 +17,8 @@ public class Ticket {
     private Date fechaEntrada;
     private Date fechaSalida;
     private double total;
+    
+    
 
     public Ticket(int numero, Date fechaEntrada) {
         this.numero = numero;
@@ -55,6 +57,14 @@ public class Ticket {
         this.total = total;
     }
 
+    public double calcularPago(Date fechaE, Date fechaS){
+        
+        fechaE.
+        
+        
+    }
+    
+    
     @Override
     public int hashCode() {
         int hash = 7;
