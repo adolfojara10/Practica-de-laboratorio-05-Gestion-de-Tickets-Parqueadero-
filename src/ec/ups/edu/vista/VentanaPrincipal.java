@@ -113,11 +113,14 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         ventanaRegistrarVehiculo.setTitle(recurso.getString("tituloCliente"));
 
         //Ventana Registrar Vehiculo
-        /*
+        
         if (ventanaRegistrarVehiculo != null) {
             ventanaRegistrarVehiculo.setRecurso(recurso);
             ventanaRegistrarVehiculo.cambiarIdioma(idioma, localidad);
-        }*/
+        }else if(ventanaListarTickets != null){
+        ventanaListarTickets.setRecurso(recurso);
+        ventanaListarTickets.cambiarIdioma(idioma,localidad);
+        }
     }
 
     /**
