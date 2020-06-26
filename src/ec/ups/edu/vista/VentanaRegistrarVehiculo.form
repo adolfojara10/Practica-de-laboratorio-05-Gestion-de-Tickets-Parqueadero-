@@ -90,9 +90,9 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="79" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="placa" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="marca" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="modelo" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="labelPlaca" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="labelMarca" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="labelModelo" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="72" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -109,17 +109,17 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="placa" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="labelPlaca" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="txtFormatedPlaca" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="txtMarca" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="marca" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="labelMarca" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="modelo" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="labelModelo" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="txtModelo" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
@@ -128,21 +128,21 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JLabel" name="placa">
+        <Component class="javax.swing.JLabel" name="labelPlaca">
           <Properties>
             <Property name="text" type="java.lang.String" value="Placa:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JFormattedTextField" name="txtFormatedPlaca">
         </Component>
-        <Component class="javax.swing.JLabel" name="marca">
+        <Component class="javax.swing.JLabel" name="labelMarca">
           <Properties>
             <Property name="text" type="java.lang.String" value="Marca:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtMarca">
         </Component>
-        <Component class="javax.swing.JLabel" name="modelo">
+        <Component class="javax.swing.JLabel" name="labelModelo">
           <Properties>
             <Property name="text" type="java.lang.String" value="Modelo:"/>
           </Properties>
@@ -196,11 +196,11 @@
                           <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="103" alignment="0" groupAlignment="1" attributes="0">
-                                  <Component id="cedula" min="-2" max="-2" attributes="0"/>
-                                  <Component id="nombre" min="-2" max="-2" attributes="0"/>
+                                  <Component id="labelCedula" min="-2" max="-2" attributes="0"/>
+                                  <Component id="labelNombre" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <Component id="telefono" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="direccion" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="labelTelefono" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="labelDireccion" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="86" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -220,22 +220,22 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="cedula" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="labelCedula" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="txtCedula" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="nombre" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="labelNombre" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="txtNombre" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="telefono" min="-2" max="-2" attributes="0"/>
+                      <Component id="labelTelefono" min="-2" max="-2" attributes="0"/>
                       <Component id="txtTelefono" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="direccion" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="labelDireccion" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="txtDireccion" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
@@ -246,7 +246,7 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JLabel" name="cedula">
+        <Component class="javax.swing.JLabel" name="labelCedula">
           <Properties>
             <Property name="text" type="java.lang.String" value="C&#xe9;dula:"/>
           </Properties>
@@ -264,7 +264,7 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBuscarActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JLabel" name="nombre">
+        <Component class="javax.swing.JLabel" name="labelNombre">
           <Properties>
             <Property name="text" type="java.lang.String" value="Nombre:"/>
           </Properties>
@@ -277,7 +277,7 @@
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="telefono">
+        <Component class="javax.swing.JLabel" name="labelTelefono">
           <Properties>
             <Property name="text" type="java.lang.String" value="Tel&#xe9;fono:"/>
           </Properties>
@@ -290,7 +290,7 @@
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="direccion">
+        <Component class="javax.swing.JLabel" name="labelDireccion">
           <Properties>
             <Property name="text" type="java.lang.String" value="Direcci&#xf3;n:"/>
           </Properties>
