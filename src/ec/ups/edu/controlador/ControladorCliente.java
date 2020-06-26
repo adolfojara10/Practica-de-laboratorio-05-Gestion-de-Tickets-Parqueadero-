@@ -76,6 +76,7 @@ public class ControladorCliente {
 
     public Cliente buscarCliente(String cedula) {
         cliente = clienteDAO.read(cedula);
+        System.out.println(cliente);
         return cliente;
     }
 

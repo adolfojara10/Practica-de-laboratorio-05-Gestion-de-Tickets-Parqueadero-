@@ -17,6 +17,7 @@ public class Ticket {
     private Date fechaEntrada;
     private Date fechaSalida;
     private double total;
+    private String tiempo;
 
     public Ticket(int numero, Date fechaEntrada) {
         this.numero = numero;
@@ -53,6 +54,14 @@ public class Ticket {
 
     public void setTotal(double total) {
         this.total = total;
+    }
+
+    public String getTiempo() {
+        return tiempo;
+    }
+
+    public void setTiempo(String tiempo) {
+        this.tiempo = tiempo;
     }
 
     public double calcularPago(Date fechaE, Date fechaS) {

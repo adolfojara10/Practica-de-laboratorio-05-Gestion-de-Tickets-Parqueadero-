@@ -41,8 +41,6 @@ public class VentanaRegistrarVehiculo extends javax.swing.JInternalFrame {
         this.ventanaRegistarCliente = ventanaRegistarCliente;
     }
 
-    
-    
     public Locale getLocalizacion() {
         return localizacion;
     }
@@ -58,21 +56,19 @@ public class VentanaRegistrarVehiculo extends javax.swing.JInternalFrame {
     public void setRecurso(ResourceBundle recurso) {
         this.recurso = recurso;
     }
-    
-    public void cambiarIdioma (String idioma, String localizacion){
-   labelPlaca.setText(recurso.getString("labelPlaca"));
-   labelMarca.setText(recurso.getString("labelMarca"));
-   labelModelo.setText(recurso.getString("labelModelo"));
-   labelCedula.setText(recurso.getString("labelCedula"));
-   labelNombre.setText(recurso.getString("labelNombre"));
-   labelTelefono.setText(recurso.getString("labelTelefono"));
-   labelDireccion.setText(recurso.getString("labelDireccion"));
-   btnAgregar.setText(recurso.getString("btnAgregar"));
-   btnBuscar.setText(recurso.getString("btnBuscar"));
-   btnAtras.setText(recurso.getString("btnAtras"));    
-    }
 
-   
+    public void cambiarIdioma(String idioma, String localizacion) {
+        labelPlaca.setText(recurso.getString("labelPlaca"));
+        labelMarca.setText(recurso.getString("labelMarca"));
+        labelModelo.setText(recurso.getString("labelModelo"));
+        labelCedula.setText(recurso.getString("labelCedula"));
+        labelNombre.setText(recurso.getString("labelNombre"));
+        labelTelefono.setText(recurso.getString("labelTelefono"));
+        labelDireccion.setText(recurso.getString("labelDireccion"));
+        btnAgregar.setText(recurso.getString("btnAgregar"));
+        btnBuscar.setText(recurso.getString("btnBuscar"));
+        btnAtras.setText(recurso.getString("btnAtras"));
+    }
 
     public void llenarTBLClientes() {
         DefaultTableModel modelo = (DefaultTableModel) tblClientes.getModel();
@@ -88,7 +84,18 @@ public class VentanaRegistrarVehiculo extends javax.swing.JInternalFrame {
         }
         tblClientes.setModel(modelo);
     }
-/*
+
+    public void llenartblClientesCliente(Cliente cliente) {
+        DefaultTableModel modelo = (DefaultTableModel) tblClientes.getModel();
+        modelo.setRowCount(0);
+
+        Object[] objeto = {cliente.getNombre(), cliente.getCedula(), cliente.getTelefono().getNumero(),
+            cliente.getDireccion().toString()};
+        modelo.addRow(objeto);
+        tblClientes.setModel(modelo);
+    }
+
+    /*
     public void cambiarIdioma(String idioma, String localizacion) {
        // placa.setText(recurso.getString("placa"));
         marca.setText(recurso.getString("marca"));
@@ -102,7 +109,6 @@ public class VentanaRegistrarVehiculo extends javax.swing.JInternalFrame {
         btnAtras.setText(recurso.getString("tbnAtras"));
 
     }*/
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -159,6 +165,12 @@ public class VentanaRegistrarVehiculo extends javax.swing.JInternalFrame {
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Datos del vehículo", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Dialog", 0, 12))); // NOI18N
 
         labelPlaca.setText("Placa:");
+
+        try {
+            txtFormatedPlaca.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("UUU-####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
 
         labelMarca.setText("Marca:");
 
@@ -220,6 +232,11 @@ public class VentanaRegistrarVehiculo extends javax.swing.JInternalFrame {
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        tblClientes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblClientesMouseClicked(evt);
             }
         });
         jScrollPane1.setViewportView(tblClientes);
@@ -371,13 +388,14 @@ public class VentanaRegistrarVehiculo extends javax.swing.JInternalFrame {
                         + "¿Desea crear un nuevo cliente?");
                 if (opcion == JOptionPane.YES_OPTION) {
                     ventanaRegistarCliente.setVisible(true);
-                    llenarTBLClientes();
+                    this.hide();
+                    //llenarTBLClientes();
                 }
             } else {
                 txtNombre.setText(c.getNombre());
                 txtTelefono.setText(c.getTelefono().getNumero());
                 txtDireccion.setText(c.getDireccion().toString());
-
+                llenartblClientesCliente(c);
             }
         }
     }//GEN-LAST:event_btnBuscarActionPerformed
@@ -396,16 +414,16 @@ public class VentanaRegistrarVehiculo extends javax.swing.JInternalFrame {
         } else {
             Vehiculo ve = controladorVehiculo.crearVehiculo(placas, marcas, modelos);
             System.out.println(ve);
-            
+
             if (ve == null) {
                 JOptionPane.showMessageDialog(this, "El vehículo ya existe");
             } else {
-               controladorCliente.agregarVehiculo(ve, cedulas);
-               JOptionPane.showMessageDialog(this, "¡Vehiculo agregado con exito!");
-               limpiar();
-               this.hide();
+                controladorCliente.agregarVehiculo(ve, cedulas);
+                JOptionPane.showMessageDialog(this, "¡Vehiculo agregado con exito!");
+                limpiar();
+                this.hide();
             }
-/*
+            /*
             controladorCliente.agregarVehiculo(ve, cedulas);
             JOptionPane.showMessageDialog(this, "Vehículo creado con exito");
             this.hide();
@@ -421,11 +439,31 @@ public class VentanaRegistrarVehiculo extends javax.swing.JInternalFrame {
 
     private void btnAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasActionPerformed
         // TODO add your handling code here:
-        
+
         limpiar();
         this.hide();
-        
+
     }//GEN-LAST:event_btnAtrasActionPerformed
+
+    private void tblClientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblClientesMouseClicked
+        // TODO add your handling code here:
+
+        txtNombre.setText("");
+        txtTelefono.setText("");
+        txtDireccion.setText("");
+
+        int index = tblClientes.getSelectedRow();
+
+        String ced = tblClientes.getValueAt(index, 1).toString();
+
+        Cliente c = controladorCliente.buscarCliente(ced);
+        txtCedula.setText("");
+        
+        txtCedula.setText(tblClientes.getValueAt(index, 1).toString());
+        txtNombre.setText(tblClientes.getValueAt(index, 0).toString());
+        txtTelefono.setText(tblClientes.getValueAt(index, 2).toString());
+        txtDireccion.setText(tblClientes.getValueAt(index, 3).toString());
+    }//GEN-LAST:event_tblClientesMouseClicked
 
     public void limpiar() {
 
@@ -437,10 +475,10 @@ public class VentanaRegistrarVehiculo extends javax.swing.JInternalFrame {
         txtNombre.setText("");
         txtTelefono.setText("");
         txtDireccion.setText("");
-        
+
     }
 
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregar;
     private javax.swing.JButton btnAtras;

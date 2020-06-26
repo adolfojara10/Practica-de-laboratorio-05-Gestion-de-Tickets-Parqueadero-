@@ -6,8 +6,17 @@
 package ec.ups.edu.vista;
 
 import ec.ups.edu.controlador.ControladorCliente;
+import ec.ups.edu.controlador.ControladorTicket;
+import ec.ups.edu.controlador.ControladorVehiculo;
+import ec.ups.edu.modelo.Cliente;
+import ec.ups.edu.modelo.Ticket;
+import ec.ups.edu.modelo.Vehiculo;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Locale;
 import java.util.ResourceBundle;
+import java.util.Set;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -17,16 +26,31 @@ import javax.swing.table.DefaultTableModel;
 public class VentanaListarTickets extends javax.swing.JInternalFrame {
 
     private ControladorCliente controladorCliente;
+    private ControladorVehiculo controladorVehiculo;
+    private ControladorTicket controladorTicket;
+
     private Locale localizacion;
     private ResourceBundle recurso;
+
+    private Set<Ticket> tickets;
+
     /**
      * Creates new form VentanaListarTickets
+     *
      * @param controladorCliente
+     * @param controladorVehiculo
+     * @param controladorTicket
      */
-    
-    public VentanaListarTickets(ControladorCliente controladorCliente) {
+    public VentanaListarTickets(ControladorCliente controladorCliente, ControladorVehiculo controladorVehiculo,
+            ControladorTicket controladorTicket) {
+
         initComponents();
+
         this.controladorCliente = controladorCliente;
+        this.controladorTicket = controladorTicket;
+        this.controladorVehiculo = controladorVehiculo;
+
+        tickets = new HashSet<>();
     }
 
     public Locale getLocalizacion() {
@@ -44,16 +68,56 @@ public class VentanaListarTickets extends javax.swing.JInternalFrame {
     public void setRecurso(ResourceBundle recurso) {
         this.recurso = recurso;
     }
-    
-    public void cambiarIdioma (String idioma, String localizacion){
-    labelParametroDeBusqueda.setText(recurso.getString("labelParametroDeBusqueda"));
-    labelSeleccioneElParametro.setText(recurso.getString("labelSeleccioneElParametro"));
-    radiobtnCedula.setText(recurso.getString("radiobtnCedula"));
-    radiobtnPlaca.setText(recurso.getString("radiobtnPlaca"));
-    btnBuscar.setText(recurso.getString("btnBuscar"));
-    btnLimpiar.setText(recurso.getString("btnLimpiar"));
-    btnAtras.setText(("btnAtras"));
-    txtBuscar.setText("txtBuscar");
+
+    public void cambiarIdioma(String idioma, String localizacion) {
+        labelParametroDeBusqueda.setText(recurso.getString("labelParametroDeBusqueda"));
+        //labelSeleccioneElParametro.setText(recurso.getString("labelSeleccioneElParametro"));
+        //radiobtnCedula.setText(recurso.getString("radiobtnCedula"));
+        //radiobtnPlaca.setText(recurso.getString("radiobtnPlaca"));
+        btnBuscar.setText(recurso.getString("btnBuscar"));
+        btnLimpiar.setText(recurso.getString("btnLimpiar"));
+        btnAtras.setText(("btnAtras"));
+        txtBuscar.setText("txtBuscar");
+    }
+
+    public void llenartblTickets() {
+
+        DefaultTableModel modelo = (DefaultTableModel) tblTickets.getModel();
+        modelo.setRowCount(0);
+
+        tickets = controladorTicket.findAll();
+        Iterator<Ticket> it = tickets.iterator();
+        while (it.hasNext()) {
+            Ticket t = it.next();
+            Vehiculo ve = controladorVehiculo.buscarPorTicket(t);
+            Cliente c = controladorCliente.buscarPorVehiculo(ve.getPlaca());
+
+            Object[] rowData = {t.getNumero(), t.getFechaEntrada(), t.getFechaSalida(),
+                t.getTiempo(), t.getTotal(), ve.getPlaca(), ve.getModelo(), ve.getMarca(),
+                c.getNombre(), c.getCedula(), c.getTelefono().getNumero(), c.getDireccion().toString()};
+
+            modelo.addRow(rowData);
+
+        }
+
+        tblTickets.setModel(modelo);
+
+    }
+
+    public void llenartblTicektsTicekt(Ticket ticket) {
+        DefaultTableModel modelo = (DefaultTableModel) tblTickets.getModel();
+        modelo.setRowCount(0);
+
+        Vehiculo ve = controladorVehiculo.buscarPorTicket(ticket);
+        Cliente c = controladorCliente.buscarPorVehiculo(ve.getPlaca());
+
+        Object[] rowData = {ticket.getNumero(), ticket.getFechaEntrada(), ticket.getFechaSalida(),
+            ticket.getTiempo(), ticket.getTotal(), ve.getPlaca(), ve.getModelo(), ve.getMarca(),
+            c.getNombre(), c.getCedula(), c.getTelefono().getNumero(), c.getDireccion().toString()};
+
+        modelo.addRow(rowData);
+        
+        tblTickets.setModel(modelo);
     }
 
     /**
@@ -68,9 +132,6 @@ public class VentanaListarTickets extends javax.swing.JInternalFrame {
         btnGroupBusqueda = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         labelParametroDeBusqueda = new javax.swing.JLabel();
-        radiobtnCedula = new javax.swing.JRadioButton();
-        radiobtnPlaca = new javax.swing.JRadioButton();
-        labelSeleccioneElParametro = new javax.swing.JLabel();
         txtBuscar = new javax.swing.JTextField();
         btnBuscar = new javax.swing.JButton();
         btnAtras = new javax.swing.JButton();
@@ -82,37 +143,38 @@ public class VentanaListarTickets extends javax.swing.JInternalFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
         setResizable(true);
         setTitle("Tickets");
+        addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+                formInternalFrameActivated(evt);
+            }
+            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
+                formInternalFrameClosed(evt);
+            }
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+            }
+        });
 
         jPanel1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
 
-        labelParametroDeBusqueda.setText("Parámetro de busqueda:");
+        labelParametroDeBusqueda.setText("Número de ticket:");
 
-        btnGroupBusqueda.add(radiobtnCedula);
-        radiobtnCedula.setText("Cédula");
-        radiobtnCedula.setToolTipText("Para buscar por la cédula del cliente");
-        radiobtnCedula.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        radiobtnCedula.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                radiobtnCedulaActionPerformed(evt);
-            }
-        });
-
-        btnGroupBusqueda.add(radiobtnPlaca);
-        radiobtnPlaca.setText("Placa");
-        radiobtnPlaca.setToolTipText("Para buscar por la placa del vehiculo");
-        radiobtnPlaca.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        radiobtnPlaca.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                radiobtnPlacaActionPerformed(evt);
-            }
-        });
-
-        labelSeleccioneElParametro.setText("Seleccione el parámetro");
-
-        txtBuscar.setEditable(false);
+        txtBuscar.setActionCommand("<Not Set>");
 
         btnBuscar.setBackground(new java.awt.Color(102, 102, 255));
         btnBuscar.setText("Buscar");
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
 
         btnAtras.setBackground(new java.awt.Color(255, 0, 0));
         btnAtras.setText("Atrás");
@@ -135,46 +197,28 @@ public class VentanaListarTickets extends javax.swing.JInternalFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(17, 17, 17)
-                        .addComponent(labelSeleccioneElParametro, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(42, 42, 42)
-                        .addComponent(btnBuscar)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(btnLimpiar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnAtras)))
+                .addGap(42, 42, 42)
+                .addComponent(btnBuscar)
+                .addGap(70, 70, 70)
+                .addComponent(btnLimpiar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
+                .addComponent(btnAtras)
                 .addGap(20, 20, 20))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(25, 25, 25)
                 .addComponent(labelParametroDeBusqueda)
-                .addGap(102, 102, 102)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(radiobtnPlaca, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(radiobtnCedula, javax.swing.GroupLayout.DEFAULT_SIZE, 97, Short.MAX_VALUE))
-                .addGap(58, 58, 58))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(43, 43, 43))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(15, 15, 15)
+                .addGap(17, 17, 17)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelParametroDeBusqueda)
-                    .addComponent(radiobtnCedula))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(radiobtnPlaca)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(labelSeleccioneElParametro, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(15, 15, 15)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnBuscar)
                     .addComponent(btnAtras)
@@ -187,14 +231,14 @@ public class VentanaListarTickets extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "Número", "Fecha entrada", "Fecha salida", "Precio", "Placa", "Marca", "Modelo", "Cliente"
+                "Número", "Fecha entrada", "Fecha salida", "Tiempo", "Precio", "Placa", "Marca", "Modelo", "Cliente", "Cédula", "Teléfono", "Dirección"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -212,39 +256,27 @@ public class VentanaListarTickets extends javax.swing.JInternalFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 708, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(24, 24, 24))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(171, 171, 171)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(192, Short.MAX_VALUE))
+                .addContainerGap(18, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 946, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(24, 24, 24))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(237, 237, 237))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(16, 16, 16)
+                .addGap(14, 14, 14)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(46, Short.MAX_VALUE))
+                .addGap(32, 32, 32)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(44, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void radiobtnCedulaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radiobtnCedulaActionPerformed
-        // TODO add your handling code here:
-        labelSeleccioneElParametro.setText("Cédula:");
-        txtBuscar.setEditable(true);
-        
-    }//GEN-LAST:event_radiobtnCedulaActionPerformed
-
-    private void radiobtnPlacaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radiobtnPlacaActionPerformed
-        // TODO add your handling code here:
-        labelSeleccioneElParametro.setText("Placa:");
-        txtBuscar.setEditable(true);
-    }//GEN-LAST:event_radiobtnPlacaActionPerformed
 
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
         // TODO add your handling code here:
@@ -256,17 +288,44 @@ public class VentanaListarTickets extends javax.swing.JInternalFrame {
         limpiar();
         this.hide();
     }//GEN-LAST:event_btnAtrasActionPerformed
-    
-    public void limpiar(){
-        radiobtnCedula.setSelected(false);
-        radiobtnPlaca.setSelected(false);
-        labelSeleccioneElParametro.setText("Seleccione el parámetro:");
+
+    private void formInternalFrameActivated(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameActivated
+        // TODO add your handling code here:
+        llenartblTickets();
+
+    }//GEN-LAST:event_formInternalFrameActivated
+
+    private void formInternalFrameClosed(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosed
+        // TODO add your handling code here:
+        limpiar();
+    }//GEN-LAST:event_formInternalFrameClosed
+
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        // TODO add your handling code here:
+
+        String num = txtBuscar.getText();
+
+        if (num == null) {
+            JOptionPane.showMessageDialog(this, "Llene el campo del número del ticket para buscar");
+        } else {
+            int n = Integer.parseInt(num);
+            Ticket t = controladorTicket.encontrarTicket(n);
+
+        }
+
+    }//GEN-LAST:event_btnBuscarActionPerformed
+
+    public void limpiar() {
+        //radiobtnCedula.setSelected(false);
+        //radiobtnPlaca.setSelected(false);
+        //labelSeleccioneElParametro.setText("Seleccione el parámetro:");
         txtBuscar.setText("");
-        txtBuscar.setEditable(false);
+        // txtBuscar.setEditable(false);
+        /*
         DefaultTableModel modelo = (DefaultTableModel) tblTickets.getModel();
         modelo.setRowCount(0);
         tblTickets.setModel(modelo);
-        
+         */
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -277,9 +336,6 @@ public class VentanaListarTickets extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel labelParametroDeBusqueda;
-    private javax.swing.JLabel labelSeleccioneElParametro;
-    private javax.swing.JRadioButton radiobtnCedula;
-    private javax.swing.JRadioButton radiobtnPlaca;
     private javax.swing.JTable tblTickets;
     private javax.swing.JTextField txtBuscar;
     // End of variables declaration//GEN-END:variables

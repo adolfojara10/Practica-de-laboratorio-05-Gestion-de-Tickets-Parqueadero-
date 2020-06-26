@@ -43,6 +43,7 @@ public class ClienteDAO implements IClienteDAO {
         while (it.hasNext()) {
             Cliente c = it.next();
             if (c.getCedula().equals(cedula)) {
+                System.out.println(c);
                 return c;
             }
             break;

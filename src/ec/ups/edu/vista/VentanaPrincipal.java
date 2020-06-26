@@ -57,18 +57,18 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         ventanaRegistrarVehiculo = new VentanaRegistrarVehiculo(controladorCliente, controladorVehiculo,
                 ventanaRegistrarCliente);
         ventanaRegistrarTicket = new VentanaRegistrarTicket(controladorTicket, controladorCliente,
-                 controladorVehiculo, ventanaRegistrarVehiculo, ventanaRegistrarCliente);
-        ventanaSalidaTicket = new VentanaSalidaTicket(controladorTicket, controladorVehiculo, 
+                controladorVehiculo, ventanaRegistrarVehiculo, ventanaRegistrarCliente);
+        ventanaSalidaTicket = new VentanaSalidaTicket(controladorTicket, controladorVehiculo,
                 controladorCliente);
 
-        ventanaListarTickets = new VentanaListarTickets(controladorCliente);
+        ventanaListarTickets = new VentanaListarTickets(controladorCliente, controladorVehiculo,
+                controladorTicket);
 
         desktopPane.add(ventanaRegistrarCliente);
         desktopPane.add(ventanaRegistrarTicket);
         desktopPane.add(ventanaRegistrarVehiculo);
         desktopPane.add(ventanaSalidaTicket);
         desktopPane.add(ventanaListarTickets);
-
 
     }
 
@@ -111,13 +111,12 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         ventanaRegistrarVehiculo.setTitle(recurso.getString("tituloCliente"));
 
         //Ventana Registrar Vehiculo
-        
         if (ventanaRegistrarVehiculo != null) {
             ventanaRegistrarVehiculo.setRecurso(recurso);
             ventanaRegistrarVehiculo.cambiarIdioma(idioma, localidad);
-        }else if(ventanaListarTickets != null){
-        ventanaListarTickets.setRecurso(recurso);
-        ventanaListarTickets.cambiarIdioma(idioma,localidad);
+        } else if (ventanaListarTickets != null) {
+            ventanaListarTickets.setRecurso(recurso);
+            ventanaListarTickets.cambiarIdioma(idioma, localidad);
         }
     }
 
@@ -277,7 +276,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_menuItemRegistrarClienteActionPerformed
 
     private void menuItemIdiomasEspañolActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemIdiomasEspañolActionPerformed
-       this.cambiarIdioma("es", "EC");
+        this.cambiarIdioma("es", "EC");
     }//GEN-LAST:event_menuItemIdiomasEspañolActionPerformed
 
     private void menuItemIdiomasInglesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemIdiomasInglesActionPerformed

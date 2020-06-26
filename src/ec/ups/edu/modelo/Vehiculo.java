@@ -22,7 +22,7 @@ public class Vehiculo {
         this.placa = placa;
         this.marca = marca;
         this.modelo = modelo;
-        
+
         listaTickets = new ArrayList<>();
     }
 
@@ -57,8 +57,13 @@ public class Vehiculo {
     public void agregarTicket(Ticket ticket) {
         listaTickets.add(ticket);
     }
-    
-    
+
+    public void actualizarTicket(Ticket ticket) {
+        if(listaTickets.contains(ticket)){
+            int index = listaTickets.indexOf(ticket);
+            listaTickets.set(index, ticket);
+        }
+    }
 
     @Override
     public int hashCode() {

@@ -34,6 +34,11 @@ public class ControladorVehiculo {
         return null;
     }
 
+    public Vehiculo actualizarVehiculo(Vehiculo vehiculo, Ticket ticket) {
+        vehiculo.actualizarTicket(ticket);
+        return vehiculo;
+    }
+
     public Vehiculo buscarVehiculo(String placa) {
 
         vehiculo = vehiculoDAO.read(placa);

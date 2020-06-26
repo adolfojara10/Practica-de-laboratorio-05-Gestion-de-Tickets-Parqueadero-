@@ -15,6 +15,7 @@ import ec.ups.edu.modelo.Cliente;
 import ec.ups.edu.modelo.Ticket;
 import ec.ups.edu.modelo.Vehiculo;
 import java.util.Date;
+import java.util.Set;
 
 /**
  *
@@ -44,6 +45,15 @@ public class ControladorTicket {
         return ticket;
     }
 
+    public Ticket actualizarTicket(Ticket ticket, Date fechaSalida, double pago, String tiempo) {
+        ticket.setFechaSalida(fechaSalida);
+        ticket.setTotal(pago);
+        ticket.setTiempo(tiempo);
+
+        ticketDAO.update(ticket);
+        return ticket;
+    }
+
     public Ticket encontrarTicket(int numero) {
         ticket = ticketDAO.read(numero);
 
@@ -67,13 +77,32 @@ public class ControladorTicket {
     public String calcularHorasMinutos(double time) {
 
         int tiempoMinutos = (int) Math.round(time);
-        int horas = tiempoMinutos / 60;
-        int minutos = (((tiempoMinutos / 60) - horas)) * 60;
 
-        String hour = horas + "" + "h;";
-        String minute = minutos + "" + "min";
-        String total = hour.concat(minute);
-        return total;
+        if (tiempoMinutos >= 1440) {
+            int dia = tiempoMinutos / 1440;
+            String dias = dia + "" + "d";
+            int horas = ((tiempoMinutos / 1440) - dia) * 60;
+            int minutos = (((tiempoMinutos / 60) - horas)) * 60;
+            String hour = horas + "" + "h;";
+            String minute = minutos + "" + "min";
+            String total = dias + " " + hour + " " + minute;
+            return total;
+        } else if (tiempoMinutos > 60) {
+            int horas = (tiempoMinutos / 60);
+            int minutos = (((tiempoMinutos / 60) - horas)) * 60;
+            String hour = horas + "" + "h;";
+            String minute = minutos + "" + "min";
+            String total = hour + " " + minute;
+            return total;
+        } else {
+            int minutos = tiempoMinutos;
+            String minute = minutos + "" + "min";
+            return minute;
+        }
+    }
+
+    public Set<Ticket> findAll() {
+        return ticketDAO.findAll();
     }
 
     public int numeroTicket() {

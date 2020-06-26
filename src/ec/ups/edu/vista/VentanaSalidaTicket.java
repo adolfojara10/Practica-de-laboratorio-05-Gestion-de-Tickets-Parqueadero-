@@ -8,11 +8,13 @@ package ec.ups.edu.vista;
 import ec.ups.edu.controlador.ControladorCliente;
 import ec.ups.edu.controlador.ControladorTicket;
 import ec.ups.edu.controlador.ControladorVehiculo;
+import ec.ups.edu.modelo.Cliente;
 import ec.ups.edu.modelo.Ticket;
 import ec.ups.edu.modelo.Vehiculo;
 import java.util.Calendar;
 import java.util.Date;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -40,7 +42,19 @@ public class VentanaSalidaTicket extends javax.swing.JInternalFrame {
 
     public void ponerFecha() {
         fechaSalida = Calendar.getInstance();
-        txtFechaEntrada.setText(fechaSalida.getTime().toString());
+        txtFechaSalida.setText(fechaSalida.getTime().toString());
+    }
+
+    public void llenartblInformacion(Cliente cliente, Vehiculo vehiculo) {
+        DefaultTableModel modelo = (DefaultTableModel) tblSalidaTicket.getModel();
+        modelo.setRowCount(0);
+
+        Object[] rowData = {cliente.getNombre(), cliente.getCedula(), vehiculo.getPlaca(),
+            vehiculo.getMarca(), vehiculo.getModelo()};
+
+        modelo.addRow(rowData);
+
+        tblSalidaTicket.setModel(modelo);
     }
 
     /**
@@ -100,12 +114,27 @@ public class VentanaSalidaTicket extends javax.swing.JInternalFrame {
         btnFactura.setBackground(new java.awt.Color(102, 102, 255));
         btnFactura.setText("Emitir Factura");
         btnFactura.setEnabled(false);
+        btnFactura.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFacturaActionPerformed(evt);
+            }
+        });
 
         btnLimpiar.setBackground(new java.awt.Color(255, 51, 51));
         btnLimpiar.setText("Limpiar");
+        btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimpiarActionPerformed(evt);
+            }
+        });
 
         btnAtras.setBackground(new java.awt.Color(255, 0, 0));
         btnAtras.setText("Atrás");
+        btnAtras.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAtrasActionPerformed(evt);
+            }
+        });
 
         btnBuscar.setBackground(new java.awt.Color(102, 102, 255));
         btnBuscar.setText("Buscar");
@@ -245,19 +274,71 @@ public class VentanaSalidaTicket extends javax.swing.JInternalFrame {
 
                 Date fechaS = Calendar.getInstance().getTime();
                 double tiempo = controladorTicket.calcularTiempo(t.getFechaEntrada(), fechaS);
-                
+
                 String totalTiempo = controladorTicket.calcularHorasMinutos(tiempo);
                 txtTiempo.setText(totalTiempo);
-                
+
                 double pago = controladorTicket.calcularPago(tiempo);
+                txtPago.setText(String.valueOf(pago));
 
                 Vehiculo ve = controladorVehiculo.buscarPorTicket(t);
+                Cliente c = controladorCliente.buscarPorVehiculo(ve.getPlaca());
+
+                llenartblInformacion(c, ve);
+
+                btnFactura.setEnabled(true);
             }
-
         }
-
     }//GEN-LAST:event_btnBuscarActionPerformed
 
+    private void btnFacturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFacturaActionPerformed
+        // TODO add your handling code here:
+        int nu = Integer.parseInt(txtNumero.getText());
+        Date fechaS = Calendar.getInstance().getTime();
+        double pago = Double.parseDouble(txtPago.getText());
+        String tiempo = txtTiempo.getText();
+
+        Ticket t = controladorTicket.encontrarTicket(nu);
+        Vehiculo ve = controladorVehiculo.buscarPorTicket(t);
+
+        Ticket ticket = controladorTicket.actualizarTicket(t, fechaS, pago, tiempo);
+
+        ve = controladorVehiculo.actualizarVehiculo(ve, ticket);
+
+        Cliente c = controladorCliente.buscarPorVehiculo(ve.getPlaca());
+
+        controladorCliente.actualizarVehiculo(c, ve);
+
+        JOptionPane.showMessageDialog(this, "Factura emitida con exito");
+        limpiar();
+        this.hide();
+    }//GEN-LAST:event_btnFacturaActionPerformed
+
+    private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
+        // TODO add your handling code here:
+        limpiar();
+    }//GEN-LAST:event_btnLimpiarActionPerformed
+
+    private void btnAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasActionPerformed
+        // TODO add your handling code here:
+        limpiar();
+        this.hide();
+    }//GEN-LAST:event_btnAtrasActionPerformed
+
+    public void limpiar() {
+        txtNumero.setText("");
+        txtFechaEntrada.setText("");
+        txtFechaSalida.setText("");
+        txtPago.setText("");
+        txtTiempo.setText("");
+
+        DefaultTableModel modelo = (DefaultTableModel) tblSalidaTicket.getModel();
+        modelo.setRowCount(0);
+        tblSalidaTicket.setModel(modelo);
+
+        btnFactura.setEnabled(false);
+
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAtras;
