@@ -278,11 +278,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_menuItemRegistrarClienteActionPerformed
 
     private void menuItemIdiomasEspañolActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemIdiomasEspañolActionPerformed
-        this.cambiarIdioma("es", "EC");
+        //this.cambiarIdioma("es", "EC");
     }//GEN-LAST:event_menuItemIdiomasEspañolActionPerformed
 
     private void menuItemIdiomasInglesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemIdiomasInglesActionPerformed
-        this.cambiarIdioma("en", "UK");
+       // this.cambiarIdioma("en", "UK");
 
     }//GEN-LAST:event_menuItemIdiomasInglesActionPerformed
 

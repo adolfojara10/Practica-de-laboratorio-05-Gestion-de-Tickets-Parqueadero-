@@ -50,7 +50,7 @@ public class VentanaRegistarCliente extends javax.swing.JInternalFrame {
         this.recurso = recurso;
     }
 
-    public void cambiarIdioma(String idioma, String localizacion){
+   public void cambiarIdioma(String idioma, String localizacion){
         labelNombre.setText(recurso.getString("labelNombre"));
         labelApellido.setText(recurso.getString("labelApellido"));
         labelCedula.setText(recurso.getString("labelCedula"));
