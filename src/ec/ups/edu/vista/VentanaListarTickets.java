@@ -68,17 +68,15 @@ public class VentanaListarTickets extends javax.swing.JInternalFrame {
     public void setRecurso(ResourceBundle recurso) {
         this.recurso = recurso;
     }
-/*
+
   public void cambiarIdioma (String idioma, String localizacion){
-    labelParametroDeBusqueda.setText(recurso.getString("labelParametroDeBusqueda"));
-    radiobtnCedula.setText(recurso.getString("radiobtnCedula"));
-    radiobtnPlaca.setText(recurso.getString("radiobtnPlaca"));
+    labelNumeroDeTicket.setText(recurso.getString("labelNumeroDeTicket"));
     btnBuscar.setText(recurso.getString("btnBuscar"));
     btnLimpiar.setText(recurso.getString("btnLimpiar"));
     btnAtras.setText(("btnAtras"));
-    //txtBuscar.setText("txtBuscar");
+
     }
-*/
+
     public void llenartblTickets() {
 
         DefaultTableModel modelo = (DefaultTableModel) tblTickets.getModel();
@@ -130,7 +128,7 @@ public class VentanaListarTickets extends javax.swing.JInternalFrame {
 
         btnGroupBusqueda = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
-        labelParametroDeBusqueda = new javax.swing.JLabel();
+        labelNumeroDeTicket = new javax.swing.JLabel();
         txtBuscar = new javax.swing.JTextField();
         btnBuscar = new javax.swing.JButton();
         btnAtras = new javax.swing.JButton();
@@ -163,9 +161,7 @@ public class VentanaListarTickets extends javax.swing.JInternalFrame {
 
         jPanel1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
 
-        labelParametroDeBusqueda.setText("Número de ticket:");
-
-        txtBuscar.setActionCommand("<Not Set>");
+        labelNumeroDeTicket.setText("Número de ticket:");
 
         btnBuscar.setBackground(new java.awt.Color(102, 102, 255));
         btnBuscar.setText("Buscar");
@@ -205,7 +201,7 @@ public class VentanaListarTickets extends javax.swing.JInternalFrame {
                 .addGap(20, 20, 20))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(25, 25, 25)
-                .addComponent(labelParametroDeBusqueda)
+                .addComponent(labelNumeroDeTicket)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(43, 43, 43))
@@ -215,7 +211,7 @@ public class VentanaListarTickets extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(17, 17, 17)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(labelParametroDeBusqueda)
+                    .addComponent(labelNumeroDeTicket)
                     .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(15, 15, 15)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -334,7 +330,7 @@ public class VentanaListarTickets extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnLimpiar;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel labelParametroDeBusqueda;
+    private javax.swing.JLabel labelNumeroDeTicket;
     private javax.swing.JTable tblTickets;
     private javax.swing.JTextField txtBuscar;
     // End of variables declaration//GEN-END:variables

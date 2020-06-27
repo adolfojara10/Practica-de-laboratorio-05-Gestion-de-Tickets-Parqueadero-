@@ -84,7 +84,7 @@
               </Group>
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
-                  <Component id="labelParametroDeBusqueda" min="-2" max="-2" attributes="0"/>
+                  <Component id="labelNumeroDeTicket" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
                   <Component id="txtBuscar" min="-2" pref="135" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
@@ -96,7 +96,7 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="labelParametroDeBusqueda" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="labelNumeroDeTicket" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="txtBuscar" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
@@ -111,15 +111,12 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JLabel" name="labelParametroDeBusqueda">
+        <Component class="javax.swing.JLabel" name="labelNumeroDeTicket">
           <Properties>
             <Property name="text" type="java.lang.String" value="N&#xfa;mero de ticket:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtBuscar">
-          <Properties>
-            <Property name="actionCommand" type="java.lang.String" value="&lt;Not Set&gt;"/>
-          </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="btnBuscar">
           <Properties>
