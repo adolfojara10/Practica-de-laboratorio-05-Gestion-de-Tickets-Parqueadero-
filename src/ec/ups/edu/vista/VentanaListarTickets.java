@@ -68,18 +68,17 @@ public class VentanaListarTickets extends javax.swing.JInternalFrame {
     public void setRecurso(ResourceBundle recurso) {
         this.recurso = recurso;
     }
-
-    public void cambiarIdioma(String idioma, String localizacion) {
-        labelParametroDeBusqueda.setText(recurso.getString("labelParametroDeBusqueda"));
-        //labelSeleccioneElParametro.setText(recurso.getString("labelSeleccioneElParametro"));
-        //radiobtnCedula.setText(recurso.getString("radiobtnCedula"));
-        //radiobtnPlaca.setText(recurso.getString("radiobtnPlaca"));
-        btnBuscar.setText(recurso.getString("btnBuscar"));
-        btnLimpiar.setText(recurso.getString("btnLimpiar"));
-        btnAtras.setText(("btnAtras"));
-        txtBuscar.setText("txtBuscar");
+/*
+  public void cambiarIdioma (String idioma, String localizacion){
+    labelParametroDeBusqueda.setText(recurso.getString("labelParametroDeBusqueda"));
+    radiobtnCedula.setText(recurso.getString("radiobtnCedula"));
+    radiobtnPlaca.setText(recurso.getString("radiobtnPlaca"));
+    btnBuscar.setText(recurso.getString("btnBuscar"));
+    btnLimpiar.setText(recurso.getString("btnLimpiar"));
+    btnAtras.setText(("btnAtras"));
+    //txtBuscar.setText("txtBuscar");
     }
-
+*/
     public void llenartblTickets() {
 
         DefaultTableModel modelo = (DefaultTableModel) tblTickets.getModel();

@@ -80,6 +80,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         ventanaListarTickets.setVisible(false);
 
     }
+    /*
 
     public void cambiarIdioma(String idioma, String localidad) {
         //System.out.println("Metodo cambiar idioma en la ventana principal y en  las ventana descritas en la misma ventana principal ");
@@ -120,7 +121,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             ventanaListarTickets.cambiarIdioma(idioma, localidad);
         }
     }
-
+*/
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
