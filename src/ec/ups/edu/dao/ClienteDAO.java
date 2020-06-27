@@ -39,29 +39,43 @@ public class ClienteDAO implements IClienteDAO {
 
     @Override
     public Cliente read(String cedula) {
+        Cliente cl = new Cliente();
         Iterator<Cliente> it = clientes.iterator();
         while (it.hasNext()) {
             Cliente c = it.next();
+            System.out.println("\n" + c.getCedula() + " " + cedula);
             if (c.getCedula().equals(cedula)) {
                 System.out.println(c);
+                cl = c;
                 return c;
             }
-            break;
         }
-        return null;
+
+        if (cl.getNombre() != null) {
+            return cl;
+        } else {
+            return null;
+        }
+
     }
 
     @Override
     public void update(Cliente cliente) {
+
+        /* Cliente aux = new Cliente();
         Iterator<Cliente> it = clientes.iterator();
 
         while (it.hasNext()) {
             Cliente c = it.next();
             if (c.getCedula().equals(cliente.getCedula())) {
-                clientes.remove(c);
-                clientes.add(cliente);
+                aux = c;
             }
-            break;
+        }
+        clientes.
+        clientes.add(cliente);*/
+        if (clientes.contains(cliente)) {
+            clientes.remove(cliente);
+            clientes.add(cliente);
         }
 
     }

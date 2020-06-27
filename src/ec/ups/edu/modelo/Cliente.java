@@ -29,6 +29,10 @@ public class Cliente {
         listaVehiculos = new ArrayList<>();
     }
 
+    public Cliente() {
+    }
+
+    
     /*
     public Cliente(String cedula, String nombre, Telefono telefono, Direccion direccion, List<Vehiculo> listaVehiculos) {
         this.cedula = cedula;

@@ -77,6 +77,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         ventanaRegistrarTicket.setVisible(false);
         ventanaRegistrarVehiculo.setVisible(false);
         ventanaSalidaTicket.setVisible(false);
+        ventanaListarTickets.setVisible(false);
 
     }
 

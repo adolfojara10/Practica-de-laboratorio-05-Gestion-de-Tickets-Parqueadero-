@@ -36,15 +36,21 @@ public class VehiculoDAO implements IVehiculoDAO {
 
     @Override
     public Vehiculo read(String placa) {
+        Vehiculo vv = new Vehiculo();
+
         Iterator<Vehiculo> it = vehiculos.iterator();
         while (it.hasNext()) {
             Vehiculo v = it.next();
             if (v.getPlaca().equals(placa)) {
+                vv = v;
                 return v;
             }
-            break;
         }
-        return null;
+        if (vv.getPlaca() != null) {
+            return vv;
+        } else {
+            return null;
+        }
     }
 
     @Override
@@ -53,11 +59,10 @@ public class VehiculoDAO implements IVehiculoDAO {
         while (it.hasNext()) {
             Vehiculo v = it.next();
             if (v.getPlaca().equals(vehiculo.getPlaca())) {
-                vehiculos.remove(v);
-                vehiculos.add(vehiculo);
+                it.remove();
             }
-            break;
         }
+        vehiculos.add(vehiculo);
     }
 
     @Override

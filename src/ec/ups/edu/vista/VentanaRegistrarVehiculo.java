@@ -391,11 +391,11 @@ public class VentanaRegistrarVehiculo extends javax.swing.JInternalFrame {
                     this.hide();
                     //llenarTBLClientes();
                 }
-            } else {
+            } else if (c != null) {
                 txtNombre.setText(c.getNombre());
                 txtTelefono.setText(c.getTelefono().getNumero());
                 txtDireccion.setText(c.getDireccion().toString());
-                llenartblClientesCliente(c);
+                // llenartblClientesCliente(c);
             }
         }
     }//GEN-LAST:event_btnBuscarActionPerformed
@@ -458,7 +458,7 @@ public class VentanaRegistrarVehiculo extends javax.swing.JInternalFrame {
 
         Cliente c = controladorCliente.buscarCliente(ced);
         txtCedula.setText("");
-        
+
         txtCedula.setText(tblClientes.getValueAt(index, 1).toString());
         txtNombre.setText(tblClientes.getValueAt(index, 0).toString());
         txtTelefono.setText(tblClientes.getValueAt(index, 2).toString());

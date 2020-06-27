@@ -27,6 +27,7 @@ public class TicketDAO implements ITicketDAO {
 
     @Override
     public boolean create(Ticket ticket) {
+        ++numero;
         if (tickets.contains(ticket) != true) {
             tickets.add(ticket);
             return true;
@@ -38,15 +39,20 @@ public class TicketDAO implements ITicketDAO {
 
     @Override
     public Ticket read(int numero) {
+        Ticket tt = new Ticket();
         Iterator<Ticket> it = tickets.iterator();
         while (it.hasNext()) {
             Ticket t = it.next();
             if (t.getNumero() == numero) {
+                tt = t;
                 return t;
             }
-            break;
         }
-        return null;
+        if (tt.getFechaEntrada() != null) {
+            return tt;
+        } else {
+            return null;
+        }
     }
 
     @Override
@@ -55,12 +61,11 @@ public class TicketDAO implements ITicketDAO {
         while (it.hasNext()) {
             Ticket t = it.next();
             if (t.getNumero() == ticket.getNumero()) {
-                tickets.remove(t);
-                tickets.add(ticket);
-            }
-            break;
-        }
+                it.remove();
 
+            }
+        }
+        tickets.add(ticket);
     }
 
     @Override
@@ -74,9 +79,9 @@ public class TicketDAO implements ITicketDAO {
     public Set<Ticket> findAll() {
         return tickets;
     }
-    
+
     @Override
-    public int devolverNumero(){
+    public int devolverNumero() {
         return numero;
     }
 

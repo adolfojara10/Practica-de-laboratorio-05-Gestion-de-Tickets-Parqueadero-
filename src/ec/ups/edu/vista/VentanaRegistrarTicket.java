@@ -64,7 +64,7 @@ public class VentanaRegistrarTicket extends javax.swing.JInternalFrame {
 
         for (Vehiculo ve : c.getListaVehiculos()) {
             Object[] rowData = {c.getNombre(), c.getCedula(), ve.getPlaca(), ve.getMarca(),
-                 ve.getModelo()};
+                ve.getModelo()};
             modelo.addRow(rowData);
         }
         tblInformacion.setModel(modelo);
@@ -74,8 +74,8 @@ public class VentanaRegistrarTicket extends javax.swing.JInternalFrame {
         DefaultTableModel modelo = (DefaultTableModel) tblInformacion.getModel();
         modelo.setRowCount(0);
 
-        Object[] rowData = {c.getNombre(), c.getCedula(), ve.getPlaca(), ve.getMarca()
-                , ve.getModelo()};
+        Object[] rowData = {c.getNombre(), c.getCedula(), ve.getPlaca(), ve.getMarca(),
+            ve.getModelo()};
         modelo.addRow(rowData);
 
         tblInformacion.setModel(modelo);
@@ -100,12 +100,11 @@ public class VentanaRegistrarTicket extends javax.swing.JInternalFrame {
         radiobtnCedula = new javax.swing.JRadioButton();
         radiobtnPlaca = new javax.swing.JRadioButton();
         labelBuscar = new javax.swing.JLabel();
-        txtBuscar = new javax.swing.JTextField();
         btnBuscar = new javax.swing.JButton();
         btnAtras = new javax.swing.JButton();
         btnLimpiar = new javax.swing.JButton();
         btnEmitir = new javax.swing.JButton();
-        cbxBusqueda = new javax.swing.JComboBox<>();
+        txtFormatedParametro = new javax.swing.JFormattedTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblInformacion = new javax.swing.JTable();
         labelMensaje = new javax.swing.JLabel();
@@ -164,8 +163,6 @@ public class VentanaRegistrarTicket extends javax.swing.JInternalFrame {
 
         labelBuscar.setText("Seleccione parámetro:");
 
-        txtBuscar.setEditable(false);
-
         btnBuscar.setBackground(new java.awt.Color(102, 102, 255));
         btnBuscar.setText("Buscar");
         btnBuscar.addActionListener(new java.awt.event.ActionListener() {
@@ -199,7 +196,7 @@ public class VentanaRegistrarTicket extends javax.swing.JInternalFrame {
             }
         });
 
-        cbxBusqueda.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", "Cédula", "Placa" }));
+        txtFormatedParametro.setEditable(false);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -207,32 +204,31 @@ public class VentanaRegistrarTicket extends javax.swing.JInternalFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(42, 42, 42)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(radiobtnPlaca, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addComponent(btnBuscar)
-                            .addGap(34, 34, 34)
-                            .addComponent(btnEmitir)
-                            .addGap(38, 38, 38)
-                            .addComponent(btnLimpiar)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnAtras))
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel1)
-                                .addComponent(jLabel2)
-                                .addComponent(labelBuscar)
-                                .addComponent(jLabel3))
-                            .addGap(59, 59, 59)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addComponent(cbxBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(radiobtnCedula))
-                                .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txtFechaEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txtNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(btnBuscar)
+                        .addGap(34, 34, 34)
+                        .addComponent(btnEmitir)
+                        .addGap(38, 38, 38)
+                        .addComponent(btnLimpiar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnAtras))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2)
+                            .addComponent(labelBuscar)
+                            .addComponent(jLabel3))
+                        .addGap(59, 59, 59)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtFormatedParametro, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtFechaEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(36, 36, 36)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(radiobtnPlaca, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(radiobtnCedula))))))
                 .addContainerGap(37, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -249,14 +245,13 @@ public class VentanaRegistrarTicket extends javax.swing.JInternalFrame {
                 .addGap(20, 20, 20)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(radiobtnCedula)
-                    .addComponent(cbxBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(radiobtnCedula))
+                .addGap(12, 12, 12)
                 .addComponent(radiobtnPlaca)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelBuscar)
-                    .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtFormatedParametro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnBuscar)
@@ -308,7 +303,7 @@ public class VentanaRegistrarTicket extends javax.swing.JInternalFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 522, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(34, Short.MAX_VALUE))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -317,7 +312,7 @@ public class VentanaRegistrarTicket extends javax.swing.JInternalFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(12, 12, 12)
                 .addComponent(labelMensaje)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(25, 25, 25))
         );
@@ -334,18 +329,40 @@ public class VentanaRegistrarTicket extends javax.swing.JInternalFrame {
     private void radiobtnCedulaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radiobtnCedulaActionPerformed
         // TODO add your handling code here:
 
+        try {
+            txtFormatedParametro.setFormatterFactory(
+                    new javax.swing.text.DefaultFormatterFactory(
+                            new javax.swing.text.MaskFormatter("AAAAAAAAAA")
+                    )
+            );
+        } catch (java.text.ParseException ex) {
+            JOptionPane.showMessageDialog(this, "Formato del número del teléfono erroneo");
+            ex.printStackTrace();
+        }
+        
         radiobtnPlaca.setSelected(false);
         labelBuscar.setText("Cédula:");
-        txtBuscar.setEditable(true);
+        txtFormatedParametro.setEditable(true);
 
     }//GEN-LAST:event_radiobtnCedulaActionPerformed
 
     private void radiobtnPlacaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radiobtnPlacaActionPerformed
         // TODO add your handling code here:
 
+        try {
+            txtFormatedParametro.setFormatterFactory(
+                    new javax.swing.text.DefaultFormatterFactory(
+                            new javax.swing.text.MaskFormatter("UUU-####")
+                    )
+            );
+        } catch (java.text.ParseException ex) {
+            JOptionPane.showMessageDialog(this, "Formato del número del teléfono erroneo");
+            ex.printStackTrace();
+        }
+
         radiobtnCedula.setSelected(false);
         labelBuscar.setText("Placa:");
-        txtBuscar.setEditable(true);
+        txtFormatedParametro.setEditable(true);
     }//GEN-LAST:event_radiobtnPlacaActionPerformed
 
     private void btnAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasActionPerformed
@@ -366,7 +383,7 @@ public class VentanaRegistrarTicket extends javax.swing.JInternalFrame {
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         // TODO add your handling code here:
 
-        String buscars = txtBuscar.getText();
+        String buscars = txtFormatedParametro.getText();
 
         String numero = txtNumero.getText();
         String fecha = txtFechaEntrada.getText();
@@ -412,33 +429,32 @@ public class VentanaRegistrarTicket extends javax.swing.JInternalFrame {
         String num = txtNumero.getText();
         int num2 = Integer.parseInt(num);
         Date entrada = fechaActual.getTime();
-        
 
         Ticket t = controladorTicket.crear(num2, entrada);
 
         int row = tblInformacion.getSelectedRow();
 
         String placa = tblInformacion.getValueAt(row, 2).toString();
-        String cedulas = tblInformacion.getValueAt(row,1).toString();
-                
-                
+        String cedulas = tblInformacion.getValueAt(row, 1).toString();
+
         Vehiculo ve = controladorVehiculo.buscarVehiculo(placa);
         ve.agregarTicket(t);
         Cliente c = controladorCliente.buscarCliente(cedulas);
-        
+
         controladorCliente.actualizarVehiculo(c, ve);
         JOptionPane.showMessageDialog(this, "¡Ticket emitido con exito!");
-        
+
         limpiar();
         this.hide();
     }//GEN-LAST:event_btnEmitirActionPerformed
 
     public void limpiar() {
         labelBuscar.setText("Seleccione parámetro:");
+        btnGroupBuscar.clearSelection();
         radiobtnCedula.setSelected(false);
         radiobtnPlaca.setSelected(false);
-        txtBuscar.setText("");
-        txtBuscar.setEditable(false);
+        txtFormatedParametro.setValue("");
+        txtFormatedParametro.setEditable(false);
         DefaultTableModel modelo = (DefaultTableModel) tblInformacion.getModel();
         modelo.setRowCount(0);
         tblInformacion.setModel(modelo);
@@ -452,7 +468,6 @@ public class VentanaRegistrarTicket extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnEmitir;
     private javax.swing.ButtonGroup btnGroupBuscar;
     private javax.swing.JButton btnLimpiar;
-    private javax.swing.JComboBox<String> cbxBusqueda;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -463,8 +478,8 @@ public class VentanaRegistrarTicket extends javax.swing.JInternalFrame {
     private javax.swing.JRadioButton radiobtnCedula;
     private javax.swing.JRadioButton radiobtnPlaca;
     private javax.swing.JTable tblInformacion;
-    private javax.swing.JTextField txtBuscar;
     private javax.swing.JTextField txtFechaEntrada;
+    private javax.swing.JFormattedTextField txtFormatedParametro;
     private javax.swing.JTextField txtNumero;
     // End of variables declaration//GEN-END:variables
 }

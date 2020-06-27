@@ -19,6 +19,10 @@ public class Ticket {
     private double total;
     private String tiempo;
 
+    public Ticket() {
+    }
+
+    
     public Ticket(int numero, Date fechaEntrada) {
         this.numero = numero;
         this.fechaEntrada = fechaEntrada;

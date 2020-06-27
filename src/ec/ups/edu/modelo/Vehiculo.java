@@ -18,6 +18,10 @@ public class Vehiculo {
     private String modelo;
     private List<Ticket> listaTickets;
 
+    public Vehiculo() {
+    }
+
+    
     public Vehiculo(String placa, String marca, String modelo) {
         this.placa = placa;
         this.marca = marca;
@@ -26,6 +30,7 @@ public class Vehiculo {
         listaTickets = new ArrayList<>();
     }
 
+ 
     public String getPlaca() {
         return placa;
     }
