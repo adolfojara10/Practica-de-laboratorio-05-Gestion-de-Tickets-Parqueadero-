@@ -80,12 +80,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         ventanaListarTickets.setVisible(false);
 
     }
-    /*
+    
 
-    public void cambiarIdioma(String idioma, String localidad) {
-        //System.out.println("Metodo cambiar idioma en la ventana principal y en  las ventana descritas en la misma ventana principal ");
+     public void cambiarIdioma(String idioma, String localidad) {
+        //
         localizacion = new Locale(idioma, localidad);
-
         recurso = ResourceBundle.getBundle("ec.ups.edu.idioma.mensaje", localizacion);
 
         //JmenuInicio
@@ -113,15 +112,28 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         ventanaRegistrarVehiculo.setTitle(recurso.getString("tituloCliente"));
 
         //Ventana Registrar Vehiculo
+        
         if (ventanaRegistrarVehiculo != null) {
             ventanaRegistrarVehiculo.setRecurso(recurso);
             ventanaRegistrarVehiculo.cambiarIdioma(idioma, localidad);
-        } else if (ventanaListarTickets != null) {
-            ventanaListarTickets.setRecurso(recurso);
-            ventanaListarTickets.cambiarIdioma(idioma, localidad);
+        }if(ventanaListarTickets != null){
+        ventanaListarTickets.setRecurso(recurso);
+       // ventanaListarTickets.cambiarIdioma(idioma,localidad);
+        }if(ventanaRegistrarTicket != null){
+            ventanaRegistrarTicket.setRecurso(recurso);
+            ventanaRegistrarTicket.cambiarIdioma(idioma, localidad);
+        }if(ventanaRegistrarCliente != null){
+        ventanaRegistrarCliente.setRecurso(recurso);
+        ventanaRegistrarCliente.cambiarIdioma(idioma, localidad);
+        }if(ventanaSalidaTicket != null){
+        ventanaSalidaTicket.setRecurso(recurso);
+        ventanaSalidaTicket.cambiarIdioma(idioma, localidad);
         }
+               
+        
+    
     }
-*/
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
