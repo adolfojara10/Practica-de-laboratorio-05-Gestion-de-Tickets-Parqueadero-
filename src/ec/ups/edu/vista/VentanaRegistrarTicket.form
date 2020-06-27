@@ -36,7 +36,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="217" max="-2" attributes="0"/>
-                      <Component id="labelMensaje" min="-2" max="-2" attributes="0"/>
+                      <Component id="labelMensajeSeleccion" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
@@ -56,7 +56,7 @@
               <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
               <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
-              <Component id="labelMensaje" min="-2" max="-2" attributes="0"/>
+              <Component id="labelMensajeSeleccion" min="-2" max="-2" attributes="0"/>
               <EmptySpace pref="24" max="32767" attributes="0"/>
               <Component id="jScrollPane1" min="-2" pref="114" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
@@ -84,10 +84,10 @@
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="labelBuscar" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="labelNumero" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="labelFechaEntrada" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="labelSeleccioneParametro" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="labelParametroBusqueda" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="59" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
@@ -113,24 +113,24 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="labelNumero" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="txtNumero" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="labelFechaEntrada" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="txtFechaEntrada" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="labelParametroBusqueda" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="radiobtnCedula" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                   <Component id="radiobtnPlaca" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="labelBuscar" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="labelSeleccioneParametro" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="txtFormatedParametro" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -146,12 +146,12 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JLabel" name="jLabel1">
+        <Component class="javax.swing.JLabel" name="labelNumero">
           <Properties>
             <Property name="text" type="java.lang.String" value="N&#xfa;mero:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel2">
+        <Component class="javax.swing.JLabel" name="labelFechaEntrada">
           <Properties>
             <Property name="text" type="java.lang.String" value="Fecha entrada:"/>
           </Properties>
@@ -172,7 +172,7 @@
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel3">
+        <Component class="javax.swing.JLabel" name="labelParametroBusqueda">
           <Properties>
             <Property name="text" type="java.lang.String" value="Par&#xe1;metro de busqueda: "/>
           </Properties>
@@ -201,7 +201,7 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="radiobtnPlacaActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JLabel" name="labelBuscar">
+        <Component class="javax.swing.JLabel" name="labelSeleccioneParametro">
           <Properties>
             <Property name="text" type="java.lang.String" value="Seleccione par&#xe1;metro:"/>
           </Properties>
@@ -312,7 +312,7 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JLabel" name="labelMensaje">
+    <Component class="javax.swing.JLabel" name="labelMensajeSeleccion">
       <Properties>
         <Property name="text" type="java.lang.String" value="Seleccione el vehiculo a asignar el ticket"/>
         <Property name="enabled" type="boolean" value="false"/>

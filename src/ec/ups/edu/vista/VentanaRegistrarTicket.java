@@ -13,6 +13,8 @@ import ec.ups.edu.modelo.Ticket;
 import ec.ups.edu.modelo.Vehiculo;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
+import java.util.ResourceBundle;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -30,6 +32,11 @@ public class VentanaRegistrarTicket extends javax.swing.JInternalFrame {
 
     private VentanaRegistrarVehiculo ventanaRegistrarVehiculo;
     private VentanaRegistarCliente ventanaRegistarCliente;
+    
+     private Locale localizacion;
+    private ResourceBundle recurso;
+
+    
 
     /**
      * Creates new form VentanaRegistrarTicket
@@ -45,6 +52,37 @@ public class VentanaRegistrarTicket extends javax.swing.JInternalFrame {
         this.controladorTicket = controladorTicket;
         this.controladorCliente = controladorCliente;
         this.controladorVehiculo = controladorVehiculo;
+    }
+    
+     public Locale getLocalizacion() {
+        return localizacion;
+    }
+
+    public void setLocalizacion(Locale localizacion) {
+        this.localizacion = localizacion;
+    }
+
+    public ResourceBundle getRecurso() {
+        return recurso;
+    }
+
+    public void setRecurso(ResourceBundle recurso) {
+        this.recurso = recurso;
+    }
+    
+    public void cambiarIdioma (String idioma, String localizacion){
+     labelNumero.setText(recurso.getString("labelNumero"));
+     labelFechaEntrada.setText(recurso.getString("labelFechaDeEntrada"));
+     labelParametroBusqueda.setText(recurso.getString("labelParametroDeBusqueda"));
+     labelSeleccioneParametro.setText(recurso.getString("labelSeleccioneParametro"));
+     radiobtnCedula.setText(recurso.getString("radiobtnCedula"));
+     radiobtnPlaca.setText(recurso.getString("radiobtnPlaca"));
+     btnBuscar.setText(recurso.getString("btnBuscar"));
+     btnEmitir.setText(recurso.getString("btnEmitir"));
+     btnLimpiar.setText(recurso.getString("btnLimpiar"));
+     btnAtras.setText(recurso.getString("btnAtras"));
+     labelMensajeSeleccion.setText(recurso.getString("labelMensajeSeleccion"));
+        
     }
 
     public void ponerFecha() {
@@ -92,14 +130,14 @@ public class VentanaRegistrarTicket extends javax.swing.JInternalFrame {
 
         btnGroupBuscar = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        labelNumero = new javax.swing.JLabel();
+        labelFechaEntrada = new javax.swing.JLabel();
         txtNumero = new javax.swing.JTextField();
         txtFechaEntrada = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
+        labelParametroBusqueda = new javax.swing.JLabel();
         radiobtnCedula = new javax.swing.JRadioButton();
         radiobtnPlaca = new javax.swing.JRadioButton();
-        labelBuscar = new javax.swing.JLabel();
+        labelSeleccioneParametro = new javax.swing.JLabel();
         btnBuscar = new javax.swing.JButton();
         btnAtras = new javax.swing.JButton();
         btnLimpiar = new javax.swing.JButton();
@@ -107,7 +145,7 @@ public class VentanaRegistrarTicket extends javax.swing.JInternalFrame {
         txtFormatedParametro = new javax.swing.JFormattedTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblInformacion = new javax.swing.JTable();
-        labelMensaje = new javax.swing.JLabel();
+        labelMensajeSeleccion = new javax.swing.JLabel();
 
         setClosable(true);
         setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
@@ -131,9 +169,9 @@ public class VentanaRegistrarTicket extends javax.swing.JInternalFrame {
             }
         });
 
-        jLabel1.setText("Número:");
+        labelNumero.setText("Número:");
 
-        jLabel2.setText("Fecha entrada:");
+        labelFechaEntrada.setText("Fecha entrada:");
 
         txtNumero.setEditable(false);
         txtNumero.setBackground(new java.awt.Color(102, 102, 102));
@@ -141,7 +179,7 @@ public class VentanaRegistrarTicket extends javax.swing.JInternalFrame {
         txtFechaEntrada.setEditable(false);
         txtFechaEntrada.setBackground(new java.awt.Color(102, 102, 102));
 
-        jLabel3.setText("Parámetro de busqueda: ");
+        labelParametroBusqueda.setText("Parámetro de busqueda: ");
 
         btnGroupBuscar.add(radiobtnCedula);
         radiobtnCedula.setText("Cédula");
@@ -161,7 +199,7 @@ public class VentanaRegistrarTicket extends javax.swing.JInternalFrame {
             }
         });
 
-        labelBuscar.setText("Seleccione parámetro:");
+        labelSeleccioneParametro.setText("Seleccione parámetro:");
 
         btnBuscar.setBackground(new java.awt.Color(102, 102, 255));
         btnBuscar.setText("Buscar");
@@ -215,10 +253,10 @@ public class VentanaRegistrarTicket extends javax.swing.JInternalFrame {
                         .addComponent(btnAtras))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2)
-                            .addComponent(labelBuscar)
-                            .addComponent(jLabel3))
+                            .addComponent(labelNumero)
+                            .addComponent(labelFechaEntrada)
+                            .addComponent(labelSeleccioneParametro)
+                            .addComponent(labelParametroBusqueda))
                         .addGap(59, 59, 59)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtFormatedParametro, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -236,21 +274,21 @@ public class VentanaRegistrarTicket extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(19, 19, 19)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
+                    .addComponent(labelNumero)
                     .addComponent(txtNumero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
+                    .addComponent(labelFechaEntrada)
                     .addComponent(txtFechaEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(20, 20, 20)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
+                    .addComponent(labelParametroBusqueda)
                     .addComponent(radiobtnCedula))
                 .addGap(12, 12, 12)
                 .addComponent(radiobtnPlaca)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(labelBuscar)
+                    .addComponent(labelSeleccioneParametro)
                     .addComponent(txtFormatedParametro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -286,8 +324,8 @@ public class VentanaRegistrarTicket extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(tblInformacion);
 
-        labelMensaje.setText("Seleccione el vehiculo a asignar el ticket");
-        labelMensaje.setEnabled(false);
+        labelMensajeSeleccion.setText("Seleccione el vehiculo a asignar el ticket");
+        labelMensajeSeleccion.setEnabled(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -297,7 +335,7 @@ public class VentanaRegistrarTicket extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(217, 217, 217)
-                        .addComponent(labelMensaje))
+                        .addComponent(labelMensajeSeleccion))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(25, 25, 25)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -311,7 +349,7 @@ public class VentanaRegistrarTicket extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(12, 12, 12)
-                .addComponent(labelMensaje)
+                .addComponent(labelMensajeSeleccion)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(25, 25, 25))
@@ -341,7 +379,7 @@ public class VentanaRegistrarTicket extends javax.swing.JInternalFrame {
         }
         
         radiobtnPlaca.setSelected(false);
-        labelBuscar.setText("Cédula:");
+        labelSeleccioneParametro.setText("Cédula:");
         txtFormatedParametro.setEditable(true);
 
     }//GEN-LAST:event_radiobtnCedulaActionPerformed
@@ -361,7 +399,7 @@ public class VentanaRegistrarTicket extends javax.swing.JInternalFrame {
         }
 
         radiobtnCedula.setSelected(false);
-        labelBuscar.setText("Placa:");
+        labelSeleccioneParametro.setText("Placa:");
         txtFormatedParametro.setEditable(true);
     }//GEN-LAST:event_radiobtnPlacaActionPerformed
 
@@ -401,7 +439,7 @@ public class VentanaRegistrarTicket extends javax.swing.JInternalFrame {
                         ventanaRegistarCliente.setVisible(true);
                     }
                 } else {
-                    labelMensaje.setEnabled(true);
+                    labelMensajeSeleccion.setEnabled(true);
                     llenartblInformacion(c);
                     btnEmitir.setEnabled(true);
                 }
@@ -415,7 +453,7 @@ public class VentanaRegistrarTicket extends javax.swing.JInternalFrame {
                     }
                 } else {
                     Cliente c = controladorCliente.buscarPorVehiculo(v.getPlaca());
-                    labelMensaje.setEnabled(true);
+                    labelMensajeSeleccion.setEnabled(true);
                     llenartblInformacionPorPlaca(c, v);
                     btnEmitir.setEnabled(true);
                 }
@@ -449,7 +487,7 @@ public class VentanaRegistrarTicket extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnEmitirActionPerformed
 
     public void limpiar() {
-        labelBuscar.setText("Seleccione parámetro:");
+        labelSeleccioneParametro.setText("Seleccione parámetro:");
         btnGroupBuscar.clearSelection();
         radiobtnCedula.setSelected(false);
         radiobtnPlaca.setSelected(false);
@@ -468,13 +506,13 @@ public class VentanaRegistrarTicket extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnEmitir;
     private javax.swing.ButtonGroup btnGroupBuscar;
     private javax.swing.JButton btnLimpiar;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel labelBuscar;
-    private javax.swing.JLabel labelMensaje;
+    private javax.swing.JLabel labelFechaEntrada;
+    private javax.swing.JLabel labelMensajeSeleccion;
+    private javax.swing.JLabel labelNumero;
+    private javax.swing.JLabel labelParametroBusqueda;
+    private javax.swing.JLabel labelSeleccioneParametro;
     private javax.swing.JRadioButton radiobtnCedula;
     private javax.swing.JRadioButton radiobtnPlaca;
     private javax.swing.JTable tblInformacion;
