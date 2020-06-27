@@ -118,7 +118,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             ventanaRegistrarVehiculo.cambiarIdioma(idioma, localidad);
         }if(ventanaListarTickets != null){
         ventanaListarTickets.setRecurso(recurso);
-       // ventanaListarTickets.cambiarIdioma(idioma,localidad);
+        ventanaListarTickets.cambiarIdioma(idioma, localidad);
         }if(ventanaRegistrarTicket != null){
             ventanaRegistrarTicket.setRecurso(recurso);
             ventanaRegistrarTicket.cambiarIdioma(idioma, localidad);
