@@ -20,6 +20,8 @@ public class VentanaListarClientes extends javax.swing.JInternalFrame {
 
     private ControladorCliente controladorCliente;
     private Set<Cliente> clientes;
+    private Locale localizacion;
+    private ResourceBundle recurso;
 
     /**
      * Creates new form VnetanaListarClientes
@@ -29,6 +31,29 @@ public class VentanaListarClientes extends javax.swing.JInternalFrame {
 
         clientes = new HashSet<>();
         this.controladorCliente = controladorCliente;
+    }
+
+    public Locale getLocalizacion() {
+        return localizacion;
+    }
+
+    public void setLocalizacion(Locale localizacion) {
+        this.localizacion = localizacion;
+    }
+
+    public ResourceBundle getRecurso() {
+        return recurso;
+    }
+
+    public void setRecurso(ResourceBundle recurso) {
+        this.recurso = recurso;
+    }
+    
+    public void cambiarIdioma(String idioma, String localizacion){
+    labelCedula.setText(recurso.getString("labelCedula"));
+    btnBuscar.setText(recurso.getString("btnBuscar"));
+    btnLimpiar.setText(recurso.getString("btnLimpiar"));
+    btnAtras.setText(recurso.getString("btnAtras"));
     }
 
     public void llenartblClientes() {
@@ -83,7 +108,7 @@ public class VentanaListarClientes extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        labelCedula = new javax.swing.JLabel();
         txtFormatedCedula = new javax.swing.JFormattedTextField();
         btnBuscar = new javax.swing.JButton();
         btnLimpiar = new javax.swing.JButton();
@@ -113,7 +138,7 @@ public class VentanaListarClientes extends javax.swing.JInternalFrame {
             }
         });
 
-        jLabel1.setText("Cédula:");
+        labelCedula.setText("Cédula:");
 
         btnBuscar.setBackground(new java.awt.Color(102, 102, 255));
         btnBuscar.setText("Buscar");
@@ -144,8 +169,8 @@ public class VentanaListarClientes extends javax.swing.JInternalFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(48, 48, 48)
-                .addComponent(jLabel1)
+                .addGap(43, 43, 43)
+                .addComponent(labelCedula)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(txtFormatedCedula, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(51, 51, 51))
@@ -163,7 +188,7 @@ public class VentanaListarClientes extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(27, 27, 27)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
+                    .addComponent(labelCedula)
                     .addComponent(txtFormatedCedula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -268,9 +293,9 @@ public class VentanaListarClientes extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnAtras;
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnLimpiar;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel labelCedula;
     private javax.swing.JTable tblClientes;
     private javax.swing.JFormattedTextField txtFormatedCedula;
     // End of variables declaration//GEN-END:variables
