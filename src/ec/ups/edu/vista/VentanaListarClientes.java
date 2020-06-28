@@ -48,12 +48,12 @@ public class VentanaListarClientes extends javax.swing.JInternalFrame {
     public void setRecurso(ResourceBundle recurso) {
         this.recurso = recurso;
     }
-    
-    public void cambiarIdioma(String idioma, String localizacion){
-    labelCedula.setText(recurso.getString("labelCedula"));
-    btnBuscar.setText(recurso.getString("btnBuscar"));
-    btnLimpiar.setText(recurso.getString("btnLimpiar"));
-    btnAtras.setText(recurso.getString("btnAtras"));
+
+    public void cambiarIdioma(String idioma, String localizacion) {
+        labelCedula.setText(recurso.getString("labelCedula"));
+        btnBuscar.setText(recurso.getString("btnBuscar"));
+        btnLimpiar.setText(recurso.getString("btnLimpiar"));
+        btnAtras.setText(recurso.getString("btnAtras"));
     }
 
     public void llenartblClientes() {
@@ -96,6 +96,26 @@ public class VentanaListarClientes extends javax.swing.JInternalFrame {
         }
 
         tblClientes.setModel(modelo);
+    }
+
+    public void cambiarJOptionPane1() {
+
+        if (localizacion.getLanguage().equals("es")) {
+            JOptionPane.showMessageDialog(this, "Cliente no encontrado");
+        } else {
+            JOptionPane.showMessageDialog(this, "The customer hasn't been found");
+        }
+
+    }
+
+    public void cambiarJOptionPane2() {
+
+        if (localizacion.getLanguage().equals("es")) {
+            JOptionPane.showMessageDialog(this, "Llene el campo cédula para buscar un cliente");
+        } else {
+            JOptionPane.showMessageDialog(this, "Fill the required field to search a customer");
+        }
+
     }
 
     /**
@@ -277,11 +297,11 @@ public class VentanaListarClientes extends javax.swing.JInternalFrame {
             if (cliente != null) {
                 llenartblClientes(cliente);
             } else {
-                JOptionPane.showMessageDialog(this, "Cliente no encontrado, intentelo otra vez");
+                cambiarJOptionPane1();
             }
 
         } else {
-            JOptionPane.showMessageDialog(this, "Llene el campo de la cédula para buscar el usuario");
+            cambiarJOptionPane2();
         }
     }//GEN-LAST:event_btnBuscarActionPerformed
 

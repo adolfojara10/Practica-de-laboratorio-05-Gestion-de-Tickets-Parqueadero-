@@ -118,6 +118,26 @@ public class VentanaListarTickets extends javax.swing.JInternalFrame {
         tblTickets.setModel(modelo);
     }
 
+    public void cambiarJOptionPane1() {
+
+        if (localizacion.getLanguage().equals("es")) {
+            JOptionPane.showMessageDialog(this, "Llene el campo requerido para buscar un ticket");
+        } else {
+            JOptionPane.showMessageDialog(this, "Fill the required field to search a ticket");
+        }
+
+    }
+
+    public void cambiarJOptionPane2() {
+
+        if (localizacion.getLanguage().equals("es")) {
+            JOptionPane.showMessageDialog(this, "Ticket no encontrado");
+        } else {
+            JOptionPane.showMessageDialog(this, "The ticket hasn't been found");
+        }
+
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -301,11 +321,15 @@ public class VentanaListarTickets extends javax.swing.JInternalFrame {
         String num = txtBuscar.getText();
 
         if (num == null) {
-            JOptionPane.showMessageDialog(this, "Llene el campo del número del ticket para buscar");
+            cambiarJOptionPane1();
         } else {
             int n = Integer.parseInt(num);
             Ticket t = controladorTicket.encontrarTicket(n);
-
+            if (t == null) {
+                cambiarJOptionPane2();
+            } else {
+                llenartblTicektsTicekt(t);
+            }
         }
 
     }//GEN-LAST:event_btnBuscarActionPerformed
