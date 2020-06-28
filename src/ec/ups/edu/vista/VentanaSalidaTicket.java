@@ -29,7 +29,7 @@ public class VentanaSalidaTicket extends javax.swing.JInternalFrame {
     private ControladorTicket controladorTicket;
     private ControladorVehiculo controladorVehiculo;
     private ControladorCliente controladorCliente;
-    
+
     private Locale localizacion;
     private ResourceBundle recurso;
 
@@ -44,8 +44,8 @@ public class VentanaSalidaTicket extends javax.swing.JInternalFrame {
         this.controladorVehiculo = controladorVehiculo;
         this.controladorCliente = controladorCliente;
     }
-    
-     public Locale getLocalizacion() {
+
+    public Locale getLocalizacion() {
         return localizacion;
     }
 
@@ -60,17 +60,18 @@ public class VentanaSalidaTicket extends javax.swing.JInternalFrame {
     public void setRecurso(ResourceBundle recurso) {
         this.recurso = recurso;
     }
-    
-   public void cambiarIdioma(String idioma, String localizacion){
-    labelEscribaNumeroTicked.setText(recurso.getString("labelEscribaNumeroTicked"));
-    labelFechaDeEntrada.setText(recurso.getString("labelFechaDeEntrada"));
-     labelFechaDeSalida.setText(recurso.getString("labelFechaDeSalida"));
-     labelTotalPagar.setText(recurso.getString("labelTiempoDeParqueo"));
-     labelTotalPagar.setText(recurso.getString("labelTotalPagar"));
-     btnBuscar.setText(recurso.getString("btnBuscar"));
-     btnFactura.setText(recurso.getString("btnFactura"));
-     btnLimpiar.setText(recurso.getString("btnLimpiar"));
-     btnAtras.setText(recurso.getString("btnAtras"));
+
+    public void cambiarIdioma(String idioma, String localizacion) {
+        this.setTitle(recurso.getString("tituloSalidaTicket"));
+        labelEscribaNumeroTicked.setText(recurso.getString("labelEscribaNumeroTicked"));
+        labelFechaDeEntrada.setText(recurso.getString("labelFechaDeEntrada"));
+        labelFechaDeSalida.setText(recurso.getString("labelFechaDeSalida"));
+        labelTotalParqueo.setText(recurso.getString("labelTiempoDeParqueo"));
+        labelTotalPagar.setText(recurso.getString("labelTotalPagar"));
+        btnBuscar.setText(recurso.getString("btnBuscar"));
+        btnFactura.setText(recurso.getString("btnFactura"));
+        btnLimpiar.setText(recurso.getString("btnLimpiar"));
+        btnAtras.setText(recurso.getString("btnAtras"));
     }
 
     public void ponerFecha() {
@@ -104,8 +105,8 @@ public class VentanaSalidaTicket extends javax.swing.JInternalFrame {
         txtNumero = new javax.swing.JTextField();
         labelFechaDeEntrada = new javax.swing.JLabel();
         labelFechaDeSalida = new javax.swing.JLabel();
+        labelTotalParqueo = new javax.swing.JLabel();
         labelTotalPagar = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
         txtFechaEntrada = new javax.swing.JTextField();
         txtFechaSalida = new javax.swing.JTextField();
         txtTiempo = new javax.swing.JTextField();
@@ -128,9 +129,9 @@ public class VentanaSalidaTicket extends javax.swing.JInternalFrame {
 
         labelFechaDeSalida.setText("Fecha de salida:");
 
-        labelTotalPagar.setText("Tiempo de parqueo:");
+        labelTotalParqueo.setText("Tiempo de parqueo:");
 
-        jLabel5.setText("Total a pagar:");
+        labelTotalPagar.setText("Total a pagar:");
 
         txtFechaEntrada.setEditable(false);
         txtFechaEntrada.setBackground(new java.awt.Color(102, 102, 102));
@@ -195,8 +196,8 @@ public class VentanaSalidaTicket extends javax.swing.JInternalFrame {
                 .addGap(58, 58, 58)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(labelFechaDeSalida)
+                    .addComponent(labelTotalParqueo)
                     .addComponent(labelTotalPagar)
-                    .addComponent(jLabel5)
                     .addComponent(labelFechaDeEntrada)
                     .addComponent(labelEscribaNumeroTicked))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -225,11 +226,11 @@ public class VentanaSalidaTicket extends javax.swing.JInternalFrame {
                     .addComponent(txtFechaSalida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(labelTotalPagar)
+                    .addComponent(labelTotalParqueo)
                     .addComponent(txtTiempo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(22, 22, 22)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
+                    .addComponent(labelTotalPagar)
                     .addComponent(txtPago, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -378,13 +379,13 @@ public class VentanaSalidaTicket extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnFactura;
     private javax.swing.JButton btnLimpiar;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel labelEscribaNumeroTicked;
     private javax.swing.JLabel labelFechaDeEntrada;
     private javax.swing.JLabel labelFechaDeSalida;
     private javax.swing.JLabel labelTotalPagar;
+    private javax.swing.JLabel labelTotalParqueo;
     private javax.swing.JTable tblSalidaTicket;
     private javax.swing.JTextField txtFechaEntrada;
     private javax.swing.JTextField txtFechaSalida;

@@ -32,11 +32,9 @@ public class VentanaRegistrarTicket extends javax.swing.JInternalFrame {
 
     private VentanaRegistrarVehiculo ventanaRegistrarVehiculo;
     private VentanaRegistarCliente ventanaRegistarCliente;
-    
-     private Locale localizacion;
-    private ResourceBundle recurso;
 
-    
+    private Locale localizacion;
+    private ResourceBundle recurso;
 
     /**
      * Creates new form VentanaRegistrarTicket
@@ -53,8 +51,8 @@ public class VentanaRegistrarTicket extends javax.swing.JInternalFrame {
         this.controladorCliente = controladorCliente;
         this.controladorVehiculo = controladorVehiculo;
     }
-    
-     public Locale getLocalizacion() {
+
+    public Locale getLocalizacion() {
         return localizacion;
     }
 
@@ -69,20 +67,36 @@ public class VentanaRegistrarTicket extends javax.swing.JInternalFrame {
     public void setRecurso(ResourceBundle recurso) {
         this.recurso = recurso;
     }
-    
-    public void cambiarIdioma (String idioma, String localizacion){
-     labelNumero.setText(recurso.getString("labelNumero"));
-     labelFechaEntrada.setText(recurso.getString("labelFechaDeEntrada"));
-     labelParametroBusqueda.setText(recurso.getString("labelParametroDeBusqueda"));
-     labelSeleccioneParametro.setText(recurso.getString("labelSeleccioneParametro"));
-     radiobtnCedula.setText(recurso.getString("radiobtnCedula"));
-     radiobtnPlaca.setText(recurso.getString("radiobtnPlaca"));
-     btnBuscar.setText(recurso.getString("btnBuscar"));
-     btnEmitir.setText(recurso.getString("btnEmitir"));
-     btnLimpiar.setText(recurso.getString("btnLimpiar"));
-     btnAtras.setText(recurso.getString("btnAtras"));
-     labelMensajeSeleccion.setText(recurso.getString("labelMensajeSeleccion"));
-        
+
+    public void cambiarIdioma(String idioma, String localizacion) {
+        this.setTitle(recurso.getString("ventanaRegistrarTicket"));
+        labelNumero.setText(recurso.getString("labelNumero"));
+        labelFechaEntrada.setText(recurso.getString("labelFechaDeEntrada"));
+        labelParametroBusqueda.setText(recurso.getString("labelParametroDeBusqueda"));
+        labelSeleccioneParametro.setText(recurso.getString("labelSeleccioneParametro"));
+        radiobtnCedula.setText(recurso.getString("radiobtnCedula"));
+        radiobtnPlaca.setText(recurso.getString("radiobtnPlaca"));
+        btnBuscar.setText(recurso.getString("btnBuscar"));
+        btnEmitir.setText(recurso.getString("btnEmitir"));
+        btnLimpiar.setText(recurso.getString("btnLimpiar"));
+        btnAtras.setText(recurso.getString("btnAtras"));
+        labelMensajeSeleccion.setText(recurso.getString("labelMensajeSeleccion"));
+
+    }
+
+    public int cambiarJOption(String idioma, String localizacion) {
+
+        int opcion = 0;
+        if (idioma.equals("es")) {
+            Object[] botones = {"Si", "No", "Cancelar"};
+            opcion = JOptionPane.showOptionDialog(this, "Cliente no encontrado, "
+                    + "¿Desea crear un nuevo cliente?", "Mensaje", JOptionPane.YES_NO_CANCEL_OPTION,
+                    JOptionPane.QUESTION_MESSAGE, null, botones, botones[0]);
+        } else {
+            opcion = JOptionPane.showConfirmDialog(this, "Do you want to create a new customer?");
+        }
+
+        return opcion;
     }
 
     public void ponerFecha() {
@@ -377,7 +391,7 @@ public class VentanaRegistrarTicket extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "Formato del número del teléfono erroneo");
             ex.printStackTrace();
         }
-        
+
         radiobtnPlaca.setSelected(false);
         labelSeleccioneParametro.setText("Cédula:");
         txtFormatedParametro.setEditable(true);
@@ -446,8 +460,7 @@ public class VentanaRegistrarTicket extends javax.swing.JInternalFrame {
             } else if (radiobtnPlaca.isSelected()) {
                 Vehiculo v = controladorVehiculo.buscarVehiculo(buscars);
                 if (v == null) {
-                    int op = JOptionPane.showConfirmDialog(this, "Vehiculo no encontrado, "
-                            + "¿desea crear un nuevo vehiculo?");
+                    int op = cambiarJOption(localizacion.getLanguage(), localizacion.getCountry());
                     if (op == JOptionPane.YES_OPTION) {
                         ventanaRegistrarVehiculo.setVisible(true);
                     }

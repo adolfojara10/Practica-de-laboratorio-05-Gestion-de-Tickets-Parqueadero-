@@ -68,8 +68,8 @@
                   <EmptySpace min="-2" pref="58" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="labelFechaDeSalida" min="-2" max="-2" attributes="0"/>
-                      <Component id="labelTotalPagar" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel5" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="labelTotalParqueo" min="-2" max="-2" attributes="0"/>
+                      <Component id="labelTotalPagar" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="labelFechaDeEntrada" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="labelEscribaNumeroTicked" min="-2" max="-2" attributes="0"/>
                   </Group>
@@ -105,12 +105,12 @@
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="labelTotalPagar" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="labelTotalParqueo" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="txtTiempo" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="labelTotalPagar" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="txtPago" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -143,12 +143,12 @@
             <Property name="text" type="java.lang.String" value="Fecha de salida:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="labelTotalPagar">
+        <Component class="javax.swing.JLabel" name="labelTotalParqueo">
           <Properties>
             <Property name="text" type="java.lang.String" value="Tiempo de parqueo:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel5">
+        <Component class="javax.swing.JLabel" name="labelTotalPagar">
           <Properties>
             <Property name="text" type="java.lang.String" value="Total a pagar:"/>
           </Properties>

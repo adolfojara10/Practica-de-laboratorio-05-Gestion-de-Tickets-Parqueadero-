@@ -58,16 +58,34 @@ public class VentanaRegistrarVehiculo extends javax.swing.JInternalFrame {
     }
 
     public void cambiarIdioma(String idioma, String localizacion) {
-   labelPlaca.setText(recurso.getString("labelPlaca"));
-   labelMarca.setText(recurso.getString("labelMarca"));
-   labelModelo.setText(recurso.getString("labelModelo"));
-   labelCedula.setText(recurso.getString("labelCedula"));
-   labelNombre.setText(recurso.getString("labelNombre"));
-   labelTelefono.setText(recurso.getString("labelTelefono"));
-   labelDireccion.setText(recurso.getString("labelDireccion"));
-   btnAgregar.setText(recurso.getString("btnAgregar"));
-   btnBuscar.setText(recurso.getString("btnBuscar"));
-   btnAtras.setText(recurso.getString("btnAtras"));    
+        this.setTitle(recurso.getString("ventanaRegistrarVehiculo"));
+        labelDatosVehiculo.setText(recurso.getString("panelVehiculo"));
+        labelCliente.setText(recurso.getString("panelCliente"));
+        labelPlaca.setText(recurso.getString("labelPlaca"));
+        labelMarca.setText(recurso.getString("labelMarca"));
+        labelModelo.setText(recurso.getString("labelModelo"));
+        labelCedula.setText(recurso.getString("labelCedula"));
+        labelNombre.setText(recurso.getString("labelNombre"));
+        labelTelefono.setText(recurso.getString("labelTelefono"));
+        labelDireccion.setText(recurso.getString("labelDireccion"));
+        btnAgregar.setText(recurso.getString("btnAgregar"));
+        btnBuscar.setText(recurso.getString("btnBuscar"));
+        btnAtras.setText(recurso.getString("btnAtras"));
+    }
+
+    public int cambiarJOption(String idioma, String localizacion) {
+
+        int opcion = 0;
+        if (idioma.equals("es")) {
+            Object[] botones = {"Si", "No", "Cancelar"};
+            opcion = JOptionPane.showOptionDialog(this, "Cliente no encontrado, "
+                    + "¿Desea crear un nuevo cliente?", "Mensaje", JOptionPane.YES_NO_CANCEL_OPTION,
+                    JOptionPane.QUESTION_MESSAGE, null, botones, botones[0]);
+        } else {
+            opcion = JOptionPane.showConfirmDialog(this, "Do you want to create a new customer?");
+        }
+
+        return opcion;
     }
 
     public void llenarTBLClientes() {
@@ -139,6 +157,8 @@ public class VentanaRegistrarVehiculo extends javax.swing.JInternalFrame {
         txtDireccion = new javax.swing.JTextField();
         btnAgregar = new javax.swing.JButton();
         btnAtras = new javax.swing.JButton();
+        labelDatosVehiculo = new javax.swing.JLabel();
+        labelCliente = new javax.swing.JLabel();
 
         setClosable(true);
         setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
@@ -162,7 +182,7 @@ public class VentanaRegistrarVehiculo extends javax.swing.JInternalFrame {
             }
         });
 
-        panelDatosVehiculo.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Datos del vehículo", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Dialog", 0, 12))); // NOI18N
+        panelDatosVehiculo.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Dialog", 0, 12))); // NOI18N
 
         labelPlaca.setText("Placa:");
 
@@ -191,7 +211,7 @@ public class VentanaRegistrarVehiculo extends javax.swing.JInternalFrame {
                     .addComponent(txtFormatedPlaca)
                     .addComponent(txtMarca)
                     .addComponent(txtModelo, javax.swing.GroupLayout.DEFAULT_SIZE, 127, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(93, Short.MAX_VALUE))
         );
         panelDatosVehiculoLayout.setVerticalGroup(
             panelDatosVehiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -208,7 +228,7 @@ public class VentanaRegistrarVehiculo extends javax.swing.JInternalFrame {
                 .addGroup(panelDatosVehiculoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelModelo)
                     .addComponent(txtModelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
 
         tblClientes.setModel(new javax.swing.table.DefaultTableModel(
@@ -241,7 +261,7 @@ public class VentanaRegistrarVehiculo extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(tblClientes);
 
-        panelAñadirCliente.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Añadir a cliente", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Dialog", 0, 12))); // NOI18N
+        panelAñadirCliente.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Dialog", 0, 12))); // NOI18N
 
         labelCedula.setText("Cédula:");
 
@@ -334,22 +354,28 @@ public class VentanaRegistrarVehiculo extends javax.swing.JInternalFrame {
             }
         });
 
+        labelDatosVehiculo.setText("Información del Vehículo");
+
+        labelCliente.setText("Añadir a");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(66, 66, 66)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(136, 136, 136)
+                        .addGap(66, 66, 66)
                         .addComponent(btnAgregar)
-                        .addGap(129, 129, 129)
+                        .addGap(152, 152, 152)
                         .addComponent(btnAtras))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(66, 66, 66)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(panelDatosVehiculo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(panelAñadirCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(panelDatosVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(labelDatosVehiculo)
+                            .addComponent(panelAñadirCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(labelCliente))
                         .addGap(50, 50, 50)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(66, Short.MAX_VALUE))
@@ -357,18 +383,25 @@ public class VentanaRegistrarVehiculo extends javax.swing.JInternalFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(labelDatosVehiculo)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(panelDatosVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(panelAñadirCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(labelCliente)
+                        .addGap(4, 4, 4)
+                        .addComponent(panelAñadirCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10, 10, 10)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAtras)
-                    .addComponent(btnAgregar))
-                .addContainerGap(19, Short.MAX_VALUE))
+                    .addComponent(btnAgregar)
+                    .addComponent(btnAtras))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -384,8 +417,17 @@ public class VentanaRegistrarVehiculo extends javax.swing.JInternalFrame {
         } else {
             Cliente c = controladorCliente.buscarCliente(cedulas);
             if (c == null) {
-                int opcion = JOptionPane.showConfirmDialog(this, "Cliente no encontrado, "
-                        + "¿Desea crear un nuevo cliente?");
+                System.out.println(localizacion.getLanguage() + localizacion.getCountry());
+                int opcion = cambiarJOption(localizacion.getLanguage(), localizacion.getCountry());
+               /* if (localizacion.getDisplayLanguage().equals("es")) {
+                    Object[] botones = {"Si", "No", "Cancelar"};
+                    opcion = JOptionPane.showOptionDialog(this, "Cliente no encontrado, "
+                            + "¿Desea crear un nuevo cliente?", "Mensaje", JOptionPane.YES_NO_CANCEL_OPTION,
+                            JOptionPane.QUESTION_MESSAGE, null, botones, botones[0]);
+                } else {
+                    opcion = JOptionPane.showConfirmDialog(this, "Do you want to create a new customer?");
+                }*/
+
                 if (opcion == JOptionPane.YES_OPTION) {
                     ventanaRegistarCliente.setVisible(true);
                     this.hide();
@@ -412,16 +454,21 @@ public class VentanaRegistrarVehiculo extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "LLene todos los campos para crear "
                     + "y agregar el vehiculo a un cliente");
         } else {
-            Vehiculo ve = controladorVehiculo.crearVehiculo(placas, marcas, modelos);
-            System.out.println(ve);
+            Cliente c = controladorCliente.buscarCliente(cedulas);
+            if (c != null) {
+                Vehiculo ve = controladorVehiculo.crearVehiculo(placas, marcas, modelos);
+                System.out.println(ve);
 
-            if (ve == null) {
-                JOptionPane.showMessageDialog(this, "El vehículo ya existe");
+                if (ve == null) {
+                    JOptionPane.showMessageDialog(this, "El vehículo ya existe");
+                } else {
+                    controladorCliente.agregarVehiculo(ve, cedulas);
+                    JOptionPane.showMessageDialog(this, "¡Vehiculo agregado con exito!");
+                    limpiar();
+                    this.hide();
+                }
             } else {
-                controladorCliente.agregarVehiculo(ve, cedulas);
-                JOptionPane.showMessageDialog(this, "¡Vehiculo agregado con exito!");
-                limpiar();
-                this.hide();
+                JOptionPane.showMessageDialog(this, "Seleccione el usuario antes de crear un vehiculo");
             }
             /*
             controladorCliente.agregarVehiculo(ve, cedulas);
@@ -485,6 +532,8 @@ public class VentanaRegistrarVehiculo extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnBuscar;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel labelCedula;
+    private javax.swing.JLabel labelCliente;
+    private javax.swing.JLabel labelDatosVehiculo;
     private javax.swing.JLabel labelDireccion;
     private javax.swing.JLabel labelMarca;
     private javax.swing.JLabel labelModelo;
