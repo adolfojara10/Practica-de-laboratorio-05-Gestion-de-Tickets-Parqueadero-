@@ -87,7 +87,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         //
         localizacion = new Locale(idioma, localidad);
         recurso = ResourceBundle.getBundle("ec.ups.edu.idioma.mensaje", localizacion);
-        
+
         this.setTitle(recurso.getString("ventanaPrincipal"));
         //JmenuInicio
         menuInicio.setText(recurso.getString("menuInicio"));
@@ -110,8 +110,32 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         //JmenusItem de el JmenuIdiomas
         menuItemIdiomasEspañol.setText(recurso.getString("español"));
         menuItemIdiomasIngles.setText(recurso.getString("ingles"));
-
         ventanaRegistrarVehiculo.setTitle(recurso.getString("tituloCliente"));
+
+        //ventana listar clientes
+        if (ventanaListarClientes != null) {
+            ventanaListarClientes.setRecurso(recurso);
+            ventanaListarClientes.cambiarIdioma(idioma, localidad);
+        }
+
+        //ventanan listar Ticket
+        if (ventanaListarTickets != null) {
+            ventanaListarTickets.setRecurso(recurso);
+            ventanaListarTickets.cambiarIdioma(idioma, localidad);
+        }
+
+        // ventana registrar cliente
+        if (ventanaRegistrarCliente != null) {
+            ventanaRegistrarCliente.setRecurso(recurso);
+            ventanaRegistrarCliente.cambiarIdioma(idioma, localidad);
+        }
+
+         //ventana registrar Ticket
+        if (ventanaRegistrarTicket != null) {
+            ventanaRegistrarTicket.setRecurso(recurso);
+            ventanaRegistrarTicket.setLocalizacion(localizacion);
+            ventanaRegistrarTicket.cambiarIdioma(idioma, localidad);
+        }
 
         //Ventana Registrar Vehiculo
         if (ventanaRegistrarVehiculo != null) {
@@ -119,19 +143,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             ventanaRegistrarVehiculo.setLocalizacion(localizacion);
             ventanaRegistrarVehiculo.cambiarIdioma(idioma, localidad);
         }
-        if (ventanaListarTickets != null) {
-            ventanaListarTickets.setRecurso(recurso);
-            ventanaListarTickets.cambiarIdioma(idioma, localidad);
-        }
-        if (ventanaRegistrarTicket != null) {
-            ventanaRegistrarTicket.setRecurso(recurso);
-            ventanaRegistrarTicket.setLocalizacion(localizacion);
-            ventanaRegistrarTicket.cambiarIdioma(idioma, localidad);
-        }
-        if (ventanaRegistrarCliente != null) {
-            ventanaRegistrarCliente.setRecurso(recurso);
-            ventanaRegistrarCliente.cambiarIdioma(idioma, localidad);
-        }
+
+        //ventana  salida de ticket
         if (ventanaSalidaTicket != null) {
             ventanaSalidaTicket.setRecurso(recurso);
             ventanaSalidaTicket.cambiarIdioma(idioma, localidad);
