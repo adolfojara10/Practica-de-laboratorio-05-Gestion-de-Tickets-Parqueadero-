@@ -84,7 +84,7 @@ public class VentanaRegistrarTicket extends javax.swing.JInternalFrame {
 
     }
 
-    public int cambiarJOption(String idioma, String localizacion) {
+    public int cambiarJOptionCliente(String idioma, String localizacion) {
 
         int opcion = 0;
         if (idioma.equals("es")) {
@@ -93,7 +93,24 @@ public class VentanaRegistrarTicket extends javax.swing.JInternalFrame {
                     + "¿Desea crear un nuevo cliente?", "Mensaje", JOptionPane.YES_NO_CANCEL_OPTION,
                     JOptionPane.QUESTION_MESSAGE, null, botones, botones[0]);
         } else {
-            opcion = JOptionPane.showConfirmDialog(this, "Do you want to create a new customer?");
+            opcion = JOptionPane.showConfirmDialog(this, "The Customer hasn't been found,"
+                    + " do you want to create a new customer?");
+        }
+
+        return opcion;
+    }
+
+    public int cambiarJOptionVehiculo(String idioma, String localizacion) {
+
+        int opcion = 0;
+        if (idioma.equals("es")) {
+            Object[] botones = {"Si", "No", "Cancelar"};
+            opcion = JOptionPane.showOptionDialog(this, "Vehiculo no encontrado, "
+                    + "¿Desea crear un nuevo vehiculo?", "Mensaje", JOptionPane.YES_NO_CANCEL_OPTION,
+                    JOptionPane.QUESTION_MESSAGE, null, botones, botones[0]);
+        } else {
+            opcion = JOptionPane.showConfirmDialog(this, "The Car hasn't been found, "
+                    + "do you want to create a new car?");
         }
 
         return opcion;
@@ -133,6 +150,41 @@ public class VentanaRegistrarTicket extends javax.swing.JInternalFrame {
         tblInformacion.setModel(modelo);
     }
 
+    public void cambiarJOptionPane1() {
+
+        if (localizacion.getLanguage().equals("es")) {
+            JOptionPane.showMessageDialog(this, "Llene el campo requerido para buscar un cliente o un vehiculo");
+        } else {
+            JOptionPane.showMessageDialog(this, "Fill the required field to search a customer or a car");
+        }
+
+    }
+
+    public void cambiarJOptionPane2() {
+
+        if (localizacion.getLanguage().equals("es")) {
+            JOptionPane.showMessageDialog(this, "Ticket emitido con exito");
+        } else {
+            JOptionPane.showMessageDialog(this, "The ticket has been issued with succes");
+        }
+
+    }
+
+    /*
+    public int cambiarJOption(String idioma, String localizacion) {
+
+        int opcion = 0;
+        if (idioma.equals("es")) {
+            Object[] botones = {"Si", "No", "Cancelar"};
+            opcion = JOptionPane.showOptionDialog(this, "Cliente no encontrado, "
+                    + "¿Desea crear un nuevo cliente?", "Mensaje", JOptionPane.YES_NO_CANCEL_OPTION,
+                    JOptionPane.QUESTION_MESSAGE, null, botones, botones[0]);
+        } else {
+            opcion = JOptionPane.showConfirmDialog(this, "Do you want to create a new customer?");
+        }
+
+        return opcion;
+    }*/
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -388,7 +440,7 @@ public class VentanaRegistrarTicket extends javax.swing.JInternalFrame {
                     )
             );
         } catch (java.text.ParseException ex) {
-            JOptionPane.showMessageDialog(this, "Formato del número del teléfono erroneo");
+            JOptionPane.showMessageDialog(this, "Formato del número de cedula erroneo");
             ex.printStackTrace();
         }
 
@@ -408,7 +460,7 @@ public class VentanaRegistrarTicket extends javax.swing.JInternalFrame {
                     )
             );
         } catch (java.text.ParseException ex) {
-            JOptionPane.showMessageDialog(this, "Formato del número del teléfono erroneo");
+            JOptionPane.showMessageDialog(this, "Formato del número de placa erroneo");
             ex.printStackTrace();
         }
 
@@ -441,16 +493,16 @@ public class VentanaRegistrarTicket extends javax.swing.JInternalFrame {
         String fecha = txtFechaEntrada.getText();
 
         if (buscars == null) {
-            JOptionPane.showMessageDialog(this, "Llene el campo requerido para buscar un vehiculo o cliente");
+            cambiarJOptionPane1();
 
         } else {
             if (radiobtnCedula.isSelected()) {
                 Cliente c = controladorCliente.buscarCliente(buscars);
                 if (c == null) {
-                    int op = JOptionPane.showConfirmDialog(this, "Cliente no encontrado, "
-                            + "¿desea crear un nuevo cliente?");
+                    int op = cambiarJOptionCliente(localizacion.getLanguage(), localizacion.getCountry());
                     if (op == JOptionPane.YES_OPTION) {
                         ventanaRegistarCliente.setVisible(true);
+                        this.hide();
                     }
                 } else {
                     labelMensajeSeleccion.setEnabled(true);
@@ -460,9 +512,10 @@ public class VentanaRegistrarTicket extends javax.swing.JInternalFrame {
             } else if (radiobtnPlaca.isSelected()) {
                 Vehiculo v = controladorVehiculo.buscarVehiculo(buscars);
                 if (v == null) {
-                    int op = cambiarJOption(localizacion.getLanguage(), localizacion.getCountry());
+                    int op = cambiarJOptionVehiculo(localizacion.getLanguage(), localizacion.getCountry());
                     if (op == JOptionPane.YES_OPTION) {
                         ventanaRegistrarVehiculo.setVisible(true);
+                        this.hide();
                     }
                 } else {
                     Cliente c = controladorCliente.buscarPorVehiculo(v.getPlaca());
@@ -493,7 +546,7 @@ public class VentanaRegistrarTicket extends javax.swing.JInternalFrame {
         Cliente c = controladorCliente.buscarCliente(cedulas);
 
         controladorCliente.actualizarVehiculo(c, ve);
-        JOptionPane.showMessageDialog(this, "¡Ticket emitido con exito!");
+        cambiarJOptionPane2();
 
         limpiar();
         this.hide();

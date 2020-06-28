@@ -91,6 +91,36 @@ public class VentanaSalidaTicket extends javax.swing.JInternalFrame {
         tblSalidaTicket.setModel(modelo);
     }
 
+    public void cambiarJOptionPane1() {
+
+        if (localizacion.getLanguage().equals("es")) {
+            JOptionPane.showMessageDialog(this, "Llene el campo requerido para buscar el ticket");
+        } else {
+            JOptionPane.showMessageDialog(this, "Fill the required field to search a ticket");
+        }
+
+    }
+
+    public void cambiarJOptionPane2() {
+
+        if (localizacion.getLanguage().equals("es")) {
+            JOptionPane.showMessageDialog(this, "Ticket no encontrado, intentelo otra vez");
+        } else {
+            JOptionPane.showMessageDialog(this, "The ticket hasn't been found, try it again");
+        }
+
+    }
+    
+      public void cambiarJOptionPane3() {
+
+        if (localizacion.getLanguage().equals("es")) {
+            JOptionPane.showMessageDialog(this, "Factura emitida con exito");
+        } else {
+            JOptionPane.showMessageDialog(this, "The bill has been issued with success");
+        }
+
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -296,12 +326,12 @@ public class VentanaSalidaTicket extends javax.swing.JInternalFrame {
         String num = txtNumero.getText();
 
         if (num == null) {
-            JOptionPane.showMessageDialog(this, "Llene el campo de número para buscar un ticket");
+            cambiarJOptionPane1();
         } else {
             int num2 = Integer.parseInt(num);
             Ticket t = controladorTicket.encontrarTicket(num2);
             if (t == null) {
-                JOptionPane.showMessageDialog(this, "Ticket no encontrado, intentelo otra vez");
+                cambiarJOptionPane2();
             } else {
                 txtFechaEntrada.setText(t.getFechaEntrada().toString());
                 ponerFecha();
@@ -343,7 +373,7 @@ public class VentanaSalidaTicket extends javax.swing.JInternalFrame {
 
         controladorCliente.actualizarVehiculo(c, ve);
 
-        JOptionPane.showMessageDialog(this, "Factura emitida con exito");
+        cambiarJOptionPane3();
         limpiar();
         this.hide();
     }//GEN-LAST:event_btnFacturaActionPerformed

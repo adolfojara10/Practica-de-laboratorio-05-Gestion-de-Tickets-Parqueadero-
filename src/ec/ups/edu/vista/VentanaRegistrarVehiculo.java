@@ -113,6 +113,56 @@ public class VentanaRegistrarVehiculo extends javax.swing.JInternalFrame {
         tblClientes.setModel(modelo);
     }
 
+    public void cambiarJOptionPane1() {
+
+        if (localizacion.getLanguage().equals("es")) {
+            JOptionPane.showMessageDialog(this, "Llene el campo cedula para buscar un cliente");
+        } else {
+            JOptionPane.showMessageDialog(this, "Fill the field ID to search a customer");
+        }
+
+    }
+
+    public void cambiarJOptionPane2() {
+
+        if (localizacion.getLanguage().equals("es")) {
+            JOptionPane.showMessageDialog(this, "Llene todos los requerimientos para crear un nuevo vehiculo");
+        } else {
+            JOptionPane.showMessageDialog(this, "Fill all the fields to create a new car");
+        }
+
+    }
+
+    public void cambiarJOptionPane3() {
+
+        if (localizacion.getLanguage().equals("es")) {
+            JOptionPane.showMessageDialog(this, "El vehiculo ya existe");
+        } else {
+            JOptionPane.showMessageDialog(this, "The car is already in the system");
+        }
+
+    }
+
+    public void cambiarJOptionPane4() {
+
+        if (localizacion.getLanguage().equals("es")) {
+            JOptionPane.showMessageDialog(this, "Vehiculo creado con exito");
+        } else {
+            JOptionPane.showMessageDialog(this, "The car has been created with success");
+        }
+
+    }
+    
+      public void cambiarJOptionPane5() {
+
+        if (localizacion.getLanguage().equals("es")) {
+            JOptionPane.showMessageDialog(this, "Seleccione un cliente para añadir el vehiculo");
+        } else {
+            JOptionPane.showMessageDialog(this, "Choose a customer to add the new car");
+        }
+
+    }
+
     /*
     public void cambiarIdioma(String idioma, String localizacion) {
        // placa.setText(recurso.getString("placa"));
@@ -413,13 +463,13 @@ public class VentanaRegistrarVehiculo extends javax.swing.JInternalFrame {
         String cedulas = txtCedula.getText();
 
         if (cedulas.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "LLene el campo de cédula para buscar un cliente");
+            cambiarJOptionPane1();
         } else {
             Cliente c = controladorCliente.buscarCliente(cedulas);
             if (c == null) {
                 System.out.println(localizacion.getLanguage() + localizacion.getCountry());
                 int opcion = cambiarJOption(localizacion.getLanguage(), localizacion.getCountry());
-               /* if (localizacion.getDisplayLanguage().equals("es")) {
+                /* if (localizacion.getDisplayLanguage().equals("es")) {
                     Object[] botones = {"Si", "No", "Cancelar"};
                     opcion = JOptionPane.showOptionDialog(this, "Cliente no encontrado, "
                             + "¿Desea crear un nuevo cliente?", "Mensaje", JOptionPane.YES_NO_CANCEL_OPTION,
@@ -451,8 +501,7 @@ public class VentanaRegistrarVehiculo extends javax.swing.JInternalFrame {
         String cedulas = txtCedula.getText();
 
         if (placas.isEmpty() || marcas.isEmpty() || modelos.isEmpty() || cedulas.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "LLene todos los campos para crear "
-                    + "y agregar el vehiculo a un cliente");
+            cambiarJOptionPane2();
         } else {
             Cliente c = controladorCliente.buscarCliente(cedulas);
             if (c != null) {
@@ -460,15 +509,15 @@ public class VentanaRegistrarVehiculo extends javax.swing.JInternalFrame {
                 System.out.println(ve);
 
                 if (ve == null) {
-                    JOptionPane.showMessageDialog(this, "El vehículo ya existe");
+                    cambiarJOptionPane3();
                 } else {
                     controladorCliente.agregarVehiculo(ve, cedulas);
-                    JOptionPane.showMessageDialog(this, "¡Vehiculo agregado con exito!");
+                    cambiarJOptionPane4();
                     limpiar();
                     this.hide();
                 }
             } else {
-                JOptionPane.showMessageDialog(this, "Seleccione el usuario antes de crear un vehiculo");
+                cambiarJOptionPane5();
             }
             /*
             controladorCliente.agregarVehiculo(ve, cedulas);

@@ -15,7 +15,7 @@ import javax.swing.JOptionPane;
  * @author Adolfo
  */
 public class VentanaRegistarCliente extends javax.swing.JInternalFrame {
-    
+
     private ControladorCliente controladorCliente;
     private List<String> operadoras;
     private Locale localizacion;
@@ -30,26 +30,26 @@ public class VentanaRegistarCliente extends javax.swing.JInternalFrame {
         initComponents();
         cargarDatosOperadora();
         formatearNumeroCasa();
-        
+
         this.controladorCliente = controladorCliente;
     }
-    
+
     public Locale getLocalizacion() {
         return localizacion;
     }
-    
+
     public void setLocalizacion(Locale localizacion) {
         this.localizacion = localizacion;
     }
-    
+
     public ResourceBundle getRecurso() {
         return recurso;
     }
-    
+
     public void setRecurso(ResourceBundle recurso) {
         this.recurso = recurso;
     }
-    
+
     public void cambiarIdioma(String idioma, String localizacion) {
         this.setTitle(recurso.getString("ventanaRegistrarCliente"));
         labelDatos.setText(recurso.getString("panelDatos"));
@@ -65,7 +65,7 @@ public class VentanaRegistarCliente extends javax.swing.JInternalFrame {
         labelCalleSecundaria.setText(recurso.getString("labelCalleSecundaria"));
         btnCrear.setText(recurso.getString("btnCrear"));
         btnAtras.setText(recurso.getString("btnAtras"));
-        
+
     }
 
     public void cargarDatosOperadora() {
@@ -77,20 +77,20 @@ public class VentanaRegistarCliente extends javax.swing.JInternalFrame {
         operadoras.add("CNT");
         operadoras.add("Tuenti");
         operadoras.add("Etapa");
-        
+
         cargarCBXOperadora();
-        
+
     }
-    
+
     public void cargarCBXOperadora() {
-        
+
         DefaultComboBoxModel modelo = (DefaultComboBoxModel) cbxOperadora.getModel();
         for (String opera : operadoras) {
             modelo.addElement(opera);
         }
-        
+
     }
-    
+
     public void formatearNumeroCasa() {
         try {
             txtFormattedNumeroCasa.setFormatterFactory(
@@ -102,7 +102,37 @@ public class VentanaRegistarCliente extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "Formato del número de la casa erroneo");
             ex.printStackTrace();
         }
-        
+
+    }
+
+    public void cambiarJOptionPane1() {
+
+        if (localizacion.getLanguage().equals("es")) {
+            JOptionPane.showMessageDialog(this, "Llene todos los requerimientos para crear un nuevo cliente");
+        } else {
+            JOptionPane.showMessageDialog(this, "Fill all the fields to create a new customer");
+        }
+
+    }
+
+    public void cambiarJOptionPane2() {
+
+        if (localizacion.getLanguage().equals("es")) {
+            JOptionPane.showMessageDialog(this, "Cliente creado con exito");
+        } else {
+            JOptionPane.showMessageDialog(this, "The new customer has been registered with success");
+        }
+
+    }
+
+    public void cambiarJOptionPane3() {
+
+        if (localizacion.getLanguage().equals("es")) {
+            JOptionPane.showMessageDialog(this, "El cliente ya existe");
+        } else {
+            JOptionPane.showMessageDialog(this, "The customer is already in the sytem");
+        }
+
     }
 
     /**
@@ -383,14 +413,14 @@ public class VentanaRegistarCliente extends javax.swing.JInternalFrame {
                                 new javax.swing.text.MaskFormatter("(593)#-####-###")
                         )
                 );
-                
+
             } else if (item.equals("Celular")) {
                 txtFormattedNumero.setFormatterFactory(
                         new javax.swing.text.DefaultFormatterFactory(
                                 new javax.swing.text.MaskFormatter("(593)###-###-###")
                         )
                 );
-                
+
             } else {
                 txtFormattedNumero.setFormatterFactory(
                         new javax.swing.text.DefaultFormatterFactory(
@@ -415,20 +445,20 @@ public class VentanaRegistarCliente extends javax.swing.JInternalFrame {
         String calleP = txtCallePrincipal.getText();
         String calleS = txtCalleSecundaria.getText();
         String numeroC = txtFormattedNumeroCasa.getText();
-        
+
         if (nombre.isEmpty() || apellido.isEmpty() || cedula.isEmpty() || tipo.equals("Seleccione") || numeroT.isEmpty()
                 || operadora.isEmpty() || calleP.isEmpty() || calleS.isEmpty() || numeroC.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Llene todos los campos para crear un nuevo cliente");
+            cambiarJOptionPane1();
         } else {
             String nombreCompleto = nombre.concat(apellido);
             boolean verdad = controladorCliente.crearCliente(cedula, nombreCompleto,
                     tipo, numeroT, operadora, calleP, calleS, numeroC);
             if (verdad) {
-                JOptionPane.showMessageDialog(this, "Cliente creado con exito");
+                cambiarJOptionPane2();
                 this.hide();
                 limpiar();
             } else {
-                JOptionPane.showMessageDialog(this, "El cliente ya existe");
+                cambiarJOptionPane3();
             }
         }
     }//GEN-LAST:event_btnCrearActionPerformed
@@ -438,7 +468,7 @@ public class VentanaRegistarCliente extends javax.swing.JInternalFrame {
         this.hide();
         limpiar();
     }//GEN-LAST:event_btnAtrasActionPerformed
-    
+
     public void limpiar() {
         txtNombre.setText("");
         txtApellido.setText("");

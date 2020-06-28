@@ -71,6 +71,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         desktopPane.add(ventanaRegistrarVehiculo);
         desktopPane.add(ventanaSalidaTicket);
         desktopPane.add(ventanaListarTickets);
+        desktopPane.add(ventanaListarClientes);
 
     }
 
@@ -80,6 +81,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         ventanaRegistrarVehiculo.setVisible(false);
         ventanaSalidaTicket.setVisible(false);
         ventanaListarTickets.setVisible(false);
+        ventanaListarClientes.setVisible(false);
 
     }
 
@@ -102,7 +104,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         menuListar.setText(recurso.getString("menuListar"));
         //JmenuItems de el JmenuListar
         menuItemListarClientes.setText(recurso.getString("listarClientes"));
-        menuItemListarVehiculos.setText(recurso.getString("listarVehiculos"));
+       // menuItemListarVehiculos.setText(recurso.getString("listarVehiculos"));
         menuItemListarTickets.setText(recurso.getString("listarTickets"));
 
         //JmenuIdiomas
@@ -115,18 +117,21 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         //ventana listar clientes
         if (ventanaListarClientes != null) {
             ventanaListarClientes.setRecurso(recurso);
+            ventanaListarClientes.setLocalizacion(localizacion);
             ventanaListarClientes.cambiarIdioma(idioma, localidad);
         }
 
         //ventanan listar Ticket
         if (ventanaListarTickets != null) {
             ventanaListarTickets.setRecurso(recurso);
+            ventanaListarTickets.setLocalizacion(localizacion);
             ventanaListarTickets.cambiarIdioma(idioma, localidad);
         }
 
         // ventana registrar cliente
         if (ventanaRegistrarCliente != null) {
             ventanaRegistrarCliente.setRecurso(recurso);
+            ventanaRegistrarCliente.setLocalizacion(localizacion);
             ventanaRegistrarCliente.cambiarIdioma(idioma, localidad);
         }
 
@@ -147,6 +152,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         //ventana  salida de ticket
         if (ventanaSalidaTicket != null) {
             ventanaSalidaTicket.setRecurso(recurso);
+            ventanaSalidaTicket.setLocalizacion(localizacion);
             ventanaSalidaTicket.cambiarIdioma(idioma, localidad);
         }
 
@@ -171,7 +177,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         menuItemExit = new javax.swing.JMenuItem();
         menuListar = new javax.swing.JMenu();
         menuItemListarClientes = new javax.swing.JMenuItem();
-        menuItemListarVehiculos = new javax.swing.JMenuItem();
         menuItemListarTickets = new javax.swing.JMenuItem();
         menuIdiomas = new javax.swing.JMenu();
         menuItemIdiomasEspañol = new javax.swing.JMenuItem();
@@ -241,11 +246,12 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         menuItemListarClientes.setMnemonic('t');
         menuItemListarClientes.setText("Clientes");
+        menuItemListarClientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItemListarClientesActionPerformed(evt);
+            }
+        });
         menuListar.add(menuItemListarClientes);
-
-        menuItemListarVehiculos.setMnemonic('y');
-        menuItemListarVehiculos.setText("Vehiculos");
-        menuListar.add(menuItemListarVehiculos);
 
         menuItemListarTickets.setMnemonic('p');
         menuItemListarTickets.setText("Tickets");
@@ -340,6 +346,12 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         ventanaListarTickets.setVisible(true);
     }//GEN-LAST:event_menuItemListarTicketsActionPerformed
 
+    private void menuItemListarClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemListarClientesActionPerformed
+        // TODO add your handling code here:
+        cerrarVentanas();
+        ventanaListarClientes.setVisible(true);
+    }//GEN-LAST:event_menuItemListarClientesActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -386,7 +398,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem menuItemIdiomasIngles;
     private javax.swing.JMenuItem menuItemListarClientes;
     private javax.swing.JMenuItem menuItemListarTickets;
-    private javax.swing.JMenuItem menuItemListarVehiculos;
     private javax.swing.JMenuItem menuItemRegistrarCliente;
     private javax.swing.JMenuItem menuItemRegistrarVehiculo;
     private javax.swing.JMenuItem menuItemSalidaTicket;
