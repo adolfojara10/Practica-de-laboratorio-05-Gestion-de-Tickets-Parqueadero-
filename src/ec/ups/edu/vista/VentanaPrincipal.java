@@ -38,6 +38,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private VentanaSalidaTicket ventanaSalidaTicket;
 
     private VentanaListarTickets ventanaListarTickets;
+    private VentanaListarClientes ventanaListarClientes;
 
     /**
      * Creates new form VentanaPrincipal
@@ -63,6 +64,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         ventanaListarTickets = new VentanaListarTickets(controladorCliente, controladorVehiculo,
                 controladorTicket);
+        ventanaListarClientes = new VentanaListarClientes(controladorCliente);
 
         desktopPane.add(ventanaRegistrarCliente);
         desktopPane.add(ventanaRegistrarTicket);
