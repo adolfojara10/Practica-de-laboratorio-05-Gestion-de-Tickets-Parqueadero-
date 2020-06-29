@@ -109,7 +109,7 @@ public class ClienteDAO implements IClienteDAO {
                 if (ve.getPlaca().equals(placa)) {
                     return c;
                 }
-                break;
+
             }
         }
         return null;

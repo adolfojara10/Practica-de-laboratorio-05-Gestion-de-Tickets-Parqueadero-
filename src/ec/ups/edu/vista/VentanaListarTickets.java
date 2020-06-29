@@ -11,6 +11,7 @@ import ec.ups.edu.controlador.ControladorVehiculo;
 import ec.ups.edu.modelo.Cliente;
 import ec.ups.edu.modelo.Ticket;
 import ec.ups.edu.modelo.Vehiculo;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Locale;
@@ -105,13 +106,16 @@ public class VentanaListarTickets extends javax.swing.JInternalFrame {
         Iterator<Ticket> it = tickets.iterator();
         while (it.hasNext()) {
             Ticket t = it.next();
+            
             Vehiculo ve = controladorVehiculo.buscarPorTicket(t);
             Cliente c = controladorCliente.buscarPorVehiculo(ve.getPlaca());
 
-            Object[] rowData = {"##", t.getFechaEntrada(), t.getFechaSalida(),
+            Object[] rowData = {"#", t.getFechaEntrada(), t.getFechaSalida(),
                 t.getTiempo(), t.getTotal(), ve.getPlaca(), ve.getModelo(), ve.getMarca(),
                 c.getNombre(), c.getCedula(), c.getTelefono().getNumero(), c.getDireccion().toString()};
-
+            
+            System.out.println(Arrays.toString(rowData));
+            
             modelo.addRow(rowData);
 
         }
@@ -333,6 +337,7 @@ public class VentanaListarTickets extends javax.swing.JInternalFrame {
     private void formInternalFrameClosed(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosed
         // TODO add your handling code here:
         limpiar();
+        llenartblTickets();
     }//GEN-LAST:event_formInternalFrameClosed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed

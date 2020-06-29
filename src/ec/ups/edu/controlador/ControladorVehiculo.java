@@ -34,6 +34,10 @@ public class ControladorVehiculo {
         return null;
     }
 
+    public Vehiculo agregarTicket(Vehiculo vehiculo, Ticket ticket){
+        vehiculo.agregarTicket(ticket);
+        return vehiculo;
+    }
     public Vehiculo actualizarVehiculo(Vehiculo vehiculo, Ticket ticket) {
         vehiculo.actualizarTicket(ticket);
         return vehiculo;

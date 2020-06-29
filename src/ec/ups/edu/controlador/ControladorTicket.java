@@ -41,7 +41,7 @@ public class ControladorTicket {
 
         ticket = new Ticket(numero, entrada);
         ticketDAO.create(ticket);
-
+        
         return ticket;
     }
 
@@ -83,8 +83,9 @@ public class ControladorTicket {
         if (tiempoMinutos >= 1440) {
             int dia = tiempoMinutos / 1440;
             String dias = dia + "" + "d";
-            int horas = ((tiempoMinutos / 1440) - dia) * 60;
-            int minutos = (((tiempoMinutos / 60) - horas)) * 60;
+            int horas = ((tiempoMinutos / 1440) - dia) * 24;
+            double mins = ((tiempoMinutos / 1440) - dia) * 60;
+            int minutos = (int) ((mins - horas)) * 60;
             String hour = horas + "" + "h;";
             String minute = minutos + "" + "min";
             String total = dias + " " + hour + " " + minute;

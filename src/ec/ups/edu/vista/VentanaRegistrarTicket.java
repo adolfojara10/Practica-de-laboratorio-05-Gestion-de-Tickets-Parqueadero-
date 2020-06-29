@@ -84,10 +84,10 @@ public class VentanaRegistrarTicket extends javax.swing.JInternalFrame {
         btnLimpiar.setText(recurso.getString("btnLimpiar"));
         btnAtras.setText(recurso.getString("btnAtras"));
         labelMensajeSeleccion.setText(recurso.getString("labelMensajeSeleccion"));
-        
+
         Object[] columnas = {recurso.getString("labelNombre"), recurso.getString("labelCedula"),
             recurso.getString("labelPlaca"), recurso.getString("labelMarca"), recurso.getString("labelModelo")};
-        
+
         for (int i = 0; i < columnas.length; i++) {
             JTableHeader head = tblInformacion.getTableHeader();
             TableColumnModel columnaModelo = head.getColumnModel();
@@ -532,9 +532,11 @@ public class VentanaRegistrarTicket extends javax.swing.JInternalFrame {
                     }
                 } else {
                     Cliente c = controladorCliente.buscarPorVehiculo(v.getPlaca());
-                    labelMensajeSeleccion.setEnabled(true);
-                    llenartblInformacionPorPlaca(c, v);
-                    btnEmitir.setEnabled(true);
+                    if (c != null) {
+                        labelMensajeSeleccion.setEnabled(true);
+                        llenartblInformacionPorPlaca(c, v);
+                        btnEmitir.setEnabled(true);
+                    }
                 }
             }
         }
@@ -555,7 +557,8 @@ public class VentanaRegistrarTicket extends javax.swing.JInternalFrame {
         String cedulas = tblInformacion.getValueAt(row, 1).toString();
 
         Vehiculo ve = controladorVehiculo.buscarVehiculo(placa);
-        ve.agregarTicket(t);
+        ve = controladorVehiculo.agregarTicket(ve, t);
+
         Cliente c = controladorCliente.buscarCliente(cedulas);
 
         controladorCliente.actualizarVehiculo(c, ve);

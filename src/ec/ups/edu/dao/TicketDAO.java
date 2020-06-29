@@ -28,6 +28,7 @@ public class TicketDAO implements ITicketDAO {
     @Override
     public boolean create(Ticket ticket) {
         ++numero;
+        ticket.setNumero(numero);
         if (tickets.contains(ticket) != true) {
             tickets.add(ticket);
             return true;
