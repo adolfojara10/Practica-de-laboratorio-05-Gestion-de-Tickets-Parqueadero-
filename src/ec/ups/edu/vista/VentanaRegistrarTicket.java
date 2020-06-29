@@ -17,6 +17,9 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
+import javax.swing.table.TableColumn;
+import javax.swing.table.TableColumnModel;
 
 /**
  *
@@ -81,7 +84,17 @@ public class VentanaRegistrarTicket extends javax.swing.JInternalFrame {
         btnLimpiar.setText(recurso.getString("btnLimpiar"));
         btnAtras.setText(recurso.getString("btnAtras"));
         labelMensajeSeleccion.setText(recurso.getString("labelMensajeSeleccion"));
-
+        
+        Object[] columnas = {recurso.getString("labelNombre"), recurso.getString("labelCedula"),
+            recurso.getString("labelPlaca"), recurso.getString("labelMarca"), recurso.getString("labelModelo")};
+        
+        for (int i = 0; i < columnas.length; i++) {
+            JTableHeader head = tblInformacion.getTableHeader();
+            TableColumnModel columnaModelo = head.getColumnModel();
+            TableColumn columna = columnaModelo.getColumn(i);
+            columna.setHeaderValue(columnas[i]);
+        }
+        tblInformacion.repaint();
     }
 
     public int cambiarJOptionCliente(String idioma, String localizacion) {

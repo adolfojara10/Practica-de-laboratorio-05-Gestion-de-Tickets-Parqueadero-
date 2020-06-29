@@ -14,6 +14,9 @@ import java.util.ResourceBundle;
 import java.util.*;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
+import javax.swing.table.TableColumn;
+import javax.swing.table.*;
 
 /**
  *
@@ -71,6 +74,17 @@ public class VentanaRegistrarVehiculo extends javax.swing.JInternalFrame {
         btnAgregar.setText(recurso.getString("btnAgregar"));
         btnBuscar.setText(recurso.getString("btnBuscar"));
         btnAtras.setText(recurso.getString("btnAtras"));
+
+        Object[] columnas = {recurso.getString("labelNombre"), recurso.getString("labelCedula"),
+            recurso.getString("labelTelefono"), recurso.getString("labelDireccion")};
+        for (int i = 0; i < columnas.length; i++) {
+            JTableHeader head = tblClientes.getTableHeader();
+            TableColumnModel columnaModelo = head.getColumnModel();
+            TableColumn columna = columnaModelo.getColumn(i);
+            columna.setHeaderValue(columnas[i]);
+        }
+        tblClientes.repaint();
+
     }
 
     public int cambiarJOption(String idioma, String localizacion) {
@@ -152,8 +166,8 @@ public class VentanaRegistrarVehiculo extends javax.swing.JInternalFrame {
         }
 
     }
-    
-      public void cambiarJOptionPane5() {
+
+    public void cambiarJOptionPane5() {
 
         if (localizacion.getLanguage().equals("es")) {
             JOptionPane.showMessageDialog(this, "Seleccione un cliente para añadir el vehiculo");

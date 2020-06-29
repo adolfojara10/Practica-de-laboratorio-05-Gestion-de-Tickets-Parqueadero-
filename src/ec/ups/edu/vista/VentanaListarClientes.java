@@ -11,6 +11,9 @@ import ec.ups.edu.modelo.Vehiculo;
 import java.util.*;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
+import javax.swing.table.TableColumn;
+import javax.swing.table.TableColumnModel;
 
 /**
  *
@@ -54,6 +57,17 @@ public class VentanaListarClientes extends javax.swing.JInternalFrame {
         btnBuscar.setText(recurso.getString("btnBuscar"));
         btnLimpiar.setText(recurso.getString("btnLimpiar"));
         btnAtras.setText(recurso.getString("btnAtras"));
+        
+        Object[] columnas = {recurso.getString("labelCedula"), recurso.getString("labelNombre"),
+            recurso.getString("labelTelefono"), recurso.getString("labelDireccion"),
+            recurso.getString("labelPlaca"), recurso.getString("labelMarca"), recurso.getString("labelModelo")};
+        for (int i = 0; i < columnas.length; i++) {
+            JTableHeader head = tblClientes.getTableHeader();
+            TableColumnModel columnaModelo = head.getColumnModel();
+            TableColumn columna = columnaModelo.getColumn(i);
+            columna.setHeaderValue(columnas[i]);
+        }
+        tblClientes.repaint();
     }
 
     public void llenartblClientes() {
@@ -280,6 +294,7 @@ public class VentanaListarClientes extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         this.hide();
         limpiar();
+        llenartblClientes();
     }//GEN-LAST:event_btnAtrasActionPerformed
 
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed

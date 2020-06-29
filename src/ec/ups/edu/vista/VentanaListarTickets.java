@@ -18,6 +18,9 @@ import java.util.ResourceBundle;
 import java.util.Set;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
+import javax.swing.table.TableColumn;
+import javax.swing.table.TableColumnModel;
 
 /**
  *
@@ -74,7 +77,22 @@ public class VentanaListarTickets extends javax.swing.JInternalFrame {
         labelNumeroDeTicket.setText(recurso.getString("labelNumeroDeTicket"));
         btnBuscar.setText(recurso.getString("btnBuscar"));
         btnLimpiar.setText(recurso.getString("btnLimpiar"));
-        btnAtras.setText(("btnAtras"));
+        btnAtras.setText((recurso.getString("btnAtras")));
+
+        Object[] columnas = {recurso.getString("labelNumero"), recurso.getString("labelFechaDeEntrada"),
+            recurso.getString("labelFechaDeSalida"), recurso.getString("labelTiempoDeParqueo"),
+            recurso.getString("labelTotalPagar"), recurso.getString("labelPlaca"),
+            recurso.getString("labelMarca"), recurso.getString("labelModelo"),
+            recurso.getString("labelNombre"), recurso.getString("labelCedula"), recurso.getString("labelTelefono"),
+            recurso.getString("labelDireccion")};
+
+        for (int i = 0; i < columnas.length; i++) {
+            JTableHeader head = tblTickets.getTableHeader();
+            TableColumnModel columnaModelo = head.getColumnModel();
+            TableColumn columna = columnaModelo.getColumn(i);
+            columna.setHeaderValue(columnas[i]);
+        }
+        tblTickets.repaint();
 
     }
 
@@ -296,12 +314,14 @@ public class VentanaListarTickets extends javax.swing.JInternalFrame {
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
         // TODO add your handling code here:
         limpiar();
+        llenartblTickets();
     }//GEN-LAST:event_btnLimpiarActionPerformed
 
     private void btnAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasActionPerformed
         // TODO add your handling code here:
         limpiar();
         this.hide();
+        llenartblTickets();
     }//GEN-LAST:event_btnAtrasActionPerformed
 
     private void formInternalFrameActivated(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameActivated

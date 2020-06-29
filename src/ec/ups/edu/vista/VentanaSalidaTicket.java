@@ -17,6 +17,7 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.*;
 
 /**
  *
@@ -72,6 +73,16 @@ public class VentanaSalidaTicket extends javax.swing.JInternalFrame {
         btnFactura.setText(recurso.getString("btnFactura"));
         btnLimpiar.setText(recurso.getString("btnLimpiar"));
         btnAtras.setText(recurso.getString("btnAtras"));
+        
+        Object[] columnas = {recurso.getString("labelNombre"), recurso.getString("labelCedula"),
+            recurso.getString("labelPlaca"), recurso.getString("labelMarca"), recurso.getString("labelModelo")};
+        for (int i = 0; i < columnas.length; i++) {
+            JTableHeader head = tblSalidaTicket.getTableHeader();
+            TableColumnModel columnaModelo = head.getColumnModel();
+            TableColumn columna = columnaModelo.getColumn(i);
+            columna.setHeaderValue(columnas[i]);
+        }
+        tblSalidaTicket.repaint();
     }
 
     public void ponerFecha() {
@@ -342,7 +353,7 @@ public class VentanaSalidaTicket extends javax.swing.JInternalFrame {
                 String totalTiempo = controladorTicket.calcularHorasMinutos(tiempo);
                 txtTiempo.setText(totalTiempo);
 
-                double pago = controladorTicket.calcularPago(tiempo);
+                float pago = controladorTicket.calcularPago(tiempo);
                 txtPago.setText(String.valueOf(pago));
 
                 Vehiculo ve = controladorVehiculo.buscarPorTicket(t);

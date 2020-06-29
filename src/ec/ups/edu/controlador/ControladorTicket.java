@@ -67,10 +67,12 @@ public class ControladorTicket {
         return tiempo;
     }
 
-    public double calcularPago(double tiempo) {
+    public float calcularPago(double tiempo) {
         int tt = (int) Math.round(tiempo);
         tt = tt / 10;
-        double pago = (tt * 25) / 100;
+        System.out.println(tt);
+        float pago = (float) (tt * 0.25);
+        System.out.println(pago);
         return pago;
     }
 
