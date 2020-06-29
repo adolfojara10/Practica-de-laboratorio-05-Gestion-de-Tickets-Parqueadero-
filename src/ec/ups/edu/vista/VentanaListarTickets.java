@@ -108,7 +108,7 @@ public class VentanaListarTickets extends javax.swing.JInternalFrame {
             Vehiculo ve = controladorVehiculo.buscarPorTicket(t);
             Cliente c = controladorCliente.buscarPorVehiculo(ve.getPlaca());
 
-            Object[] rowData = {t.getNumero(), t.getFechaEntrada(), t.getFechaSalida(),
+            Object[] rowData = {"##", t.getFechaEntrada(), t.getFechaSalida(),
                 t.getTiempo(), t.getTotal(), ve.getPlaca(), ve.getModelo(), ve.getMarca(),
                 c.getNombre(), c.getCedula(), c.getTelefono().getNumero(), c.getDireccion().toString()};
 
@@ -127,7 +127,7 @@ public class VentanaListarTickets extends javax.swing.JInternalFrame {
         Vehiculo ve = controladorVehiculo.buscarPorTicket(ticket);
         Cliente c = controladorCliente.buscarPorVehiculo(ve.getPlaca());
 
-        Object[] rowData = {ticket.getNumero(), ticket.getFechaEntrada(), ticket.getFechaSalida(),
+        Object[] rowData = {"##", ticket.getFechaEntrada(), ticket.getFechaSalida(),
             ticket.getTiempo(), ticket.getTotal(), ve.getPlaca(), ve.getModelo(), ve.getMarca(),
             c.getNombre(), c.getCedula(), c.getTelefono().getNumero(), c.getDireccion().toString()};
 
