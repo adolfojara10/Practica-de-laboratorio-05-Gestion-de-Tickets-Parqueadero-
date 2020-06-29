@@ -30,6 +30,8 @@ public class VentanaRegistarCliente extends javax.swing.JInternalFrame {
         initComponents();
         cargarDatosOperadora();
         formatearNumeroCasa();
+        formatearTextCedula();
+        
 
         this.controladorCliente = controladorCliente;
     }
@@ -67,6 +69,11 @@ public class VentanaRegistarCliente extends javax.swing.JInternalFrame {
         btnAtras.setText(recurso.getString("btnAtras"));
 
     }
+     public void formatearTextCedula(){
+     
+     }
+     
+     
 
     public void cargarDatosOperadora() {
         operadoras = new ArrayList<>();
